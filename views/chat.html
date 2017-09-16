@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<body>
+<div class="container">
+<form class="form-horizontal" action="/api/chat" method="POST">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+        <label for="msg">msg</label>
+        <input type="text" id="msg" name="msg">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th> Username </th>
+            <th> msg </th>
+        </tr>
+        </thead>
+        <% for (var i = 0; i < resultado.length; i++){ %>
+        <tbody>
+        <tr>
+            <td><%= resultado[i].username%></td>
+            <td><%= resultado[i].msg %></td>
+        </tr>
+        <% }%>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

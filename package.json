@@ -1,17 +1,19 @@
 {
-  "name": "cati",
+  "name": "pendiente",
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.0",
+    "chat": "^0.6.0",
     "ejs": "^2.5.7",
     "express": "^4.10.6",
     "express-myconnection": "^1.0.4",
+    "express-session": "^1.15.5",
     "ip": "^1.1.5",
     "mysql": "~2.11.1",
     "sequelize": "^3.24.0"
   },
-  "author": "Ayudantes ASDW/FISW 2016-2",
-  "license": "ISC"
+  "author": "BluePanda",
+  "license": ""
 }
