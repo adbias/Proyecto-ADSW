@@ -2,11 +2,6 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models');
-var chat = require('chat');
-var room = chat.room();
-//console.log(room);
-var clients = {};
-
 
 //Return router
 module.exports = router;
@@ -106,22 +101,5 @@ router.delete('/usuarios/:id', function(req,res,next){
 	}
 });
 
-router.post('/chat',function (req, res, next) {
-	try {
-        var client = chat.client(room);
-        console.log(req.body.username, "chat");
-        client.identify({ nick:req.body.username });
-        client.once('ready', function() {
-            client.write(req.body.msg);
-        });
-        models.Chat.create({
-            username: req.body.username,
-            msg: req.body.msg
-        });
-        res.redirect("/chat");
-	}
-	catch(ex){
-        console.error("Internal error:"+ex);
-        return next(ex);
-	}
-});
+
+

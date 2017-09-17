@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var models  = require('../models');
 
+var chat = require('chat');
+var room = chat.room();
+
 
 app.get('/',function(req,res){
     res.render('index.html', {title: 'Mi primer Aplicacion Web'});
@@ -23,6 +26,38 @@ app.get('/verUsuario',function(req,res){
 
 app.get('/crearUsuario',function(req,res){
     res.render('CrearUsuario.html', {title: 'Registrar Usuarios'});
+});
+
+app.get('/chat/12345', function (req,res,next) {
+    try {
+        return models.Chat.findAll().then(function (chat) {
+            res.json(chat);
+        })
+    }
+    catch(ex){
+        console.error("Internal error:"+ex);
+        return next(ex);
+    }
+
+});
+app.post('/chat/12345',function (req, res, next) {
+    console.log("Access through post");
+    try {
+        var client = chat.client(room);
+        console.log(req, "chat");
+        client.identify({ nick:req.username });
+        client.once('ready', function() {
+            client.write(req.msg);
+        });
+        models.Chat.create({
+            username: req.username,
+            msg: req.msg
+        });
+    }
+    catch(ex){
+        console.error("Internal error:"+ex);
+        return next(ex);
+    }
 });
 
 module.exports = app;

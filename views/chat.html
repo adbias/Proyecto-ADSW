@@ -3,34 +3,38 @@
 <% include ../partials/header %>
 <% include ../partials/nav %>
 <body>
-<div class="container">
-<form class="form-horizontal" action="/api/chat" method="POST">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
-        <label for="msg">msg</label>
-        <input type="text" id="msg" name="msg">
-        <button type="submit" class="btn btn-primary">Submit</button>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('ChatSend', function($scope, $http) {
+        $scope.username = "";
+        $scope.msg = "";
+        $scope.algo = function () { return $scope.username };
+        $scope.algo2 = function () { return $scope.msg };
+        $scope.sendMsg = function () {
+            $http.post('/chat/12345', {username:$scope.algo(), msg:$scope.algo2()});
+        }
+    });
+    app.controller('ChatRecv', function ($scope, $http) {
+        $http.get('/chat/12345')
+            .then(function(response) {
+                $scope.msg = JSON.stringify(response);
+            });
+    })
+</script>
+<div class="container" ng-app="myApp">
+<form class="form-horizontal">
+    <div class="form-group" ng-controller="ChatSend">
+        <label>Username</label>
+        <input type="text" ng-model="username">
+        <label>msg</label>
+        <input type="text" ng-model="msg">
+        <button ng-click="sendMsg()" class="btn btn-primary">Submit</button>
+        <p>{{mensaje()}}</p>
     </div>
 </form>
+<div ng-controller='ChatRecv'>
+    <p>{{msg}}</p>
 </div>
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th> Username </th>
-            <th> msg </th>
-        </tr>
-        </thead>
-        <% for (var i = 0; i < resultado.length; i++){ %>
-        <tbody>
-        <tr>
-            <td><%= resultado[i].username%></td>
-            <td><%= resultado[i].msg %></td>
-        </tr>
-        <% }%>
-        </tbody>
-    </table>
 </div>
 
 </body>
