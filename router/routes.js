@@ -36,6 +36,10 @@ app.get('/crearUsuario',function(req,res){
     res.render('CrearUsuario.html', {title: 'Registrar Usuarios'});
 });
 
+app.get('/createSesion',function(req,res){
+    res.render('CreateSesion.html', {title: 'Crear Sesion'});
+});
+
 app.get('/chat/12345', function (req,res,next) {
     try {
         return models.Chat.findAll().then(function (chat) {
