@@ -7,6 +7,12 @@ var mysql = require('mysql');
 var Usuario= require('./models/usuario.js');
 var models = require("./models/index.js");
 var session = require('express-session');
+app.use(session({
+    secret: 'a4f8071f-c873-4447-8ee2',
+    cookie: {maxAge: 2628000000},
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 app.use(express.static(__dirname + '/style'));
@@ -14,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'ejs');
-app.use('/',require('./router/routes'));
+app.use('/', require('./router/routes'));
 
 
 /*var nodeadmin = require('nodeadmin');
@@ -23,12 +29,7 @@ app.use(nodeadmin(app));*/
 //Express
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(bodyParser.json());
-app.use(session({
-    secret: 'a4f8071f-c873-4447-8ee2',
-    cookie: {maxAge: 2628000000},
-    resave: false,
-	saveUninitialized: true
-}));
+
 
 //Routes
 app.use('/api', require('./router/api'));

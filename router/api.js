@@ -25,25 +25,21 @@ router.post('/login', function(req, res, next) {
     try {
         models.Usuario.findAll({
             where: {
-                email: req.body.email
+                email: req.body.email,
+                password: req.body.password
             }
         }).then(function (results) {
                 if (results.length > 0) {
-                    if (results[0].password == req.body.password) {
-                        res.render('Log.html', {resultado: results[0].username});
-                    }
-                    else {
-                        res.redirect('Login.html',{resultado: 'error', title: 'Login'});
-                    }
+                    req.session.login = 1;
+                    req.session.save(function(){res.redirect('/');});
+                    //res.render('Login.html', {resultado: results[0].username, session:req.session});
                 }
                 else {
-                    res.render('Login.html',{resultado: 'error', title: 'Login'});
+                    res.redirect('/');
                 }
         });
     } catch (ex) {
         console.error("Internal error:" + ex);
         return next(ex);
     }
-})
-
-
+});

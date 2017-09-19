@@ -1,24 +1,27 @@
 var express = require('express');
 var app = express();
 var models  = require('../models');
-
 var chat = require('chat');
 var room = chat.room();
 
 
-app.get('/',function(req,res){
-    res.render('index.html', {title: 'LeadTo'});
+app.get('/', function(req, res){
+    res.render('index.html', {session: req.session});
 });
 
-app.get('/beta',function(req,res){
-    res.render('index2.html', {title: 'LeadTo'});
+app.get('/beta', function(req, res){
+    res.render('index2.html', {session: req.session});
 });
 
-app.get('/login',function(req,res){
-    res.render('Login.html', {title: 'Login', resultado: 'xxxx'});
+app.get('/login', function(req, res){
+    if (typeof req.session.login === 'undefined') {
+        res.render('Login.html');
+    } else {
+        res.redirect('/');
+    }
 });
 
-app.get('/chat',function(req,res){
+app.get('/chat', function(req, res){
     models.Chat.findAll().then(function (lista){
         res.render('chat.html', {resultado: lista});
     });
