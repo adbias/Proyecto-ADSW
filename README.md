@@ -11,3 +11,4 @@ Done:
 
 Doing:
 * Modelo conceptual
+* Chat
