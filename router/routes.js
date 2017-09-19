@@ -7,7 +7,11 @@ var room = chat.room();
 
 
 app.get('/',function(req,res){
-    res.render('index.html', {title: 'Mi primer Aplicacion Web'});
+    res.render('index.html', {title: 'LeadTo'});
+});
+
+app.get('/beta',function(req,res){
+    res.render('index2.html', {title: 'LeadTo'});
 });
 
 app.get('/chat',function(req,res){

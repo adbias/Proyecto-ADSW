@@ -9,6 +9,7 @@ var models = require("./models/index.js");
 var session = require('express-session');
 
 
+app.use(express.static(__dirname + '/style'));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 
