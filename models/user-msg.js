@@ -15,9 +15,8 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        msg: {
-            type: DataTypes
-        },
+        msg: DataTypes.DATE},
+        {
         classMethods: {
             associate: function (models) {
                 Msg.belongsTo(models.Sesion, {

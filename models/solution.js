@@ -1,12 +1,12 @@
 "use strict";
-var Sequelize = require('sequelize');
+
 module.exports = function(sequelize, DataTypes) {
-    var Solution = sequelize.define("Rol", {
+    var Solution = sequelize.define("Solution", {
         description: DataTypes.STRING
     }, {
         classMethods: {
             associate: function(models) {
-                Solution.hasmany(models.Voto)
+                Solution.hasMany(models.Voto)
             }
         }
     });

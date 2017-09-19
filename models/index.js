@@ -10,7 +10,8 @@ var opts = {
         //prevent sequelize from pluralizing table names
         freezeTableName: true
     }
-}
+};
+
 var sequelize = new Sequelize('fisw', 'root', 'root',opts);
 var db        = {};
 
