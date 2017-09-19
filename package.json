@@ -15,7 +15,8 @@
     "express-session": "^1.15.5",
     "ip": "^1.1.5",
     "mysql": "~2.11.1",
-    "sequelize": "^3.24.0"
+    "sequelize": "^3.24.0",
+    "sleep": "^5.1.1"
   },
   "author": "BluePanda",
   "license": ""

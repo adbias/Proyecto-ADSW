@@ -15,7 +15,7 @@ app.get('/beta',function(req,res){
 });
 
 app.get('/login',function(req,res){
-    res.render('Login.html', {title: 'Login'});
+    res.render('Login.html', {title: 'Login', resultado: 'xxxx'});
 });
 
 app.get('/chat',function(req,res){
@@ -33,12 +33,13 @@ app.get('/verUsuario',function(req,res){
 });
 
 app.get('/crearUsuario',function(req,res){
-    res.render('CrearUsuario.html', {title: 'Registrar Usuarios'});
+    res.render('CrearUsuario.html', {title: 'Registro de Usuario'});
 });
 
 app.get('/createSesion',function(req,res){
-    res.render('CreateSesion.html', {title: 'Crear Sesion'});
+        res.render('CreateSesion.html', {title: 'Crear Sesion'});
 });
+
 
 app.get('/chat/12345', function (req,res,next) {
     try {
