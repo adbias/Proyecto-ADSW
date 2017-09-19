@@ -15,7 +15,7 @@ app.get('/beta', function(req, res){
 
 app.get('/login', function(req, res){
     if (typeof req.session.login === 'undefined') {
-        res.render('Login.html');
+        res.render('Login.html', {session: req.session});
     } else {
         res.redirect('/');
     }
@@ -74,6 +74,11 @@ app.post('/chat/12345',function (req, res, next) {
         console.error("Internal error:"+ex);
         return next(ex);
     }
+});
+
+app.get('/logout', function(req, res) {
+   req.session.destroy();
+   res.redirect('/');
 });
 
 module.exports = app;

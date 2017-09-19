@@ -50,16 +50,12 @@
                 <li><a href="/chat"><i class="fa fa-folder"></i></a></li>
                 <li><a href="/chat"><i class="fa fa-download"></i></a></li>-->
                 <li><a href="/createSesion"><i class="fa fa-plus-square-o"></i> Crear Sesion</a></li>
+                <% if (typeof session.login === 'undefined') { %>
                 <li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                <% } else { %>
+                <li><a href="/logout"><i class="fa fa-user" aria-hidden="true"></i> Cerrar Sesion</a></li>
+                <% } %>
             </ul>
         </div>
     </div>
 </nav>
-<% if (typeof session !== 'undefined') {
-if (session.login === 1){%>
-<div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-        <button type="button" class="btn btn-danger">WOOOOO</button>
-    </div>
-</div>
-<% }}%>
