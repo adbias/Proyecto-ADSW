@@ -18,3 +18,5 @@ router.post('/usuarios', function(req,res,next){
 		return next(ex);
 	}
 });
+
+

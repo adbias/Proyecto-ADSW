@@ -14,6 +14,10 @@ app.get('/beta',function(req,res){
     res.render('index2.html', {title: 'LeadTo'});
 });
 
+app.get('/login',function(req,res){
+    res.render('Login.html', {title: 'Login'});
+});
+
 app.get('/chat',function(req,res){
     models.Chat.findAll().then(function (lista){
         res.render('chat.html', {resultado: lista});
