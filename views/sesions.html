@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<script>
+    models.Sesion.findAll().then.function(resultado)
+</script>
+<body>
+<div class="container">
+    <h1> <p> Sesiones </p> </h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Título </th>
+            <th> Escenario </th>
+        </tr>
+        </thead>
+        <% for (var i = 0; i < resultado.length; i++){ %>
+        <tbody>
+        <tr>
+            <td><%= resultado[i].id%></td>
+            <td><%= resultado[i].username%></td>
+            <td><%= resultado[i].password %></td>
+            <td><%= resultado[i].email %></td>
+            <!--<td><%= resultado[i].rut%></td>-->
+            <td> Eliminar Modificar</td>
+        </tr>
+        <% }%>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
