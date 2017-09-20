@@ -12,20 +12,19 @@
     <table class="table">
         <thead>
         <tr>
-            <th> <p> ID </p> </th>
             <th> <p> Título </p> </th>
             <th> <p> Escenario </p></th>
+            <th> <p> Objetivo </p></th>
         </tr>
         </thead>
         <% for (var i = 0; i < resultado.length; i++){ %>
         <tbody>
         <tr>
-            <td><%= resultado[i].id%></td>
-            <td><%= resultado[i].titulo%></td>
-            <td><%= resultado[i].escenario %></td>
-            <td><%= resultado[i].link %></td>
+            <td> <p> <%= resultado[i].titulo%> </p> </td>
+            <td> <p> <%= resultado[i].escenario %> </p> </td>
+            <td> <p> <%= resultado[i].objetivo %> </p> </td>
             <!--<td><%= resultado[i].rut%></td>-->
-            <td> Eliminar Modificar</td>
+            <td> <p> Eliminar Modificar </p> </td>
         </tr>
         <% }%>
         </tbody>
