@@ -6,7 +6,7 @@ var regex = require('regex-email');
 module.exports = router;
 
 router.post('/usuarios', function(req, res){
-    var existed = false;
+    var add = true;
     // Search for user and email registered
     models.Usuario.findAll({
         where: {
@@ -24,10 +24,10 @@ router.post('/usuarios', function(req, res){
                 console.log("correo ya registrado");
                 res.redirect("/");
             }
-            existed = true;
+            existed = false;
     }});
     //Condition for validate
-    if (existed){
+    if (add){
         if (regex.test(req.body.email)) { // validate email
             if (req.body.password.length >= 6){ // validate password
                 models.Usuario.create({
