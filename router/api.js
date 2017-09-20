@@ -1,48 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models');
+var bcrypt = require('bcrypt-nodejs');
 // var sleep = require('sleep'); delay
 module.exports = router;
 
-router.post('/usuarios', function(req,res,next){
-	try {
-		console.log(req.body.permiso);
-		models.Usuario.create({
-			username: req.body.username,
-			password: req.body.password,
-			email: req.body.email
-		}).then(function (result) {
-			res.redirect("/");
-		});
-	} catch(ex) {
-		console.error("Internal error:" + ex);
-		return next(ex);
-	}
+router.post('/usuarios', function(req, res){
+    models.Usuario.create({
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password),
+        email: req.body.email
+    }).then(function () {
+        res.redirect("/");
+    });
 });
 
 router.post('/login', function(req, res, next) {
-    console.log('user and pw: %s , %s', req.body.email, req.body.password);
-    try {
-        models.Usuario.findAll({
-            where: {
-                email: req.body.email,
-                password: req.body.password
-            }
-        }).then(function (results) {
-                if (results.length > 0) {
-                    req.session.login = 1;
-                    var user = models.Usuario.findOne({where:{email:req.body.email}});
-                    req.session.username = user.username;
-                    req.session.save(function(){
-                        res.redirect('/');
-                    });
-                }
-                else {
-                    res.redirect('/');
-                }
+    models.Usuario.findOne({
+        where: { email: req.body.email }
+    }).then(function (results) {
+        if (results !== null && bcrypt.compareSync(req.body.password, results.password)) {
+            req.session.login = 1;
+            req.session.username = results.username;
+            res.redirect('/');
+        }
+        else {
+            res.redirect('/login');
+        }
         });
-    } catch (ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
 });
