@@ -2,17 +2,51 @@ var express = require('express');
 var router = express.Router();
 var models  = require('../models');
 var bcrypt = require('bcrypt-nodejs');
-// var sleep = require('sleep'); delay
+var regex = require('regex-email');
 module.exports = router;
 
 router.post('/usuarios', function(req, res){
-    models.Usuario.create({
-        username: req.body.username,
-        password: bcrypt.hashSync(req.body.password),
-        email: req.body.email
-    }).then(function () {
-        res.redirect("/");
-    });
+    var existed = false;
+    // Search for user and email registered
+    models.Usuario.findAll({
+        where: {
+            $or:[
+                {email: req.body.email},
+                {username: req.body.username}
+            ]
+        }
+    }).then(function (results) {
+        if(results.length > 0){
+            if (results[0].username == req.body.username) {
+                console.log("usuario ya registrado");
+                res.redirect("/");
+            }   else {
+                console.log("correo ya registrado");
+                res.redirect("/");
+            }
+            existed = true;
+    }});
+    //Condition for validate
+    if (existed){
+        if (regex.test(req.body.email)) { // validate email
+            if (req.body.password.length >= 6){ // validate password
+                models.Usuario.create({
+                    username: req.body.username,
+                    password: bcrypt.hashSync(req.body.password),
+                    email: req.body.email
+                }).then(function () {
+                    console.log("registrado");
+                    res.redirect("/");
+                });
+            } else {
+                console.log("contraseña no valida");
+                res.redirect("/");
+            }
+        } else {
+            console.log("email no valido");
+            res.redirect("/");
+        }
+    }
 });
 
 router.post('/createSesion', function(req,res,next){
