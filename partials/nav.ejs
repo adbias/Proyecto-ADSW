@@ -1,53 +1,15 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>LeadTo</title>
-    <link href="css/global.css" type="text/css" rel="stylesheet" media="all">
-    <style type="text/css">
-        p {color: #efe9ff;}
-    </style>
-    <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
-</head>
+<header class="header">
+    <div class="header__wrapper">
+        <a href="/" class="header__title-wrapper  js-smooth-scroll">
+            <div class="header__title-main"> Lead Together </div>
+        </a>
 
-<body>
-<section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
-    <div class="hero__content"></div>
-</section>
-</body>
-
-<nav class="navbar navbar-default navbar-inverse navbar-static-top" >
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!--<a class="navbar-brand" href="/">LeadTo</a>-->
-            <a class="navbar-brand" href="/beta">LeadToBeta</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav navbar-right">
-
-                <% if (typeof session.login === 'undefined') { %>
-                <li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                <li><a href="/crearUsuario">Registrarse</a></li>
-                <% } else { %>
-                <li><a href="/sesions"> Mis Sesiones </a></li>
-                <li><a href="/chat"><i class="fa fa-bar-chart"></i></a></li>
-                <li><a href="/chat"><i class="fa fa-folder"></i></a></li>
-                <li><a href="/chat"><i class="fa fa-download"></i></a></li>
-                <li><a href="/logout"><i class="fa fa-user" aria-hidden="true"></i> Cerrar Sesion</a></li>
-                <% } %>
-            </ul>
+        <div class="header__social-icons">
+            <% if (typeof session.login === 'undefined') { %>
+            <a href="/login"><i class="fa fa-sign-in"></i> Login</a>
+            <% } else { %>
+            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+            <% } %>
         </div>
     </div>
-</nav>
-
+</header>
