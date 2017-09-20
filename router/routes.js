@@ -36,11 +36,15 @@ app.get('/verUsuario',function(req,res){
 });
 
 app.get('/crearUsuario',function(req,res){
-    res.render('CrearUsuario.html', {title: 'Registro de Usuario'});
+    res.render('CrearUsuario.html', {title: 'Registro de Usuario', session: req.session});
+});
+
+app.get('/sesions',function(req,res){
+    res.render('sesions.html', {title: 'Sesiones', session: req.session});
 });
 
 app.get('/createSesion',function(req,res){
-        res.render('CreateSesion.html', {title: 'Crear Sesion'});
+        res.render('CreateSesion.html', {title: 'Crear Sesion', session: req.session});
 });
 
 
