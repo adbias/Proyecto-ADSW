@@ -31,10 +31,6 @@ app.get('/chat2',function(req,res){
     res.render('chat2.html', {title: 'Chat'});
 });
 
-app.get('/verUsuario',function(req,res){
-    res.redirect('/api/usuarios')
-});
-
 app.get('/crearUsuario',function(req,res){
     res.render('CrearUsuario.html', {title: 'Registro de Usuario', session: req.session});
 });
@@ -45,39 +41,6 @@ app.get('/sesions',function(req,res){
 
 app.get('/createSesion',function(req,res){
         res.render('CreateSesion.html', {title: 'Crear Sesion', session: req.session});
-});
-
-
-app.get('/chat/12345', function (req,res,next) {
-    try {
-        return models.Chat.findAll().then(function (chat) {
-            res.json(chat);
-        })
-    }
-    catch(ex){
-        console.error("Internal error:"+ex);
-        return next(ex);
-    }
-
-});
-app.post('/chat/12345',function (req, res, next) {
-    console.log("Access through post");
-    try {
-        var client = chat.client(room);
-        console.log(req, "chat");
-        client.identify({ nick:req.username });
-        client.once('ready', function() {
-            client.write(req.msg);
-        });
-        models.Chat.create({
-            username: req.username,
-            msg: req.msg
-        });
-    }
-    catch(ex){
-        console.error("Internal error:"+ex);
-        return next(ex);
-    }
 });
 
 app.get('/logout', function(req, res) {

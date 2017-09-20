@@ -31,8 +31,11 @@ router.post('/login', function(req, res, next) {
         }).then(function (results) {
                 if (results.length > 0) {
                     req.session.login = 1;
-                    req.session.save(function(){res.redirect('/');});
-                    //res.render('Login.html', {resultado: results[0].username, session:req.session});
+                    var user = models.Usuario.findOne({where:{email:req.body.email}});
+                    req.session.username = user.username;
+                    req.session.save(function(){
+                        res.redirect('/');
+                    });
                 }
                 else {
                     res.redirect('/');
