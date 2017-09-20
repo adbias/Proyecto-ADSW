@@ -20,6 +20,21 @@ router.post('/usuarios', function(req,res,next){
 	}
 });
 
+router.post('/createSesion', function(req,res,next){
+    try {
+        models.Sesion.create({
+            titulo: req.body.title,
+            escenario: req.body.stage,
+            link: " Zelda "
+        }).then(function (result) {
+            res.redirect("/sesions");
+        });
+    } catch(ex) {
+        console.error("Internal error:" + ex);
+        return next(ex);
+    }
+});
+
 router.post('/login', function(req, res, next) {
     console.log('user and pw: %s , %s', req.body.email, req.body.password);
     try {

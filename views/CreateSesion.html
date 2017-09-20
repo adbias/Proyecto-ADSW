@@ -4,13 +4,28 @@
 <% include ../partials/nav %>
 <body>
 <div class="container">
-    <h1><p>Crear Nueva Sesion</p></h1>
+    <h1><p class="text-center"><%=title%></p></h1>
 
-    <form>
-        <p>Título:</p>  <br>
-        <input type="text" class="form-control text-center" id="name" name="email" placeholder="name"><br>
-        <p>Objetivo:</p>  <br>
-        <input type="text" class="form-control text-center" id="objective" name="objective" placeholder="objective"><br>
+    <form class="form-horizontal" action="/api/createSesion" method="POST" enctype="application/x-www-form-urlencoded">
+        <legend></legend>
+        <div class="form-group">
+            <label class="col-lg-2 control-label"><p>Titulo</p></label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label"><p>Escenario</p></label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control" id="stage" name="stage" placeholder="Escenario">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
     </form>
 
 </div>
