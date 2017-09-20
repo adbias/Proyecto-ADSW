@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
         email: {
             type: DataTypes.STRING,
             allowNull: false
+        }}, { classMethods: {
+            associate: function(models) {
+                Usuario.hasMany(models.Sesion)
+            }
         }
     });
     return Usuario;

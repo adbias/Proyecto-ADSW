@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
 
         },
+        objetivo: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         link: {
             type: DataTypes.STRING,
             allowNull: false

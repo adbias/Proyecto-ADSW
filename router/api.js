@@ -17,10 +17,14 @@ router.post('/usuarios', function(req, res){
 
 router.post('/createSesion', function(req,res,next){
     try {
+        console.log(req.session.username);
+        console.log(req.session.id);
         models.Sesion.create({
             titulo: req.body.title,
             escenario: req.body.stage,
-            link: " Zelda "
+            objetivo: req.body.objetive,
+            link: " Zelda ",
+            UsuarioId: req.session.userId
         }).then(function (result) {
             res.redirect("/sesions");
         });
@@ -30,6 +34,7 @@ router.post('/createSesion', function(req,res,next){
     }
 });
 
+
 router.post('/login', function(req, res, next) {
     models.Usuario.findOne({
         where: { email: req.body.email }
@@ -37,6 +42,7 @@ router.post('/login', function(req, res, next) {
         if (results !== null && bcrypt.compareSync(req.body.password, results.password)) {
             req.session.login = 1;
             req.session.username = results.username;
+            req.session.userId = results.id;
             res.redirect('/');
         }
         else {
