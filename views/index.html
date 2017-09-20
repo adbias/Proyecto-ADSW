@@ -59,8 +59,12 @@
 					Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.
 				</div>
 				<div class="hero__call-to-action">
-					<a href="#" class="hero__button  ghost-button  ghost-button--hero">Entrar como invitado<i class="hero__alt-button"></i></a>
-					<a href="/crearUsuario" class="hero__button  ghost-button  ghost-button--hero">Registrarse<i class="hero__alt-button"></i></a>
+					<% if (typeof session.login === 'undefined') { %>
+					<a href="#" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Entrar como invitado</i></a>
+					<a href="/crearUsuario" class="hero__button ghost-button ghost-button--hero"><i class="fa fa-user-plus"></i> Registrarse</i></a>
+					<% } else { %>
+					<a href="/createSesion" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Crear sesión</i></a>
+					<% } %>
 				</div>
 			</div>
 		</div>
