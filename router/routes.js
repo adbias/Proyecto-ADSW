@@ -4,7 +4,6 @@ var models  = require('../models');
 var chat = require('chat');
 var room = chat.room();
 
-
 app.get('/', function(req, res){
     res.render('index.html', {session: req.session});
 });
