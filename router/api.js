@@ -4,6 +4,7 @@ var models  = require('../models');
 var bcrypt = require('bcrypt-nodejs');
 var regex = require('regex-email');
 module.exports = router;
+var chat = [];
 
 router.post('/usuarios', function(req, res){
     var add = true;
@@ -83,4 +84,19 @@ router.post('/login', function(req, res, next) {
             res.redirect('/login');
         }
         });
+});
+
+router.post('/chat', function (req, res, next) {
+    models.Chat.create({
+        username: req.body.username,
+        msg: req.body.msg
+    });
+    chat.push({
+        username:req.body.username,
+        msg: req.body.msg});
+    next();
+});
+
+router.get('/chat', function (req, res, next) {
+       res.send(chat);
 });

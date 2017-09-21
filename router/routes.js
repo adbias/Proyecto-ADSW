@@ -21,9 +21,7 @@ app.get('/login', function(req, res){
 });
 
 app.get('/chat', function(req, res){
-    models.Chat.findAll().then(function (lista){
-        res.render('chat.html', {resultado: lista});
-    });
+    res.render('chat.html');
 });
 
 app.get('/chat2',function(req,res){
