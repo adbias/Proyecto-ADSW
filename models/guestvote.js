@@ -1,25 +1,20 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Voto = sequelize.define("Voto", {
+    var Guestvote = sequelize.define("Guestvote", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         }},{
         classMethods: {
-            associate: function (models) {
-                Voto.belongsTo(models.Stage, {
+            associate: function(models) {
+                Guestvote.belongsTo(models.Solution, {
                     foreignKey: {
                         allowNull: false
                     }
                 });
-                Voto.belongsTo(models.Solution, {
-                    foreignKey: {
-                        allowNull: false
-                    }
-                });
-                Voto.belongsTo(models.Usuario, {
+                Guestvote.belongsTo(models.Stage, {
                     foreignKey: {
                         allowNull: false
                     }
@@ -27,5 +22,5 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     });
-    return Voto;
+    return Guestvote;
 };

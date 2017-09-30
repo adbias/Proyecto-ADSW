@@ -20,7 +20,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         }}, { classMethods: {
             associate: function(models) {
-                Usuario.hasMany(models.Sesion)
+                Usuario.hasMany(models.Sesion);
+                Usuario.hasMany(models.Participants);
+                Usuario.hasMany(models.Msg);
+                Usuario.hasMany(models.Voto)
             }
         }
     });

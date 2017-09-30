@@ -1,31 +1,31 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Msg = sequelize.define("Msg", {
+    var Stage = sequelize.define("Stage", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        username: {
+        titulo: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        time: {
+        descripcion: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        msg: DataTypes.DATE},
-        {
+        }},{
         classMethods: {
-            associate: function (models) {
-                Msg.belongsTo(models.Sesion, {
+            associate: function(models) {
+                Stage.belongsTo(models.Sesion, {
                     foreignKey: {
                         allowNull: false
                     }
                 });
+                Stage.hasMany(models.Msg);
+                Stage.hasMany(models.Voto);
             }
         }
     });
-    return Msg;
+    return Stage;
 };

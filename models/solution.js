@@ -3,7 +3,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Solution = sequelize.define("Solution", {
         description: DataTypes.STRING,
-        result: DataTypes.STRING,
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -17,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Solution.hasMany(models.Voto)
+                Solution.hasMany(models.Voto);
+                Solution.hasMany(models.Guestvote)
             }
         }
     });

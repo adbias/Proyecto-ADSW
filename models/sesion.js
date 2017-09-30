@@ -11,11 +11,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        escenario: {
-            type: DataTypes.STRING,
-            allowNull: false
-
-        },
         objetivo: {
             type: DataTypes.STRING,
             allowNull: false
@@ -32,6 +27,8 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
+                    Sesion.hasMany(models.Guestmsg);
+                    Sesion.hasMany(models.Stage)
                 }
             }
         });
