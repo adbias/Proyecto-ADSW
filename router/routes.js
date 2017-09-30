@@ -33,16 +33,10 @@ app.get('/crearUsuario',function(req,res){
 });
 
 app.get('/sesions',function(req,res){
-    try {
-        models.Sesion.findAll().then(function (user) {
-            res.render('sesions.html', {title: 'Sesiones', resultado: user, session: req.session});
-        });
-    } catch (ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
+    models.Sesion.findAll().then(function (user) {
+        res.render('sesions.html', {title: 'Sesiones', resultado: user, session: req.session});
+    });
 });
-
 
 app.get('/createSesion',function(req,res){
         res.render('CreateSesion.html', {title: 'Crear Sesion', session: req.session});

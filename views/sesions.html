@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../partials/header %>
-<% include ../partials/nav %>
 <script>
     models.Sesion.findAll().then.function(resultado)
 </script>
 <body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+    <div class="hero__gradient">&nbsp;</div>
+    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__content">
+        <div class="hero__content-wrapper">
 <div class="container">
-    <h1> <p> Sesiones </p></h1>
-    <a href="/createSesion"> <p> Nueva Sesion </p> </a>
+    <h1> <p class="clabel"> Sesiones </p></h1>
+    <a href="/createSesion"> <p class="clabel"> Nueva Sesion </p> </a>
     <table class="table">
         <thead>
         <tr>
-            <th> <p> Título </p> </th>
-            <th> <p> Escenario </p></th>
-            <th> <p> Objetivo </p></th>
+            <th> <p class="clabel"> Título </p> </th>
+            <th> <p class="clabel"> Escenario </p></th>
+            <th> <p class="clabel"> Objetivo </p></th>
         </tr>
         </thead>
         <% for (var i = 0; i < resultado.length; i++){ %>
         <tbody>
         <tr>
-            <td> <p> <%= resultado[i].titulo%> </p> </td>
-            <td> <p> <%= resultado[i].escenario %> </p> </td>
-            <td> <p> <%= resultado[i].objetivo %> </p> </td>
-            <!--<td><%= resultado[i].rut%></td>-->
+            <td> <p class="clabel"> <%= resultado[i].titulo%> </p> </td>
+            <td> <p class="clabel"> <%= resultado[i].escenario %> </p> </td>
+            <td> <p class="clabel"> <%= resultado[i].objetivo %> </p> </td>
             <td> <p> Eliminar Modificar </p> </td>
         </tr>
         <% }%>
         </tbody>
     </table>
 </div>
+        </div>
+    </div>
 </body>
 </html>

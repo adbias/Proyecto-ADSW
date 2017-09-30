@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../partials/header %>
-<% include ../partials/nav %>
 <body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+    <div class="hero__gradient">&nbsp;</div>
+    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__content">
+        <div class="hero__content-wrapper">
 <div class="container">
-    <h1><p class="text-center"><%=title%></p></h1>
+    <h1><p class="text-center clabel"><%=title%></p></h1>
 
     <form class="form-horizontal" action="/api/createSesion" method="POST" enctype="application/x-www-form-urlencoded">
         <legend></legend>
         <div class="form-group">
-            <label class="col-lg-2 control-label"><p>Titulo</p></label>
+            <label class="col-lg-2 control-label clabel"><p>Titulo</p></label>
             <div class="col-lg-3">
                 <input type="text" class="form-control" id="title" name="title" placeholder="Título">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-2 control-label"><p>Escenario</p></label>
+            <label class="col-lg-2 control-label clabel"><p>Escenario</p></label>
             <div class="col-lg-3">
                 <input type="text" class="form-control" id="stage" name="stage" placeholder="Escenario">
             </div>
         </div>
         <div class="form-group">
-        <label class="col-lg-2 control-label"><p>Objetivos</p></label>
+        <label class="col-lg-2 control-label clabel"><p>Objetivos</p></label>
         <div class="col-lg-3">
             <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
         </div>
@@ -35,5 +42,8 @@
     </form>
 
 </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
