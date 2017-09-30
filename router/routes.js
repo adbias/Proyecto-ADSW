@@ -30,6 +30,16 @@ app.get('/crearUsuario',function(req,res){
     res.render('CrearUsuario.html', {title: 'Registro de Usuario', session: req.session});
 });
 
+app.get('/crearSolucion',function(req,res){
+    res.render('CrearSolucion.html', {title: 'Crear Solucion', session: req.session});
+});
+
+app.get('/soluciones',function(req,res){
+    models.Solution.findAll().then(function (user) {
+        res.render('Soluciones.html', {title: 'Posibles soluciones', resultado: user, session: req.session});
+    });
+});
+
 app.get('/sesions',function(req,res){
     models.Sesion.findAll().then(function (user) {
         res.render('sesions.html', {title: 'Sesiones', resultado: user, session: req.session});

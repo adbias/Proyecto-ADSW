@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+<script>
+    models.Solution.findAll().then.function(resultado)
+</script>
+<body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+    <div class="hero__gradient">&nbsp;</div>
+    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__content">
+        <div class="hero__content-wrapper">
+            <div class="container">
+                <h1> <p class="clabel"> <% title %> </p></h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th> <p class="clabel"> Nombre </p> </th>
+                        <th> <p class="clabel"> Descripción </p></th>
+                        <th> <p class="clabel"> Resultado esperado </p></th>
+                    </tr>
+                    </thead>
+                    <% for (var i = 0; i < resultado.length; i++){ %>
+                    <tbody>
+                    <tr>
+                        <td> <p class="clabel"> <%= resultado[i].name%> </p> </td>
+                        <td> <p class="clabel"> <%= resultado[i].description %> </p> </td>
+                        <td> <p class="clabel"> <%= resultado[i].result %> </p> </td>
+                    </tr>
+                    <% }%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="hero__call-to-action">
+            <a href="/CrearSolucion" class="hero__button  ghost-button  ghost-button--hero">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva solucion</p></a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+
+<body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+    <div class="hero__gradient">&nbsp;</div>
+    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__content">
+        <div class="hero__content-wrapper">
+
+            <form class="form-horizontal" action="/api/soluciones" method="POST" enctype="application/x-www-form-urlencoded">
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label clabel"><p>Nombre solucion</p></label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre solucion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label clabel"><p>Descripcion</p></label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Descripcion solucion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label clabel"><p>Resultado esperado</p></label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" id="result" name="result" placeholder="Resultado solucion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-5">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>
