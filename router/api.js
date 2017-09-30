@@ -97,6 +97,24 @@ router.post('/chat', function (req, res, next) {
     next();
 });
 
+router.post('/soluciones', function (req, res,next) {
+    try {
+        console.log(req.session.username);
+        console.log(req.session.id);
+        models.Solution.create({
+            name: req.body.name,
+            description: req.body.description,
+            result: req.body.result,
+        }).then(function (result) {
+            res.redirect("/soluciones");
+        });
+    } catch(ex) {
+        console.error("Internal error:" + ex);
+        return next(ex);
+    }
+});
+
 router.get('/chat', function (req, res, next) {
        res.send(chat);
 });
+
