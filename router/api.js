@@ -105,7 +105,7 @@ router.post('/soluciones', function (req, res,next) {
         models.Solution.create({
             name: req.body.name,
             description: req.body.description,
-            result: req.body.result,
+            result: req.body.result
         }).then(function (result) {
             res.redirect("/soluciones");
         });

@@ -8,10 +8,10 @@
     app.controller('ChatSend', function($scope, $http) {
         $scope.username = "";
         $scope.msg = "";
-        $scope.algo = function () { return $scope.username };
         $scope.algo2 = function () { return $scope.msg };
         $scope.sendMsg = function () {
-            $http.post('/api/chat', {username:$scope.algo(), msg:$scope.algo2()});
+            $http.post('/api/chat', {username:"<%= session.username %>", msg:$scope.algo2()});
+            $scope.msg = null;
         }
     });
     app.controller('ChatRecv', function ($scope, $http, $timeout) {
@@ -25,24 +25,23 @@
         retrieve();
     })
 </script>
-<div class="container" ng-app="myApp">
+<div class="container" data-ng-app="myApp">
 <form class="form-horizontal">
-    <div class="form-group" ng-controller="ChatSend">
+    <div class="form-group" data-ng-controller="ChatSend">
         <label>Username</label>
-        <input type="text" ng-model="username">
+        <label data-ng-model="username"><%= session.username %></label>
         <label>msg</label>
-        <input type="text" ng-model="msg">
-        <button ng-click="sendMsg()" class="btn btn-primary">Submit</button>
+        <input type="text" data-ng-model="msg">
+        <button data-ng-click="sendMsg()" class="btn btn-primary">Submit</button>
     </div>
 </form>
-<div ng-controller='ChatRecv'>
-    <script>document.getElementById("display").innerHTML = "{{msg}}"</script>
+<div data-ng-controller='ChatRecv'>
     <table>
         <tr>
             <th>user</th>
             <th>msg</th>
         </tr>
-        <tr ng-repeat="i in lista">
+        <tr data-ng-repeat="i in lista">
             <td>{{ i.username }}</td>
             <td>{{ i.msg }}</td>
         </tr>

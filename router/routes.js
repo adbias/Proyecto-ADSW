@@ -19,7 +19,11 @@ app.get('/login', function(req, res){
 });
 
 app.get('/chat', function(req, res){
-    res.render('chat.html');
+    if (typeof req.session.login !== 'undefined') {
+        res.render('chat.html', {session: req.session});
+    } else {
+        res.redirect('/login');
+    }
 });
 
 app.get('/chat2',function(req,res){
