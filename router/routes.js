@@ -1,8 +1,6 @@
 var express = require('express');
 var app = express();
 var models  = require('../models');
-var chat = require('chat');
-var room = chat.room();
 
 app.get('/', function(req, res){
     res.render('index.html', {session: req.session});
@@ -45,6 +43,10 @@ app.get('/createSesion',function(req,res){
 app.get('/logout', function(req, res) {
    req.session.destroy();
    res.redirect('/');
+});
+
+app.get('/timer',function(req, res){
+   res.render('Timer.html');
 });
 
 module.exports = app;

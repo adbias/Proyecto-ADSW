@@ -1,7 +1,7 @@
 {
-  "name": "pendiente",
-  "version": "0.0.0",
-  "description": "",
+  "name": "LeadTo",
+  "version": "0.1.0",
+  "description": "Plataforma de ayuda para la toma de decisiones",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -9,7 +9,6 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.0",
-    "chat": "^0.6.0",
     "ejs": "^2.5.7",
     "express": "^4.10.6",
     "express-myconnection": "^1.0.4",

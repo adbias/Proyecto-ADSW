@@ -18,7 +18,7 @@ router.post('/usuarios', function(req, res){
         }
     }).then(function (results) {
         if(results.length > 0){
-            if (results[0].username == req.body.username) {
+            if (results[0].username === req.body.username) {
                 console.log("usuario ya registrado");
                 res.redirect("/");
             }   else {
@@ -60,7 +60,7 @@ router.post('/createSesion', function(req,res,next){
             objetivo: req.body.objetive,
             link: " Zelda ",
             UsuarioId: req.session.userId
-        }).then(function (result) {
+        }).then(function () {
             res.redirect("/sesions");
         });
     } catch(ex) {
@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
             req.session.login = 1;
             req.session.username = results.username;
             req.session.userId = results.id;
-            res.redirect('/');
+            res.redirect('/sesions');
         }
         else {
             res.redirect('/login');
@@ -93,7 +93,8 @@ router.post('/chat', function (req, res, next) {
     });
     chat.push({
         username:req.body.username,
-        msg: req.body.msg});
+        msg: req.body.msg
+    });
     next();
 });
 

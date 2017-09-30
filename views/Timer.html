@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.js"></script>
+    <script>
+        var app = angular.module('TimerApp', ['ngSanitize']);
+        app.controller('Timer', function($scope, $timeout) {
+            $scope.timer = 10;
+            var flag = false;
+            var retrieve = function() {
+                flag = false;
+                if ($scope.timer > 0) {
+                    $scope.timer -= 1;
+                    console.log($scope.timer);
+                } else {
+                    flag = true;
+                    return;
+                }
+                    $timeout(retrieve, 1000);
+                };
+            retrieve();
+            $scope.addTime = function() {
+                $scope.timer += 5;
+                if (flag) {retrieve()}
+            };
+        });
+    </script>
+</head>
+<body>
+<div data-ng-app='TimerApp' data-ng-controller='Timer'>
+    <p>{{ timer }} segundos</p>
+    <button data-ng-click='addTime()'>Agregar tiempo</button>
+</div>
+</body>
+</html>
