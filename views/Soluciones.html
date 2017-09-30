@@ -15,7 +15,6 @@
         <div class="hero__content-wrapper">
             <div class="container">
                 <h1> <p class="clabel"> <% title %> </p></h1>
-                <a href="/crearSolucion"> <p class="clabel"> Nueva solucion </p> </a>
                 <table class="table">
                     <thead>
                     <tr>
@@ -30,13 +29,17 @@
                         <td> <p class="clabel"> <%= resultado[i].name%> </p> </td>
                         <td> <p class="clabel"> <%= resultado[i].description %> </p> </td>
                         <td> <p class="clabel"> <%= resultado[i].result %> </p> </td>
-                        <td> <p> Like </p> </td>
                     </tr>
                     <% }%>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="hero__call-to-action">
+            <a href="/CrearSolucion" class="hero__button  ghost-button  ghost-button--hero">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva solucion</p></a>
+        </div>
     </div>
+
 </body>
 </html>
