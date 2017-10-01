@@ -61,7 +61,7 @@ router.post('/createSesion', function(req,res,next){
             link: " Zelda ",
             UsuarioId: req.session.userId
         }).then(function () {
-            res.redirect("/sesions");
+            res.redirect("/sessions");
         });
     } catch(ex) {
         console.error("Internal error:" + ex);
@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
             req.session.login = 1;
             req.session.username = results.username;
             req.session.userId = results.id;
-            res.redirect('/sesions');
+            res.redirect('/');
         }
         else {
             res.redirect('/login');
@@ -96,6 +96,23 @@ router.post('/chat', function (req, res, next) {
         msg: req.body.msg
     });
     next();
+});
+
+router.post('/soluciones', function (req, res,next) {
+    try {
+        console.log(req.session.username);
+        console.log(req.session.id);
+        models.Solution.create({
+            name: req.body.name,
+            description: req.body.description,
+            result: req.body.result
+        }).then(function (result) {
+            res.redirect("/soluciones");
+        });
+    } catch(ex) {
+        console.error("Internal error:" + ex);
+        return next(ex);
+    }
 });
 
 router.post('/soluciones', function (req, res,next) {

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../partials/header %>
-<script>
-    models.Sesion.findAll().then.function(resultado)
-</script>
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
@@ -20,17 +17,14 @@
         <thead>
         <tr>
             <th> <p class="clabel"> Título </p> </th>
-            <th> <p class="clabel"> Escenario </p></th>
             <th> <p class="clabel"> Objetivo </p></th>
         </tr>
         </thead>
         <% for (var i = 0; i < resultado.length; i++){ %>
         <tbody>
         <tr>
-            <td> <p class="clabel"> <%= resultado[i].titulo%> </p> </td>
-            <td> <p class="clabel"> <%= resultado[i].escenario %> </p> </td>
+            <td> <a href="/session?SessionId=<%= resultado[i].id%>" class="clabel"> <%= resultado[i].titulo%> </a> </td>
             <td> <p class="clabel"> <%= resultado[i].objetivo %> </p> </td>
-            <td> <p> Eliminar Modificar </p> </td>
         </tr>
         <% }%>
         </tbody>

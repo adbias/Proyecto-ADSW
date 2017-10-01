@@ -44,9 +44,19 @@ app.get('/soluciones',function(req,res){
     });
 });
 
-app.get('/sesions',function(req,res){
-    models.Sesion.findAll().then(function (user) {
-        res.render('sesions.html', {title: 'Sesiones', resultado: user, session: req.session});
+app.get('/session',function(req,res){
+    models.Stage.findAll({
+        where: { SesionId: req.query.SessionId}
+    }).then(function (resultado) {
+        res.render('Session.html', {title: 'Sesion',resultado: resultado, session: req.session});
+    });
+});
+
+app.get('/sessions',function(req,res){
+    models.Sesion.findAll({
+        where: {UsuarioId: req.session.userId}
+    }).then(function (resultado) {
+        res.render('Sessions.html', {title: 'Sesiones', resultado: resultado, session: req.session});
     });
 });
 

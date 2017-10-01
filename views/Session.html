@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+<body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+    <div class="hero__gradient">&nbsp;</div>
+    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__content">
+        <div class="hero__content-wrapper">
+            <div class="container">
+                <h1> <p class="clabel"> Sesion</p></h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th> <p class="clabel"> Título Escenario </p> </th>
+                        <th> <p class="clabel"> Descripción </p></th>
+                    </tr>
+                    </thead>
+                    <% for (var i = 0; i < resultado.length; i++){ %>
+                    <tbody>
+                    <tr>
+                        <td> <p class="clabel"> <%= resultado[i].titulo%> </p> </td>
+                        <td> <p class="clabel"> <%= resultado[i].descripcion %> </p> </td>
+                    </tr>
+                    <% }%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
