@@ -70,7 +70,7 @@ router.post('/createSesion', function(req,res,next){
 });
 
 
-router.post('/login', function(req, res, next) {
+router.post('/login', function(req, res) {
     models.Usuario.findOne({
         where: { email: req.body.email }
     }).then(function (results) {
@@ -89,11 +89,13 @@ router.post('/login', function(req, res, next) {
 router.post('/chat', function (req, res, next) {
     models.Chat.create({
         username: req.body.username,
-        msg: req.body.msg
+        msg: req.body.msg,
+        sessionid:req.query.id
     });
     chat.push({
         username:req.body.username,
-        msg: req.body.msg
+        msg: req.body.msg,
+        sessionid: req.query.id
     });
     next();
 });
@@ -106,7 +108,7 @@ router.post('/soluciones', function (req, res,next) {
             name: req.body.name,
             description: req.body.description,
             result: req.body.result
-        }).then(function (result) {
+        }).then(function () {
             res.redirect("/soluciones");
         });
     } catch(ex) {
@@ -123,7 +125,7 @@ router.post('/soluciones', function (req, res,next) {
             name: req.body.name,
             description: req.body.description,
             result: req.body.result
-        }).then(function (result) {
+        }).then(function () {
             res.redirect("/soluciones");
         });
     } catch(ex) {
@@ -132,7 +134,7 @@ router.post('/soluciones', function (req, res,next) {
     }
 });
 
-router.get('/chat', function (req, res, next) {
-       res.send(chat);
+router.get('/chat', function (req, res) {
+    res.send(chat.filter(function (t) { if (t.sessionid === req.query.id){return t} }));
 });
 

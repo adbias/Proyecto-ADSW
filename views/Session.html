@@ -1,5 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    span {
+        -ms-word-break: break-all;
+        word-break: break-all;
+
+        /* Non standard for webkit */
+        word-break: break-word;
+
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+        color: whitesmoke;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.js"></script>
+<script>
+    var app = angular.module('myApp', ['ngSanitize']);
+    app.controller('ChatSend', function($scope, $http) {
+        $scope.username = "";
+        $scope.msg = "";
+        var urlid = new URLSearchParams(document.location.search.substring(1));
+        $scope.algo2 = function () { return $scope.msg };
+        $scope.sendMsg = function () {
+            $http.post('/api/chat?id='+urlid.get("SessionId"), {username:"<%= session.username %>", msg:$scope.algo2()});
+            $scope.msg = null;
+        }
+    });
+    app.controller('ChatRecv', function ($scope, $http, $timeout) {
+        $scope.lista = [];
+        var urlid =  new URLSearchParams(document.location.search.substring(1));
+        var retrieve = function() {
+            $http.get('/api/chat?id='+urlid.get("SessionId")).then(function (response) {
+                $scope.lista = response.data;
+                $timeout(retrieve, 500);
+            });
+        };
+        retrieve();
+    })
+</script>
 <% include ../partials/header %>
 <body>
 <div id="start" class="start"></div>
@@ -10,7 +50,7 @@
     <div class="hero__pattern">&nbsp;</div>
     <div class="hero__content">
         <div class="hero__content-wrapper">
-            <div class="container">
+            <div class="container col-md-8 pull-left">
                 <h1> <p class="clabel"> Sesion</p></h1>
                 <table class="table">
                     <thead>
@@ -28,6 +68,27 @@
                     <% }%>
                     </tbody>
                 </table>
+            </div>
+            <div class="container col-md-4 pull-right" data-ng-app="myApp">
+                <form class="form-horizontal">
+                    <div class="form-group" data-ng-controller="ChatSend">
+                        <label class="clabel">Mensaje</label>
+                        <input type="text" data-ng-model="msg">
+                        <button data-ng-click="sendMsg()" class="btn btn-primary pull-right">Enviar</button>
+                    </div>
+                </form>
+                <div data-ng-controller='ChatRecv'>
+                    <div class="table table-borderless">
+                        <!--<tr>
+                            <th>user</th>
+                            <th>msg</th>
+                        </tr>-->
+                        <div data-ng-repeat="i in lista">
+                            <span>{{ i.username }}:</span>
+                            <span>{{ i.msg }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
