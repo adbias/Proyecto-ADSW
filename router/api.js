@@ -58,12 +58,19 @@ router.post('/createSesion', function(req,res,next){
     try {
         models.Sesion.create({
             titulo: req.body.title,
-            escenario: req.body.stage,
             objetivo: req.body.objetive,
             link: " Zelda ",
             UsuarioId: req.session.userId
         }).then(function () {
-            res.redirect("/sessions");
+            models.Sesion.findOne({
+                where: {
+                    titulo: req.body.title,
+                    objetivo: req.body.objetive,
+                }
+            }).then(function (results) {
+                res.redirect("/crearEscenario?idSesion="+results.id.toString()+"&created=0");
+            });
+
         });
     } catch(ex) {
         console.error("Internal error:" + ex);
@@ -75,10 +82,10 @@ router.post('/crearEscenario', function(req,res,next){
     try {
         models.Stage.create({
             titulo: req.body.title,
-            objetivo: req.body.objetive,
-            UsuarioId: req.session.userId
+            descripcion: req.body.objetive,
+            SesionId: req.query.idSesion,
         }).then(function () {
-            res.redirect("/sessions");
+            res.redirect("/crearEscenario?created=1&idSesion="+req.query.idSesion.toString());
         });
     } catch(ex) {
         console.error("Internal error:" + ex);

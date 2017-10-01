@@ -65,7 +65,8 @@ app.get('/createSesion',function(req,res){
 });
 
 app.get('/crearEscenario',function(req,res){
-    res.render('CrearEscenario.html', {title: 'Crear Escenario', session: req.session});
+    res.render('CrearEscenario.html', {title: 'Crear Escenario', session: req.session,created:req.query.created,
+                                        idSesion: req.query.idSesion});
 });
 
 app.get('/logout', function(req, res) {
