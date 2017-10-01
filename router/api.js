@@ -19,11 +19,9 @@ router.post('/usuarios', function(req, res){
     }).then(function (results) {
         if(results.length > 0){
             if (results[0].username === req.body.username) {
-                console.log("usuario ya registrado");
-                res.redirect("/");
+                res.redirect('/crearUsuario?Err=1');
             }   else {
-                console.log("correo ya registrado");
-                res.redirect("/");
+                res.redirect('/crearUsuario?Err=3');
             }
             existed = false;
     }});
@@ -36,24 +34,28 @@ router.post('/usuarios', function(req, res){
                     password: bcrypt.hashSync(req.body.password),
                     email: req.body.email
                 }).then(function () {
-                    console.log("registrado");
-                    res.redirect("/");
+                    models.Usuario.findOne({
+                        where: { email: req.body.email }
+                    }).then(function (results) {
+                        if (results !== null && bcrypt.compareSync(req.body.password, results.password)) {
+                            req.session.login = 1;
+                            req.session.username = results.username;
+                            req.session.userId = results.id;
+                            res.redirect('/');
+                        }
+                    });
                 });
             } else {
-                console.log("contraseña no valida");
-                res.redirect("/");
+                res.redirect('/crearUsuario?Err=2');
             }
         } else {
-            console.log("email no valido");
-            res.redirect("/");
+            res.redirect('/crearUsuario?Err=4');
         }
     }
 });
 
 router.post('/createSesion', function(req,res,next){
     try {
-        console.log(req.session.username);
-        console.log(req.session.id);
         models.Sesion.create({
             titulo: req.body.title,
             escenario: req.body.stage,
@@ -69,6 +71,20 @@ router.post('/createSesion', function(req,res,next){
     }
 });
 
+router.post('/crearEscenario', function(req,res,next){
+    try {
+        models.Stage.create({
+            titulo: req.body.title,
+            objetivo: req.body.objetive,
+            UsuarioId: req.session.userId
+        }).then(function () {
+            res.redirect("/sessions");
+        });
+    } catch(ex) {
+        console.error("Internal error:" + ex);
+        return next(ex);
+    }
+});
 
 router.post('/login', function(req, res) {
     models.Usuario.findOne({

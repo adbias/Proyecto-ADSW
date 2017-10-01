@@ -27,7 +27,7 @@
 				<div class="hero__call-to-action">
 					<% if (typeof session.login === 'undefined') { %>
 					<a href="/createSesion" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Entrar como invitado</i></a>
-					<a href="/crearUsuario" class="hero__button ghost-button ghost-button--hero"><i class="fa fa-user-plus"></i> Registrarse</i></a>
+					<a href="/crearUsuario?Err=0" class="hero__button ghost-button ghost-button--hero"><i class="fa fa-user-plus"></i> Registrarse</i></a>
 					<% } else { %>
 					<a href="/sessions" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Mis sesiones</i></a>
 					<a href="/" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Unirme a una sesion </i></a>

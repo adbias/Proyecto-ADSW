@@ -31,7 +31,7 @@ app.get('/chat2',function(req,res){
 });
 
 app.get('/crearUsuario',function(req,res){
-    res.render('CrearUsuario.html', {title: 'Registro de Usuario', session: req.session});
+    res.render('CrearUsuario.html', {title: 'Registro de Usuario', session: req.session, error:req.query.Err});
 });
 
 app.get('/crearSolucion',function(req,res){
@@ -48,7 +48,7 @@ app.get('/session',function(req,res){
     models.Stage.findAll({
         where: { SesionId: req.query.SessionId}
     }).then(function (resultado) {
-        res.render('Session.html', {title: 'Sesion',resultado: resultado, session: req.session});
+        res.render('Session.html', {title: 'Sesion',resultado: resultado, session: req.session,name: req.query.nameSession});
     });
 });
 
@@ -62,6 +62,10 @@ app.get('/sessions',function(req,res){
 
 app.get('/createSesion',function(req,res){
         res.render('CreateSesion.html', {title: 'Crear Sesion', session: req.session});
+});
+
+app.get('/crearEscenario',function(req,res){
+    res.render('CrearEscenario.html', {title: 'Crear Escenario', session: req.session});
 });
 
 app.get('/logout', function(req, res) {

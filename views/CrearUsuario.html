@@ -37,6 +37,24 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </div>
+                    <div class="col-lg-10 col-lg-offset-5">
+                        <% if(error==1){ %>
+                        <button type="button" class="btn btn-danger">Usuario ocupado</button>
+                        <%}%>
+
+                        <% if(error==2){ %>
+                        <button type="button" class="btn btn-danger">Contraseña inválida</button>
+                        <%}%>
+
+                        <% if(error==3){ %>
+                        <button type="button" class="btn btn-danger">Correo ya en uso</button>
+                        <%}%>
+
+                        <% if(error==4){ %>
+                        <button type="button" class="btn btn-danger">Correo ya en uso</button>
+                        <%}%>
+                    </div>
+
               </form>
 
 </div>
