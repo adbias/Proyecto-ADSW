@@ -3,6 +3,7 @@ var router = express.Router();
 var models  = require('../models');
 var bcrypt = require('bcrypt-nodejs');
 var regex = require('regex-email');
+var url = require('url');
 module.exports = router;
 var chat = [];
 

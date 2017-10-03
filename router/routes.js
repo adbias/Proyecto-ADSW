@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var models  = require('../models');
+var url = require('url');
+var ip = require("ip");
+
 
 app.get('/', function(req, res){
     res.render('index.html', {session: req.session});
@@ -48,7 +51,10 @@ app.get('/session',function(req,res){
     models.Stage.findAll({
         where: { SesionId: req.query.SessionId}
     }).then(function (resultado) {
-        res.render('Session.html', {title: 'Sesion',resultado: resultado, session: req.session,name: req.query.nameSession});
+        console.log(req.query.hostId + "  /  " + req.session.userId);
+        res.render('Session.html', {title: 'Sesion',resultado: resultado, session: req.session,name: req.query.nameSession,
+            url:'//http:'+ip.address().toString()+':3000/session?SessionId='+req.query.SessionId+'&nameSession='+ req.query.nameSession,
+            hostId:req.query.hostId});
     });
 });
 
@@ -56,7 +62,8 @@ app.get('/sessions',function(req,res){
     models.Sesion.findAll({
         where: {UsuarioId: req.session.userId}
     }).then(function (resultado) {
-        res.render('Sessions.html', {title: 'Sesiones', resultado: resultado, session: req.session});
+        console.log(req.session.userId);
+        res.render('Sessions.html', {title: 'Sesiones', resultado: resultado, session: req.session, hostId:req.session.userId});
     });
 });
 
