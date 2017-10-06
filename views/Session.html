@@ -1,102 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<style>
-    span {
-        -ms-word-break: break-all;
-        word-break: break-all;
-
-        /* Non standard for webkit */
-        word-break: break-word;
-
-        -webkit-hyphens: auto;
-        -moz-hyphens: auto;
-        hyphens: auto;
-        color: whitesmoke;
-    }
-</style>
+<html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.js"></script>
 <script>
-    var app = angular.module('myApp', ['ngSanitize']);
-    app.controller('ChatSend', function($scope, $http) {
-        $scope.username = "";
-        $scope.msg = "";
-        var urlid = new URLSearchParams(document.location.search.substring(1));
-        $scope.algo2 = function () { return $scope.msg };
-        $scope.sendMsg = function () {
-            $http.post('/api/chat?id='+urlid.get("SessionId"), {username:"<%= session.username %>", msg:$scope.algo2()});
-            $scope.msg = null;
-        }
-    });
-    app.controller('ChatRecv', function ($scope, $http, $timeout) {
-        $scope.lista = [];
-        var urlid =  new URLSearchParams(document.location.search.substring(1));
-        var retrieve = function() {
-            $http.get('/api/chat?id='+urlid.get("SessionId")).then(function (response) {
-                $scope.lista = response.data;
-                $timeout(retrieve, 500);
-            });
-        };
-        retrieve();
-    })
+    var usernamelogged = "<%= session.username %>"
 </script>
+<script src="js/chat_rest.js"></script>
 <% include ../partials/header %>
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
+    <div class="hero__gradient"></div>
+    <div class="hero__pattern"></div>
     <div class="hero__content">
         <div class="hero__content-wrapper">
             <div class="container col-md-8 pull-left">
-                <h1> <p class="clabel"> <a href="/sessions">Sesion:</a> <%=name%> </p></h1>
+                <h1 class="clabel"><a href="/sessions">Sesion:</a> <%= name %></h1>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th> <p class="clabel"> Título Escenario </p> </th>
-                        <th> <p class="clabel"> Descripción </p></th>
+                        <th class="clabel">Título Escenario</th>
+                        <th class="clabel">Descripción</th>
                     </tr>
                     </thead>
-                    <% for (var i = 0; i < resultado.length; i++){ %>
+                    <% for (var i = 0; i < resultado.length; i++) { %>
                     <tbody>
                     <tr>
-                        <td> <p class="clabel"> <%= resultado[i].titulo%> </p> </td>
-                        <td> <p class="clabel"> <%= resultado[i].descripcion %> </p> </td>
+                        <td class="clabel"><%= resultado[i].titulo %></td>
+                        <td class="clabel"><%= resultado[i].descripcion %></td>
                     </tr>
-                    <% }%>
+                    <% } %>
                     </tbody>
                 </table>
 
-                <%if(hostId == session.userId){%>
+                <% if(hostId == session.userId) { %>
                 <div class="container col-md-8 pull-left">
-                <h3> <p class="clabel"> Compartir:</p></h3>
-                <h3> <p class="clabel"> <%=url%> </p></h3>
+                <h3 class="clabel"> Compartir:</h3>
+                <h3 class="clabel"> <%= url %></h3>
                 </div>
-                <!--
-                <div class="hero__call-to-action">
-                    <a href="/" class="hero__button  ghost-button  ghost-button--hero">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i><p> <%=url%></p></a>
-                </div>
-                -->
-                <%}%>
+                <% } %>
 
             </div>
             <div class="container col-md-4 pull-right" data-ng-app="myApp">
-                <form class="form-horizontal">
+                <form class="form-inline">
                     <div class="form-group" data-ng-controller="ChatSend">
-                        <label class="clabel">Mensaje</label>
-                        <input type="text" data-ng-model="msg">
-                        <button data-ng-click="sendMsg()" class="btn btn-primary pull-right">Enviar</button>
+                        <label for="message" class="clabel">Mensaje</label>
+                        <input id="message" type="text" data-ng-model="msg" />
                     </div>
+                    <button data-ng-click="sendMsg()" class="btn btn-primary">Enviar</button>
                 </form>
                 <div data-ng-controller='ChatRecv'>
                     <div class="table table-borderless">
-                        <!--<tr>
-                            <th>user</th>
-                            <th>msg</th>
-                        </tr>-->
                         <div data-ng-repeat="i in lista">
                             <span>{{ i.username }}:</span>
                             <span>{{ i.msg }}</span>
@@ -106,5 +62,6 @@
             </div>
         </div>
     </div>
+</section>
 </body>
 </html>

@@ -5,3 +5,16 @@ a {
 .clabel {
     color: whitesmoke;
 }
+
+span {
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    color: whitesmoke;
+}

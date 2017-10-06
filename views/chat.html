@@ -30,8 +30,8 @@
     <div class="form-group" data-ng-controller="ChatSend">
         <label>Username</label>
         <label data-ng-model="username"><%= session.username %></label>
-        <label>msg</label>
-        <input type="text" data-ng-model="msg">
+        <label for="msg">msg</label>
+        <input name="msg" id="msg" type="text" data-ng-model="msg" />
         <button data-ng-click="sendMsg()" class="btn btn-primary">Submit</button>
     </div>
 </form>
