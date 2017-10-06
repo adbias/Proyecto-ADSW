@@ -20,3 +20,38 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
     };
     retrieve();
 });
+app.controller('Timer', function($scope, $timeout) {
+    $scope.timer = 300;
+    var flag = false;
+    var retrieve = function() {
+        flag = false;
+        if ($scope.timer > 0) {
+            $scope.timer -= 1;
+        } else {
+            flag = true;
+            return;
+        }
+        $timeout(retrieve, 1000);
+    };
+    retrieve();
+    $scope.addTime = function() {
+        $scope.timer += 60;
+        if (flag) {retrieve()}
+    };
+    $scope.resetTime = function() {
+        $scope.timer = new Date(300);
+        if (flag) {retrieve()}
+    };
+    $scope.minutes = function() {
+        return Math.floor($scope.timer/60);
+    };
+});
+app.controller('Show', function($scope, $timeout){
+    var hide = function(){
+        $scope.url = "";
+    };
+    $scope.show = function(){
+        $scope.url = url;
+        $timeout(hide, 10000)
+    };
+});

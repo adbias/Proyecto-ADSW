@@ -3,7 +3,7 @@ var router = express.Router();
 var models  = require('../models');
 var bcrypt = require('bcrypt-nodejs');
 var regex = require('regex-email');
-var url = require('url');
+//var url = require('url');
 module.exports = router;
 var chat = [];
 
@@ -55,48 +55,39 @@ router.post('/usuarios', function(req, res){
     }
 });
 
-router.post('/createSesion', function(req,res,next){
-    try {
-        models.Sesion.create({
-            titulo: req.body.title,
-            objetivo: req.body.objetive,
-            link: " Zelda ",
-            UsuarioId: req.session.userId
-        }).then(function () {
-            models.Sesion.findOne({
-                where: {
-                    titulo: req.body.title,
-                    objetivo: req.body.objetive,
-                }
-            }).then(function (results) {
-                res.redirect("/crearEscenario?idSesion="+results.id.toString()+"&created=0");
-            });
-
+router.post('/createSesion', function(req, res){
+    models.Sesion.create({
+        titulo: req.body.title,
+        objetivo: req.body.objetive,
+        link: " Zelda ",
+        UsuarioId: req.session.userId
+    }).then(function () {
+        models.Sesion.findOne({
+            where: {
+                titulo: req.body.title,
+                objetivo: req.body.objetive
+            }
+        }).then(function (results) {
+            res.redirect("/crearEscenario?idSesion="+results.id.toString()+"&created=0");
         });
-    } catch(ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
+    });
 });
 
-router.post('/crearEscenario', function(req,res,next){
-    try {
-        models.Stage.create({
-            titulo: req.body.title,
-            descripcion: req.body.objetive,
-            SesionId: req.query.idSesion,
-        }).then(function () {
-            res.redirect("/crearEscenario?created=1&idSesion="+req.query.idSesion.toString());
-        });
-    } catch(ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
+router.post('/crearEscenario', function(req, res){
+    models.Stage.create({
+        titulo: req.body.title,
+        descripcion: req.body.objetive,
+        SesionId: req.query.idSesion
+    }).then(function () {
+        res.redirect("/crearEscenario?created=1&idSesion="+req.query.idSesion.toString());
+    });
 });
 
 router.post('/login', function(req, res) {
     models.Usuario.findOne({
-        where: { email: req.body.email }
+        where: {
+            email: req.body.email
+        }
     }).then(function (results) {
         if (results !== null && bcrypt.compareSync(req.body.password, results.password)) {
             req.session.login = 1;
@@ -104,13 +95,11 @@ router.post('/login', function(req, res) {
             req.session.userId = results.id;
             res.redirect('/');
         }
-        else {
-            res.redirect('/login');
-        }
-        });
+        else res.redirect('/login');
+    });
 });
 
-router.post('/chat', function (req, res, next) {
+router.post('/chat', function(req, res, next) {
     models.Chat.create({
         username: req.body.username,
         msg: req.body.msg,
@@ -124,41 +113,33 @@ router.post('/chat', function (req, res, next) {
     next();
 });
 
-router.post('/soluciones', function (req, res,next) {
-    try {
-        console.log(req.session.username);
-        console.log(req.session.id);
-        models.Solution.create({
-            name: req.body.name,
-            description: req.body.description,
-            result: req.body.result
-        }).then(function () {
-            res.redirect("/soluciones");
-        });
-    } catch(ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
+router.post('/soluciones', function (req, res) {
+    console.log(req.session.username);
+    console.log(req.session.id);
+    models.Solution.create({
+        name: req.body.name,
+        description: req.body.description,
+        result: req.body.result
+    }).then(function() {
+        res.redirect("/soluciones");
+    });
 });
 
-router.post('/soluciones', function (req, res,next) {
-    try {
-        console.log(req.session.username);
-        console.log(req.session.id);
-        models.Solution.create({
-            name: req.body.name,
-            description: req.body.description,
-            result: req.body.result
-        }).then(function () {
-            res.redirect("/soluciones");
-        });
-    } catch(ex) {
-        console.error("Internal error:" + ex);
-        return next(ex);
-    }
+router.post('/soluciones', function (req, res) {
+    console.log(req.session.username);
+    console.log(req.session.id);
+    models.Solution.create({
+        name: req.body.name,
+        description: req.body.description,
+        result: req.body.result
+    }).then(function() {
+        res.redirect("/soluciones");
+    });
 });
 
 router.get('/chat', function (req, res) {
-    res.send(chat.filter(function (t) { if (t.sessionid === req.query.id){return t} }));
+    res.send(chat.filter(function (t) {
+        if (t.sessionid === req.query.id) return t;
+    }));
 });
 
