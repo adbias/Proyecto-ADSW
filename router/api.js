@@ -110,6 +110,7 @@ router.post('/chat', function(req, res, next) {
         msg: req.body.msg,
         sessionid: req.query.id
     });
+    console.log(req.body);
     next();
 });
 
@@ -141,5 +142,11 @@ router.get('/chat', function (req, res) {
     res.send(chat.filter(function (t) {
         if (t.sessionid === req.query.id) return t;
     }));
+});
+var soluciones = "";
+models.Solution.findAll().then(function(info){soluciones= info});
+
+router.get('/soluciones', function(req, res) {
+    res.send(soluciones);
 });
 
