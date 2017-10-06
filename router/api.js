@@ -6,6 +6,12 @@ var regex = require('regex-email');
 //var url = require('url');
 module.exports = router;
 var chat = [];
+var rn = require('random-number');
+var options = {
+    min:  0
+    , max:  1000
+    , integer: true
+}
 
 router.post('/usuarios', function(req, res){
     var add = true;
@@ -20,9 +26,13 @@ router.post('/usuarios', function(req, res){
     }).then(function (results) {
         if(results.length > 0){
             if (results[0].username === req.body.username) {
-                res.redirect('/crearUsuario?Err=1');
-            }   else {
-                res.redirect('/crearUsuario?Err=3');
+                if (results[0].email != "invitado@invitado.com"){ // invitado
+                    res.redirect('/crearUsuario?Err=1');
+                }
+            }  else {
+                if (results[0].email != "invitado@invitado.com"){ // invitado
+                    res.redirect('/crearUsuario?Err=3');
+                }
             }
             existed = false;
     }});
@@ -137,9 +147,30 @@ router.post('/soluciones', function (req, res) {
     });
 });
 
+router.get('/inGuest',function (req,res) {
+    var num = rn(options);
+    models.Usuario.create({
+        username: 'invitado'+num.toString(),
+        password: bcrypt.hashSync('123456'),
+        email: 'invitado@invitado.com'
+    }).then(function () {
+        models.Usuario.findOne({
+            where: { username: 'invitado'+num.toString()}
+        }).then(function (results) {
+            if (results !== null && bcrypt.compareSync('123456', results.password)) {
+                req.session.login = 1;
+                req.session.username = results.username;
+                req.session.userId = results.id;
+                res.redirect('/');
+            }
+        });
+    });
+});
+
 router.get('/chat', function (req, res) {
     res.send(chat.filter(function (t) {
         if (t.sessionid === req.query.id) return t;
     }));
 });
+
 

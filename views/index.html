@@ -11,7 +11,10 @@
 			<div class="hero__content-wrapper">
 				<div class="hero__title-wrapper">
 					<div class="hero__title-large">
-						Bienvenido <% if (typeof session.login !== 'undefined') { %>
+						Bienvenido
+					</div>
+					<div class="hero__title-small">
+						<% if (typeof session.login != 'undefined') { %>
 						<%= session.username %>
 						<% } %>
 					</div>
@@ -24,9 +27,10 @@
 				<div class="hero__description">
 					Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.
 				</div>
+
 				<div class="hero__call-to-action">
-					<% if (typeof session.login === 'undefined') { %>
-					<a href="/createSesion" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Entrar como invitado</i></a>
+					<% if (typeof session.login == 'undefined') { %>
+					<a href="/entradaInvitado" type="submit" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Entrar como invitado</i></a>
 					<a href="/crearUsuario?Err=0" class="hero__button ghost-button ghost-button--hero"><i class="fa fa-user-plus"></i> Registrarse</i></a>
 					<% } else { %>
 					<a href="/sessions" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Mis sesiones</i></a>
@@ -34,6 +38,7 @@
 					<a href="/soluciones" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Soluciones generales</i></a>
 					<% } %>
 				</div>
+
 			</div>
 		</div>
 	</section>
