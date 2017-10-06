@@ -5,6 +5,7 @@
 <script>
     var usernamelogged = "<%= session.username %>"
     var url = "<%= url %>"
+    var reslen = parseInt("<%= resultado.length %>")
 </script>
 <script src="js/chat_rest.js"></script>
 <% include ../partials/header %>
@@ -33,19 +34,23 @@
                         <th class="clabel">Título Escenario</th>
                         <th class="clabel">Descripción</th>
                         <th class="clabel">Votos</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <% for (var i = 0; i < resultado.length; i++) { %>
                     <tr>
-                        <td class="clabel"><%= resultado[i].titulo %></td>
-                        <td class="clabel"><%= resultado[i].descripcion %></td>
-                        <td><button class="btn btn-xs btn-primary" data-ng-click="showAlt(<%= i %>)">+</button>
-                        <div data-ng-show="showing[<%= i %>]" data-ng-repeat="k in form">
-                          <p>{{ k.nombre }}</p>
-                          <p></p>
-                          <p></p>
-                        </div></td>
+                        <td class="clabel"><%= resultado[id=i].titulo %></td>
+                        <td class="clabel"><%= resultado[id=i].descripcion %></td>
+                        <td><button class="btn btn-xs btn-primary" data-ng-click="showAlt(<%= i %>)">+</button></td>
+                        <td>
+                            <table>
+                                <tr data-ng-show="showing[<%= i %>]" data-ng-repeat="k in form" class="checkbox">
+                                    <td><label class="clabel"><input type="checkbox" data-ng-model="voto[<%= i %>][k.id-1]"> {{ k.name }}</label></td>
+                                </tr>
+                                <p class="clabel">{{ voto }}</p>
+                            </table>
+                        </td>
                     </tr>
                     <% } %>
                     </tbody>

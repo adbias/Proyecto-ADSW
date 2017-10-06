@@ -52,7 +52,9 @@ app.controller('Show', function($scope, $timeout, $http){
           $scope.form = response.data;
 
     console.log($scope.form);
-    $scope.showing = [];
+
+    $scope.showing = new Array(reslen);
+    $scope.showing.fill(false);
     var hide = function(){
         $scope.url = "";
     };
@@ -60,8 +62,13 @@ app.controller('Show', function($scope, $timeout, $http){
         $scope.url = url;
         $timeout(hide, 10000);
     };
+    $scope.voto = {};
     $scope.showAlt = function(i){
-        $scope.showing[i] = true;
+        if ($scope.showing[i] === false)
+            $scope.showing[i] = true;
+        else
+            $scope.showing[i] = false;
+        if (typeof $scope.voto[id=i] === 'undefined') $scope.voto[id=i] = new Array(17);
     };
 });
 });

@@ -118,6 +118,10 @@ var a = [{
         name:"Autenticar actor",
         mechanism:"Asegurar que un usuario autenticado tiene los derechos de acceder y modificar datos o servicios",
         result:"Definir grupos de usuario, roles, listas individuales"}];
+models.Solution.destroy({
+    where: {},
+    truncate:true
+});
 for (var i = 0; i< a.length; i++) {
     models.Solution.create(a[i]);
 }
