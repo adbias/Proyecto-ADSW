@@ -168,6 +168,38 @@ router.get('/inGuest',function (req,res) {
     });
 });
 
+router.get('/addVotes', function (req, res) {
+    // Se borran los votos
+    var index = -1;
+    models.Voto.finAll({
+        UsuarioId: req.session.userId,
+        StageId: req.query.stageId
+    }).then(function (result) {
+        for(i=0;i<result.lenght;i++){
+            index=req.IdSolutions.indexOf(result[i].SolutionId);
+            if (index > -1) { // Ya existe este voto, no es necesario agregarlo
+                req.IdSolutions.splice(index, 1); // se retira del arreglo, debido a que ya existe
+            } else {
+                models.Voto.remove({ // se borra debido a que ya no existe el voto
+                    UsuarioId: req.session.userId,
+                    StageId: req.query.stageId,
+                    SolutionId: result[i].SolutionId
+                });
+            };
+        };
+    });
+    // Se agregan los votos que quedaron del arreglo, debido a que son los nuevos
+    for (i=0;i<req.IdSolutions.lenght;i++){
+        models.Voto.create({
+            UsuarioId: req.session.userId,
+            StageId: req.query.stageId,
+            SolutionId: result[i].SolutionId
+        }).then(function (result) {
+            res.render('/');
+        });
+    };
+});
+
 router.get('/chat', function (req, res) {
     res.send(chat.filter(function (t) {
         if (t.sessionid === req.query.id) return t;
