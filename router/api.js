@@ -194,8 +194,16 @@ router.get('/addVotes', function (req, res) {
             UsuarioId: req.session.userId,
             StageId: req.query.stageId,
             SolutionId: result[i].SolutionId
-        }).then(function (result) {
-            res.render('/');
+        }).then(function () {
+            models.Stage.findOne({
+                id: req.query.stageId
+            }).then(function (result1) {
+                models.Sesion.findOne({
+                    id: result1.SesionId
+                }).then(function (result2) {
+                    res.render('/session',{SessionId:result1.SesionId,nameSession:result2.titulo,hostId:result2.UsuarioId});
+                });
+            });
         });
     };
 });
