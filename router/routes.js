@@ -100,6 +100,5 @@ app.get('/entradaInvitado', function(req, res) {
 
 
 
-
 module.exports = app;
 
