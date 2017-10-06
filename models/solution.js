@@ -2,7 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Solution = sequelize.define("Solution", {
-        description: DataTypes.STRING,
+        mechanism: DataTypes.STRING,
+        result: DataTypes.STRING,
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -21,6 +22,5 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     });
-
     return Solution;
 };

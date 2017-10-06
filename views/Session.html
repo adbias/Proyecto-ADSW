@@ -17,13 +17,13 @@
     <div class="hero__pattern"></div>
     <div class="hero__content">
         <div class="hero__content-wrapper">
-            <div class="container col-md-8 pull-left">
+            <div class="container col-md-8 pull-left" data-ng-controller="Show">
                 <div style="display: inline-flex">
                     <h1 class="clabel"><a href="/sessions">Sesion:</a> <%= name %></h1>
                     <% if(hostId == session.userId) { %>
-                    <div style="margin-left: 30px" data-ng-controller="Show">
+                    <div style="margin-left: 10px; display: inline-flex">
                         <button class="btn btn-primary" data-ng-click="show()">Compartir...</button>
-                        <p class="clabel">{{ url }}</p>
+                        <p style="margin-left: 10px" class="clabel">{{ url }}</p>
                     </div>
                     <% } %>
                 </div>
@@ -37,7 +37,7 @@
                     <% for (var i = 0; i < resultado.length; i++) { %>
                     <tbody>
                     <tr>
-                        <td class="clabel"><%= resultado[i].titulo %></td>
+                        <td class="clabel"><a data-ng-click="showAlt()"><%= resultado[i].titulo %></a></td>
                         <td class="clabel"><%= resultado[i].descripcion %></td>
                     </tr>
                     <% } %>
@@ -50,8 +50,8 @@
                     <button class="btn btn-success" data-ng-click='addTime()'>+1</button>
                     <button class="btn btn-warning" data-ng-click='resetTime()'>Reset</button>
                 </div>
-                <form class="form-inline">
-                    <div class="form-group" data-ng-controller="ChatSend">
+                <form class="form-inline" data-ng-controller='ChatSend'>
+                    <div class="form-group">
                         <label for="message" class="clabel">Mensaje</label>
                         <input id="message" type="text" data-ng-model="msg" />
                     </div>
