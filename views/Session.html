@@ -11,7 +11,7 @@
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
-<% include ../partials/nav %>
+<% include ../partials/nav %>console.log($scope.form);
 <section id="hero" class="hero" data-ng-app="myApp">
     <div class="hero__gradient"></div>
     <div class="hero__pattern"></div>
@@ -32,35 +32,24 @@
                     <tr>
                         <th class="clabel">Título Escenario</th>
                         <th class="clabel">Descripción</th>
+                        <th class="clabel">Votos</th>
                     </tr>
                     </thead>
-                    <% for (var i = 0; i < resultado.length; i++) { %>
                     <tbody>
+                    <% for (var i = 0; i < resultado.length; i++) { %>
                     <tr>
-                        <td class="clabel"><a data-ng-click="showAlt()"><%= resultado[i].titulo %></a></td>
+                        <td class="clabel"><%= resultado[i].titulo %></td>
                         <td class="clabel"><%= resultado[i].descripcion %></td>
+                        <td><button class="btn btn-xs btn-primary" data-ng-click="showAlt(<%= i %>)">+</button>
+                        <div data-ng-show="showing[<%= i %>]" data-ng-repeat="k in form">
+                          <p>{{ k.nombre }}</p>
+                          <p></p>
+                          <p></p>
+                        </div></td>
                     </tr>
                     <% } %>
                     </tbody>
                 </table>
-                <label ng-repeat="fruit in fruits">
-                    <!--
-                      - Use `value="{{fruit.name}}"` to give the input a real value, in case the form gets submitted
-                        traditionally
-
-                      - Use `ng-checked="fruit.selected"` to have the checkbox checked based on some angular expression
-                        (no two-way-data-binding)
-
-                      - Use `ng-model="fruit.selected"` to utilize two-way-data-binding. Note that `.selected`
-                        is arbitrary. The property name could be anything and will be created on the object if not present.
-                    -->
-                    <input
-                            type="checkbox"
-                            name="selectedFruits[]"
-                            value="{{fruit.name}}"
-                            ng-model="fruit.selected"
-                    > {{fruit.name}}
-                </label>
             </div>
             <div class="container col-md-4 pull-right">
                 <div class="form-inline form-group" data-ng-controller='Timer'>

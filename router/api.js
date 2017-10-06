@@ -174,10 +174,8 @@ router.get('/chat', function (req, res) {
     }));
 });
 var soluciones = "";
-models.Solution.findAll().then(function(info){soluciones= info});
+models.Solution.findAll().then(function(info){soluciones = info});
 
 router.get('/soluciones', function(req, res) {
     res.send(soluciones);
 });
-
-

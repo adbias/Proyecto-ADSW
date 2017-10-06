@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mysql = require('mysql');
 var Usuario = require('./models/usuario.js');
+var Solution = require('./models/solution.js');
 var models = require("./models/index.js");
 var session = require('express-session');
 app.use(session({
@@ -32,7 +33,6 @@ models.sequelize.sync().then(function () {
 	});
 });
 
-/*
 var a = [{
     id:1,
     name:"Identificar autor",
@@ -119,5 +119,5 @@ var a = [{
         mechanism:"Asegurar que un usuario autenticado tiene los derechos de acceder y modificar datos o servicios",
         result:"Definir grupos de usuario, roles, listas individuales"}];
 for (var i = 0; i< a.length; i++) {
-    models.Solution.update(a[i]);
-}*/
+    models.Solution.create(a[i]);
+}

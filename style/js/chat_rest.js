@@ -40,7 +40,7 @@ app.controller('Timer', function($scope, $timeout) {
         if (flag) {retrieve()}
     };
     $scope.resetTime = function() {
-        $scope.timer = new Date(300);
+        $scope.timer = 300;
         if (flag) {retrieve()}
     };
     $scope.minutes = function() {
@@ -48,19 +48,20 @@ app.controller('Timer', function($scope, $timeout) {
     };
 });
 app.controller('Show', function($scope, $timeout, $http){
+  $http.get('/api/soluciones').then(function(response) {
+          $scope.form = response.data;
+
+    console.log($scope.form);
+    $scope.showing = [];
     var hide = function(){
         $scope.url = "";
     };
     $scope.show = function(){
         $scope.url = url;
-        $timeout(hide, 10000)
+        $timeout(hide, 10000);
     };
-    $scope.showAlt = function(){
-        $scope.form = "";
-        $http.get('/api/soluciones')
-            .then(function(response) {
-                $scope.form = response;
-            });
-        console.log($scope.form);
+    $scope.showAlt = function(i){
+        $scope.showing[i] = true;
     };
+});
 });
