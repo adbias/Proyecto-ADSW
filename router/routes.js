@@ -96,8 +96,9 @@ app.get('/logout', function(req, res) {
 
 app.get('/entradaInvitado', function(req, res) {
     res.redirect('/api/inGuest');
-
 });
+
+
 
 
 module.exports = app;
