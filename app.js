@@ -118,9 +118,18 @@ var a = [{
         name:"Autenticar actor",
         mechanism:"Asegurar que un usuario autenticado tiene los derechos de acceder y modificar datos o servicios",
         result:"Definir grupos de usuario, roles, listas individuales"}];
-models.Solution.destroy({
-    where: {}
-});
-for (var i = 0; i< a.length; i++) {
-    models.Solution.create(a[i]);
-}
+models.Solution.sync().then(models.Solution.findAll({
+    where:{id:1}
+}).then(function(result){
+    if (result === null)
+        for (var i = 0; i< a.length; i++)
+            models.Solution.create(a[i]);
+    else
+        models.Solution.destroy({
+            where: {}
+        }).then(function(){
+            for (var i = 0; i< a.length; i++)
+                models.Solution.create(a[i]);
+        });
+
+}));
