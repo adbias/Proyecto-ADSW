@@ -42,13 +42,13 @@
                     <tr>
                         <td class="clabel"><%= resultado[i].titulo %></td>
                         <td class="clabel"><%= resultado[i].descripcion %></td>
-                        <td><button class="btn btn-xs btn-primary" data-ng-click="showAlt(<%= resultado[i].id %>)">+</button></td>
+                        <td><button class="btn btn-xs btn-danger" data-ng-click="showAlt(<%= resultado[i].id %>)">+</button></td>
                         <td>
                             <table>
                                 <tr data-ng-show="showing[<%= resultado[i].id %>]" data-ng-repeat="k in form" class="checkbox">
                                     <td><label class="clabel"><input type="checkbox" data-ng-model="voto[<%= resultado[i].id %>][k.id-1]"> {{ k.name }}</label></td>
                                 </tr>
-                                <p class="clabel">{{ voto }}</p>
+                                <button data-ng-show="showing[<%= resultado[i].id %>]" class="btn btn-success" data-ng-click="sendVoto()">Enviar</button>
                             </table>
                         </td>
                     </tr>

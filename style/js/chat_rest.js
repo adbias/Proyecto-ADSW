@@ -49,7 +49,7 @@ app.controller('Timer', function($scope, $timeout) {
 });
 app.controller('Show', function($scope, $timeout, $http){
   $http.get('/api/soluciones').then(function(response) {
-          $scope.form = response.data;
+      $scope.form = response.data;
 
     console.log($scope.form);
 
@@ -68,7 +68,16 @@ app.controller('Show', function($scope, $timeout, $http){
             $scope.showing[i] = true;
         else
             $scope.showing[i] = false;
-        if (typeof $scope.voto[id=i] === 'undefined') $scope.voto[id=i] = new Array(17);
+        if (typeof $scope.voto[id=i] === 'undefined') {
+            $scope.voto[id = i] = {};
+            for (k=0; k < 17; k++){
+                $scope.voto[id=i][String(k+1)] = false;
+            }
+        }
     };
 });
+  $scope.sendVoto = function(){
+      $http.post('/api/addVotes', $scope.voto);
+      console.log($scope.voto["1"]);
+  }
 });
