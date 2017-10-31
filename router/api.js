@@ -83,6 +83,7 @@ router.post('/createSesion', function(req, res){
     });
 });
 
+
 router.post('/crearEscenario', function(req, res){
     models.Stage.create({
         titulo: req.body.title,
@@ -213,9 +214,23 @@ router.get('/chat', function (req, res) {
         if (t.sessionid === req.query.id) return t;
     }));
 });
+
 var soluciones = "";
 models.Solution.findAll().then(function(info){soluciones = info});
 
 router.get('/soluciones', function(req, res) {
     res.send(soluciones);
 });
+
+router.get('/deleteSesion', function(req, res){
+    console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
+    models.Sesion.destroy({
+        where: {
+            id: req.query.SessionId
+        }
+    }).then(function () {
+        res.redirect("/sessions");
+    });
+
+});
+

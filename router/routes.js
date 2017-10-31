@@ -82,7 +82,7 @@ app.get('/createSesion',function(req,res){
 
 app.get('/crearEscenario',function(req,res){
     res.render('CrearEscenario.html', {
-        title: 'Crear Escenario',
+        title: 'Creando Escenarios',
         session: req.session,
         created:req.query.created,
         idSesion: req.query.idSesion
@@ -97,6 +97,13 @@ app.get('/logout', function(req, res) {
 app.get('/entradaInvitado', function(req, res) {
     res.redirect('/api/inGuest');
 });
+
+app.get('/deleteSesion', function(req, res) {
+    console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
+    res.redirect('/api/deleteSesion?SessionId='+req.query.SessionId);
+});
+
+
 
 
 
