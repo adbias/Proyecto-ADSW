@@ -74,10 +74,10 @@ app.get('/sessions',function(req,res){
 });
 
 app.get('/createSesion',function(req,res){
-        res.render('CreateSesion.html', {
-            title: 'Crear Sesion',
-            session: req.session
-        });
+    res.render('CreateSesion.html', {
+        title: 'Crear Sesion',
+        session: req.session
+    });
 });
 
 app.get('/crearEscenario',function(req,res){
