@@ -24,3 +24,7 @@ div.scroll {
     height: 400px;
     overflow: scroll;
 }
+
+.center {
+    margin: auto;
+}

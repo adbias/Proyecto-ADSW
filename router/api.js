@@ -224,12 +224,20 @@ router.get('/soluciones', function(req, res) {
 
 router.get('/deleteSesion', function(req, res){
     console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
-    models.Sesion.destroy({
+    // Borrar todos los escenarios que apuntan a la sesion
+    models.Stage.destroy({
         where: {
-            id: req.query.SessionId
+            SesionId: req.query.SessionId
         }
     }).then(function () {
-        res.redirect("/sessions");
+        //Borrar la sesion
+        models.Sesion.destroy({
+            where: {
+                id: req.query.SessionId
+            }
+        }).then(function () {
+            res.redirect("/sessions");
+        });
     });
 
 });

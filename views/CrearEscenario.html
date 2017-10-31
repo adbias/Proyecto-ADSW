@@ -12,7 +12,6 @@
         <div class="hero__content-wrapper">
             <div class="container">
                 <h1><p class="text-center clabel"><%=title%></p></h1>
-
                 <form class="form-horizontal" action="/api/crearEscenario?idSesion=<%=idSesion%>&created=1" method="POST" enctype="application/x-www-form-urlencoded">
                     <legend></legend>
                     <div class="form-group">
@@ -40,9 +39,25 @@
 
                     </div>
                     <%}%>
-
                 </form>
 
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="clabel">Título Escenario</th>
+                        <th class="clabel">Descripción</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (var i = 0; i < resultado.length; i++) { %>
+                    <tr>
+                        <td class="clabel"><%= resultado[i].titulo %></td>
+                        <td class="clabel"><%= resultado[i].descripcion %></td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

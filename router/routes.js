@@ -81,12 +81,20 @@ app.get('/createSesion',function(req,res){
 });
 
 app.get('/crearEscenario',function(req,res){
-    res.render('CrearEscenario.html', {
-        title: 'Creando Escenarios',
-        session: req.session,
-        created:req.query.created,
-        idSesion: req.query.idSesion
+    models.Stage.findAll({
+        where: {SesionId: req.query.idSesion}
+    }).then(function (resultado) {
+        console.log("Resultado:");
+        console.log(resultado.length);
+        res.render('CrearEscenario.html', {
+            title: 'Creando Escenarios',
+            session: req.session,
+            created:req.query.created,
+            idSesion: req.query.idSesion,
+            resultado: resultado
+        });
     });
+
 });
 
 app.get('/logout', function(req, res) {
