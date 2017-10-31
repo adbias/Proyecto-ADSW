@@ -18,3 +18,9 @@ span {
     hyphens: auto;
     color: whitesmoke;
 }
+
+div.scroll {
+    width: 1200px;
+    height: 400px;
+    overflow: scroll;
+}
