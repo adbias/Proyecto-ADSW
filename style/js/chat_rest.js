@@ -19,7 +19,7 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
             });
     };
     retrieve();
-    console.log($scope.lista);
+    //console.log($scope.lista);
 });
 app.controller('Timer', function($scope, $timeout) {
     $scope.timer = 300;
@@ -32,7 +32,7 @@ app.controller('Timer', function($scope, $timeout) {
             flag = true;
             return;
         }
-        $timeout(retrievetimer, 1000);
+        //$timeout(retrievetimer, 1000);
     };
     retrievetimer();
     $scope.addTime = function() {
@@ -47,37 +47,57 @@ app.controller('Timer', function($scope, $timeout) {
         return Math.floor($scope.timer/60);
     };
 });
-app.controller('Show', function($scope, $timeout, $http){
-  $http.get('/api/soluciones').then(function(response) {
-      $scope.form = response.data;
 
-    console.log($scope.form);
-
-    $scope.showing = new Array(reslen);
-    $scope.showing.fill(false);
-    var hide = function(){
-        $scope.url = "";
+app.controller('Stages', function($scope, $http){
+    $scope.actualStage = 0;
+    refresh = function(){
+        $scope.actualName = window.stages[$scope.actualStage][0];
+        $scope.actualDesc = window.stages[$scope.actualStage][1];
     };
-    $scope.show = function(){
-        $scope.url = url;
-        $timeout(hide, 10000);
-    };
-    $scope.voto = {};
-    $scope.showAlt = function(i){
-        if ($scope.showing[i] === false)
-            $scope.showing[i] = true;
-        else
-            $scope.showing[i] = false;
-        if (typeof $scope.voto[id=i] === 'undefined') {
-            $scope.voto[id = i] = {};
-            for (k=0; k < 17; k++){
-                $scope.voto[id=i][String(k+1)] = false;
-            }
+    refresh();
+    $scope.left = function(){
+        if ($scope.actualStage > 0) {
+            $scope.actualStage--;
+            refresh();
         }
+        console.log("left")
     };
-});
-  $scope.sendVoto = function(){
-      $http.post('/api/addVotes', $scope.voto);
-      console.log($scope.voto["1"]);
-  }
+    $scope.right = function(){
+        if ($scope.actualStage < window.stages.length--) {
+            $scope.actualStage++;
+            refresh();
+        }
+        console.log("right")
+    };
+
+    $http.get('/api/soluciones').then(function(response) {
+        $scope.form = response.data;
+
+        console.log($scope.form);
+
+        var hide = function(){
+            $scope.url = "";
+        };
+        $scope.show = function(){
+            $scope.url = url;
+            $timeout(hide, 10000);
+        };
+        $scope.voto = {};
+        $scope.showAlt = function(i){
+            if ($scope.showing[i] === false)
+                $scope.showing[i] = true;
+            else
+                $scope.showing[i] = false;
+            if (typeof $scope.voto[id=i] === 'undefined') {
+                $scope.voto[id = i] = {};
+                for (k=0; k < 17; k++){
+                    $scope.voto[id=i][String(k+1)] = false;
+                }
+            }
+        };
+    });
+    $scope.sendVoto = function(){
+        $http.post('/api/addVotes', {i:"i"});
+        //console.log($scope.voto["1"]);
+    }
 });

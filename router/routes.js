@@ -48,6 +48,7 @@ app.get('/session',function(req,res){
     models.Stage.findAll({
         where: {SesionId: req.query.SessionId}
     }).then(function (resultado) {
+        console.log(resultado);
         res.render('Session.html', {
             title: 'Sesion',
             resultado: resultado,

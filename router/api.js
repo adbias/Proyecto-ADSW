@@ -8,10 +8,10 @@ module.exports = router;
 var chat = [];
 var rn = require('random-number');
 var options = {
-    min:  0
-    , max:  1000
-    , integer: true
-}
+    min: 0,
+    max: 1000,
+    integer: true
+};
 
 router.post('/usuarios', function(req, res){
     var add = true;
@@ -169,10 +169,11 @@ router.get('/inGuest',function (req,res) {
     });
 });
 
-router.get('/addVotes', function (req, res) {
+router.post('/addVotes', function (req, res) {
+    console.log("something");
     // Se borran los votos
     var index = -1;
-    models.Voto.finAll({
+    models.Voto.findAll({
         UsuarioId: req.session.userId,
         StageId: req.query.stageId
     }).then(function (result) {
