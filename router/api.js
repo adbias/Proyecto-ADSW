@@ -170,44 +170,23 @@ router.get('/inGuest',function (req,res) {
 });
 
 router.post('/addVotes', function (req, res) {
-    console.log(req.body);
-    // Se borran los votos
-    var index = -1;
-    models.Voto.findAll({
-        UsuarioId: req.session.userId,
-        StageId: req.body.stageId
-    }).then(function (result) {
-        for(i=0;i<result.length;i++){
-            index=req.body.IdSolutions.indexOf(result[i].SolutionId);
-            if (index > -1) { // Ya existe este voto, no es necesario agregarlo
-                req.IdSolutions.splice(index, 1); // se retira del arreglo, debido a que ya existe
-            } else {
-                models.Voto.remove({ // se borra debido a que ya no existe el voto
-                    UsuarioId: req.session.userId,
-                    StageId: req.query.stageId,
-                    SolutionId: result[i].SolutionId
-                });
-            }
-        }
-    });
-    // Se agregan los votos que quedaron del arreglo, debido a que son los nuevos
-    for (i=0;i<req.body.IdSolutions.length;i++){
-        models.Voto.create({
+    models.Voto.destroy({
+        where:{
             UsuarioId: req.session.userId,
-            StageId: req.query.stageId,
-            SolutionId: result[i].SolutionId
-        }).then(function () {
-            models.Stage.findOne({
-                id: req.query.stageId
-            }).then(function (result1) {
-                models.Sesion.findOne({
-                    id: result1.SesionId
-                }).then(function (result2) {
-                    res.render('/session',{SessionId:result1.SesionId,nameSession:result2.titulo,hostId:result2.UsuarioId});
-                });
-            });
-        });
-    };
+            StageId: parseInt(req.body.stageId)
+        }
+        }
+    )
+    .then( function(){
+        for (var i in req.body.IdSolutions){
+        if (req.body.IdSolutions[i]) {
+            models.Voto.create({
+                UsuarioId: req.session.userId,
+                StageId: parseInt(req.body.stageId),
+                SolutionId: parseInt(i)+1
+            })
+        }
+    }})
 });
 
 router.get('/chat', function (req, res) {

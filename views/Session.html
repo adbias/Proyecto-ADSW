@@ -9,7 +9,7 @@
     var sessionId = "<%= sessionId %>";
     var stages = [
         <%for (var i = 0; i < resultado.length; i++) {%>
-        ["<%= resultado[i].titulo %>","<%= resultado[i].descripcion %>"],
+        ["<%= resultado[i].titulo %>","<%= resultado[i].descripcion %>","<%= resultado[i].id %>"],
         <%}%>];
 </script>
 <script src="js/chat_rest.js"></script>
@@ -91,13 +91,13 @@
                     </div>
                 </div>
                 <div>
-                    <ul  class="group-list">
-                        <li data-ng-repeat="k in form" class="group-list-item">
-                            <div class="card">
+                    <div class="group-list">
+                        <div data-ng-repeat="k in form" class="group-list-item">
+                            <div class="card" style="padding:5px;background-color:rgba(255,255,255,0.2)">
                         <span><label class="clabel"><input type="checkbox" data-ng-model="voto[k.id-1]"> {{ k.name }}</label></span>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                     <div style="display:inline-flex"><button data-ng-click="sendVoto()">Send</button><p class="clabel">{{ voto }}</p></div>
                 </div>
             </div>

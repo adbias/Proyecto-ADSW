@@ -83,23 +83,11 @@ app.controller('Stages', function($scope, $http){
             $timeout(hide, 10000);
         };
         $scope.voto = {};
-        $scope.showAlt = function(i){
-            if ($scope.showing[i] === false)
-                $scope.showing[i] = true;
-            else
-                $scope.showing[i] = false;
-            if (typeof $scope.voto[id=i] === 'undefined') {
-                $scope.voto[id = i] = {};
-                for (k=0; k < 17; k++){
-                    $scope.voto[id=i][String(k+1)] = false;
-                }
-            }
-        };
     });
     $scope.sendVoto = function(){
         $http.post('/api/addVotes', {
             IdSolutions:$scope.voto,
-            stageId: sessionId
+            stageId: window.stages[$scope.actualStage][2]
     });
         //console.log($scope.voto["1"]);
     }
