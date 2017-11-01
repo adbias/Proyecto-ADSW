@@ -170,15 +170,15 @@ router.get('/inGuest',function (req,res) {
 });
 
 router.post('/addVotes', function (req, res) {
-    console.log("something");
+    console.log(req.body);
     // Se borran los votos
     var index = -1;
     models.Voto.findAll({
         UsuarioId: req.session.userId,
-        StageId: req.query.stageId
+        StageId: req.body.stageId
     }).then(function (result) {
         for(i=0;i<result.length;i++){
-            index=req.IdSolutions.indexOf(result[i].SolutionId);
+            index=req.body.IdSolutions.indexOf(result[i].SolutionId);
             if (index > -1) { // Ya existe este voto, no es necesario agregarlo
                 req.IdSolutions.splice(index, 1); // se retira del arreglo, debido a que ya existe
             } else {
@@ -191,7 +191,7 @@ router.post('/addVotes', function (req, res) {
         }
     });
     // Se agregan los votos que quedaron del arreglo, debido a que son los nuevos
-    for (i=0;i<req.IdSolutions.lenght;i++){
+    for (i=0;i<req.body.IdSolutions.length;i++){
         models.Voto.create({
             UsuarioId: req.session.userId,
             StageId: req.query.stageId,

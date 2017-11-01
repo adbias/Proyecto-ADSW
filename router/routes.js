@@ -53,6 +53,7 @@ app.get('/session',function(req,res){
             title: 'Sesion',
             resultado: resultado,
             session: req.session,
+            sessionId:req.query.SessionId,
             name: req.query.nameSession,
             url:'http://'+ip.address().toString()+':3000/session?SessionId='+req.query.SessionId+'&nameSession='+ req.query.nameSession,
             hostId:req.query.hostId

@@ -6,11 +6,11 @@
     var usernamelogged = "<%= session.username %>";
     var url = "<%= url %>";
     var reslen = parseInt("<%= resultado.length %>");
+    var sessionId = "<%= sessionId %>";
     var stages = [
         <%for (var i = 0; i < resultado.length; i++) {%>
         ["<%= resultado[i].titulo %>","<%= resultado[i].descripcion %>"],
         <%}%>];
-    console.log(stages);
 </script>
 <script src="js/chat_rest.js"></script>
 <% include ../partials/header %>

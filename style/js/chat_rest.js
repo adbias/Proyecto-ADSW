@@ -97,7 +97,10 @@ app.controller('Stages', function($scope, $http){
         };
     });
     $scope.sendVoto = function(){
-        $http.post('/api/addVotes', {i:"i"});
+        $http.post('/api/addVotes', {
+            IdSolutions:$scope.voto,
+            stageId: sessionId
+    });
         //console.log($scope.voto["1"]);
     }
 });
