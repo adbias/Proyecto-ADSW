@@ -177,7 +177,7 @@ router.post('/addVotes', function (req, res) {
         UsuarioId: req.session.userId,
         StageId: req.query.stageId
     }).then(function (result) {
-        for(i=0;i<result.lenght;i++){
+        for(i=0;i<result.length;i++){
             index=req.IdSolutions.indexOf(result[i].SolutionId);
             if (index > -1) { // Ya existe este voto, no es necesario agregarlo
                 req.IdSolutions.splice(index, 1); // se retira del arreglo, debido a que ya existe
@@ -187,8 +187,8 @@ router.post('/addVotes', function (req, res) {
                     StageId: req.query.stageId,
                     SolutionId: result[i].SolutionId
                 });
-            };
-        };
+            }
+        }
     });
     // Se agregan los votos que quedaron del arreglo, debido a que son los nuevos
     for (i=0;i<req.IdSolutions.lenght;i++){

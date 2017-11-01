@@ -63,7 +63,7 @@ app.controller('Stages', function($scope, $http){
         console.log("left")
     };
     $scope.right = function(){
-        if ($scope.actualStage < window.stages.length--) {
+        if ($scope.actualStage < window.stages.length-1) {
             $scope.actualStage++;
             refresh();
         }
