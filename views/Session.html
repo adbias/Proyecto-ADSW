@@ -91,12 +91,11 @@
                     </div>
                 </div>
                 <div>
-                    <ul data-ng-show="showing[<%= resultado[i].id %>]" class="group-list">
+                    <ul  class="group-list">
                         <li data-ng-repeat="k in form" class="group-list-item">
                             <div class="card">
-                                <label class="clabel"><input type="checkbox" data-ng-model="voto[<%= resultado[i].id %>][k.id-1]"> {{ k.name }}</label>
+                        <span><label class="clabel"><input type="checkbox" data-ng-model="voto[k.id-1]"> {{ k.name }}</label></span>
                             </div>
-
                         </li>
                     </ul>
                     <div style="display:inline-flex"><button data-ng-click="sendVoto()">Send</button><p class="clabel">{{ voto }}</p></div>
