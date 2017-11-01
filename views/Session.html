@@ -91,9 +91,13 @@
                     </div>
                 </div>
                 <div>
-                    <div data-ng-repeat="k in form" class="checkbox">
+                    <ul  class="group-list">
+                        <li data-ng-repeat="k in form" class="group-list-item">
+                            <div class="card">
                         <span><label class="clabel"><input type="checkbox" data-ng-model="voto[k.id-1]"> {{ k.name }}</label></span>
-                    </div>
+                            </div>
+                        </li>
+                    </ul>
                     <div style="display:inline-flex"><button data-ng-click="sendVoto()">Send</button><p class="clabel">{{ voto }}</p></div>
                 </div>
             </div>
