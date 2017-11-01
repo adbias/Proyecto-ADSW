@@ -28,3 +28,37 @@ div.scroll {
 .center {
     margin: auto;
 }
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 70%;
+    border-radius: 5px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+
+
+.group-list {
+    -moz-column-gap: 20;
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 22;
+    column-count: 3;
+    column-gap: 20;
+}
+
+.group-list-item{
+    margin: 10px 0;
+}
+
+.testing {
+
+}
