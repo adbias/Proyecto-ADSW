@@ -1,5 +1,7 @@
 var app = angular.module('myApp', ['ngSanitize']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
+
+
 app.controller('ChatSend', function($scope, $http) {
     $scope.sendMsg = function() {
         $http.post('/api/chat?id=' + urlid.get("SessionId"), {
@@ -19,33 +21,50 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
             });
     };
     retrieve();
-    //console.log($scope.lista);
 });
 app.controller('Timer', function($scope, $timeout) {
     $scope.timer = 300;
     var flag = false;
+    var pause = true;
+    var socket = io.connect('http://localhost:3000');
     var retrievetimer = function() {
         flag = false;
-        if ($scope.timer > 0) {
+        if ($scope.timer > 0 && !pause) {
             $scope.timer -= 1;
-        } else {
+        } else if ($scope.timer <= 0 ) {
             flag = true;
             return;
         }
-        //$timeout(retrievetimer, 1000);
+        if ($scope.timer != 300) {
+            socket.emit('timeNow', {
+                hour: Math.floor($scope.timer / 3600),
+                m: Math.floor($scope.timer / 60),
+                seg: Math.floor($scope.timer % 60)
+            });
+        }
+        $timeout(retrievetimer, 1000);
     };
     retrievetimer();
     $scope.addTime = function() {
-        $scope.timer += 60;
+        $scope.timer += 300;
         if (flag) {retrieve()}
     };
     $scope.resetTime = function() {
         $scope.timer = 300;
         if (flag) {retrieve()}
     };
+
+    $scope.starting = function(){
+        pause = false;
+        return Math.floor($scope.timer/60);
+    };
     $scope.minutes = function() {
         return Math.floor($scope.timer/60);
     };
+    $scope.sit = function(){
+      if (!pause) pause = true;
+    };
+
 });
 
 app.controller('Stages', function($scope, $http){

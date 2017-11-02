@@ -30,15 +30,11 @@
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="submit" class="btn btn-primary">Agregar</button>
                             <a href="/sessions" class="btn btn-info" role="button">Listo!</a>
+                            <% if (created==1){%>
+                            <button class="btn btn-success">Agregado</button>
+                            <%}%>
                         </div>
                     </div>
-                    <% if (created==1){%>
-                    <div class="col-lg-10 col-lg-offset-2">
-
-                        <button type="submit" class="btn btn-success">Agregado</button>
-
-                    </div>
-                    <%}%>
                 </form>
 
                 <table class="table">
