@@ -53,6 +53,7 @@ app.controller('Stages', function($scope, $http){
     refresh = function(){
         $scope.actualName = window.stages[$scope.actualStage][0];
         $scope.actualDesc = window.stages[$scope.actualStage][1];
+        $scope.voto = {};
     };
     refresh();
     $scope.left = function(){
