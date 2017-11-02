@@ -86,6 +86,9 @@ app.controller('Stages', function($scope, $http){
         $scope.voto = {};
     });
     $scope.priorities = [];
+    for (i=0;i<17;i++){
+        $scope.priorities.push(["",""])
+    }
     $scope.sendVoto = function(){
         $http.post('/api/addVotes', {
             IdSolutions:$scope.voto,
@@ -94,13 +97,7 @@ app.controller('Stages', function($scope, $http){
     });
     };
     $scope.addPriority = function (i,j) {
-        for (k=0;k<$scope.priorities.length;k++){
-            if ($scope.priorities[k][0]===i){
-                $scope.priorities[k] = [i,j];
-                return;
-            }
-        }
-        $scope.priorities.push([i,j]);
+        $scope.priorities[i]=([i,j]);
         console.log($scope.priorities)
         }
 });
