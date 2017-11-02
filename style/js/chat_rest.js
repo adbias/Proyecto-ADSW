@@ -84,11 +84,22 @@ app.controller('Stages', function($scope, $http){
         };
         $scope.voto = {};
     });
+    $scope.priorities = [];
     $scope.sendVoto = function(){
         $http.post('/api/addVotes', {
             IdSolutions:$scope.voto,
-            stageId: window.stages[$scope.actualStage][2]
+            stageId: window.stages[$scope.actualStage][2],
+            priorities:$scope.priorities
     });
-        //console.log($scope.voto["1"]);
-    }
+    };
+    $scope.addPriority = function (i,j) {
+        for (k=0;k<$scope.priorities.length;k++){
+            if ($scope.priorities[k][0]===i){
+                $scope.priorities[k] = [i,j];
+                return;
+            }
+        }
+        $scope.priorities.push([i,j]);
+        console.log($scope.priorities)
+        }
 });

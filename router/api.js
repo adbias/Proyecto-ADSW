@@ -121,13 +121,13 @@ router.post('/chat', function(req, res, next) {
         msg: req.body.msg,
         sessionid: req.query.id
     });
-    console.log(req.body);
+    //console.log(req.body);
     next();
 });
 
 router.post('/soluciones', function (req, res) {
-    console.log(req.session.username);
-    console.log(req.session.id);
+    //console.log(req.session.username);
+    //console.log(req.session.id);
     models.Solution.create({
         name: req.body.name,
         description: req.body.description,
@@ -138,8 +138,8 @@ router.post('/soluciones', function (req, res) {
 });
 
 router.post('/soluciones', function (req, res) {
-    console.log(req.session.username);
-    console.log(req.session.id);
+    //console.log(req.session.username);
+    //console.log(req.session.id);
     models.Solution.create({
         name: req.body.name,
         description: req.body.description,
@@ -180,7 +180,16 @@ router.post('/addVotes', function (req, res) {
     .then( function(){
         for (var i in req.body.IdSolutions){
         if (req.body.IdSolutions[i]) {
+            priority = 1;
+            console.log(req.body.priorities);
+            for (k=0;k<req.body.priorities.length;k++){
+                if (req.body.priorities[k][0]===parseInt(i)) {
+                    priority = req.body.priorities[k][1];
+                    //console.log("wii");
+                }
+            }
             models.Voto.create({
+                priority: priority,
                 UsuarioId: req.session.userId,
                 StageId: parseInt(req.body.stageId),
                 SolutionId: parseInt(i)+1
@@ -203,7 +212,7 @@ router.get('/soluciones', function(req, res) {
 });
 
 router.get('/deleteSesion', function(req, res){
-    console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
+    //console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
     // Borrar todos los escenarios que apuntan a la sesion
     models.Stage.destroy({
         where: {

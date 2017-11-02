@@ -48,7 +48,7 @@ app.get('/session',function(req,res){
     models.Stage.findAll({
         where: {SesionId: req.query.SessionId}
     }).then(function (resultado) {
-        console.log(resultado);
+        //console.log(resultado);
         res.render('Session.html', {
             title: 'Sesion',
             resultado: resultado,
@@ -65,7 +65,7 @@ app.get('/sessions',function(req,res){
     models.Sesion.findAll({
         where: {UsuarioId: req.session.userId}
     }).then(function (resultado) {
-        console.log(req.session.userId);
+        //console.log(req.session.userId);
         res.render('Sessions.html', {
             title: 'Sesiones',
             resultado: resultado,
@@ -86,8 +86,8 @@ app.get('/crearEscenario',function(req,res){
     models.Stage.findAll({
         where: {SesionId: req.query.idSesion}
     }).then(function (resultado) {
-        console.log("Resultado:");
-        console.log(resultado.length);
+        //console.log("Resultado:");
+        //console.log(resultado.length);
         res.render('CrearEscenario.html', {
             title: 'Creando Escenarios',
             session: req.session,
@@ -109,7 +109,7 @@ app.get('/entradaInvitado', function(req, res) {
 });
 
 app.get('/deleteSesion', function(req, res) {
-    console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
+    //console.log("Entro en deleteSesion. SessionId = "+req.query.SessionId);
     res.redirect('/api/deleteSesion?SessionId='+req.query.SessionId);
 });
 
