@@ -18,7 +18,8 @@
     "random-number": "0.0.9",
     "regex-email": "^1.0.2",
     "sequelize": "^3.24.0",
-    "sleep": "^5.1.1"
+    "sleep": "^5.1.1",
+    "socket.io": "^2.0.4"
   },
   "author": "BluePanda",
   "license": ""

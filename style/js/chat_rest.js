@@ -69,10 +69,15 @@ app.controller('Timer', function($scope, $timeout) {
 
 app.controller('Stages', function($scope, $http){
     $scope.actualStage = 0;
+    $scope.priorities = [];
     refresh = function(){
         $scope.actualName = window.stages[$scope.actualStage][0];
         $scope.actualDesc = window.stages[$scope.actualStage][1];
         $scope.voto = {};
+        $scope.priorities =[];
+        for (i=0;i<17;i++){
+            $scope.priorities.push(["",""])
+        }
     };
     refresh();
     $scope.left = function(){
@@ -104,10 +109,6 @@ app.controller('Stages', function($scope, $http){
         };
         $scope.voto = {};
     });
-    $scope.priorities = [];
-    for (i=0;i<17;i++){
-        $scope.priorities.push(["",""])
-    }
     $scope.sendVoto = function(){
         $http.post('/api/addVotes', {
             IdSolutions:$scope.voto,
