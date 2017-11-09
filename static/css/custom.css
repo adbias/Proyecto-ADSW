@@ -59,6 +59,56 @@ img {
     margin: 10px 0;
 }
 
-.testing {
+.left-arrow {
+    display: inline-block;
+    top: 50%;
+    margin-top: -0.5em;
+    position: relative;
+    height: 100%;
+    width: 20px;
+    float: left;
+    color: white;
+}
+.right-arrow {
+    display: inline-block;
+    top: 50%;
+    margin-top: -0.5em;
+    position: relative;
+    height: 100%;
+    width: 20px;
+    color: white;
+    float:right;
+}
+.image {
+    border-radius: 50px;
+    background: url(/img/dog.png);
+    background-size: 95%;
+    background-position: center;
+    height: 100px;
+    width: 100px;
+    float: left;
+    position: relative;
+}
+.name {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    width: 500px;
+    float: left;
+}
+.desc {
+    font-weight: normal;
+    font-style: italic;
+}
 
+.move {
+    animation: woo 2s ease 0s;
+    animation-fill-mode: forwards;
+}
+@keyframes woo {
+    from {color:rgba(255,255,255,1);}
+    to {color:rgba(255,255,255,0);}
 }
