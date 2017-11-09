@@ -16,7 +16,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.static(__dirname + '/style'));
+app.use(express.static(__dirname + '/static'));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 

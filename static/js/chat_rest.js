@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize']);
+var app = angular.module('myApp', ['ngSanitize', 'chart.js']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
 
