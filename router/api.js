@@ -231,3 +231,12 @@ router.get('/deleteSesion', function(req, res){
 
 });
 
+router.get('/getNamSol',function (req,res) {
+   models.Solution.findAll().then(function (data) {
+       var arr=[];
+       for(i in data){
+           arr.push(data[i].name);
+       }
+       res.send(data);
+   })
+});

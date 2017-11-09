@@ -63,16 +63,24 @@
         font-weight: normal;
         font-style: italic;
     }
+    .graph {
+        width: 600px;
+        height: 600px;
+        margin:auto;
+        margin-top: 670px;
+    }
 </style>
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
+
 <section id="hero" class="hero" data-ng-app="myApp">
     <div class="hero__gradient"></div>
     <div class="hero__pattern"></div>
     <div class="hero__content">
         <div class="hero__content-wrapper">
+
             <div class="container col-md-9 pull-left" data-ng-controller="Stages">
                 <div style="...">
                     <% if(hostId == session.userId) { %>
@@ -117,14 +125,6 @@
                 </div>
 
 
-                <div class="hero__content-wrapper">
-                    <div class="hero__call-to-action">
-                        <div>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div class="container col-md-3 pull-right">
                 <div class="form-inline form-group" data-ng-controller='Timer' >
@@ -161,8 +161,18 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
+
+
     </div>
+    <div class="graph" ng-controller="BarChart" >
+        <canvas id="bar" class="chart-horizontal-bar"
+                chart-data="data" chart-labels="labels">
+        </canvas>
+    </div>
+
 </section>
 </body>
 </html>

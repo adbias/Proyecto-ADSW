@@ -1,6 +1,31 @@
 var app = angular.module('myApp', ['ngSanitize', 'chart.js']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
+app.controller("BarChart", function ($scope, $http) {
+    $http.get('/api/getNamSol').then(function (response) {
+        $scope.series = ['Soluciones elegidas'];
+
+        var arr=[];
+        $scope.form = response.data;
+        for(i in $scope.form){
+            arr.push($scope.form[i].name);
+        }
+        $scope.labels = arr;
+
+
+        $scope.data = [
+            [65, 59, 80, 81, 56, 55, 50,65, 59, 80, 81, 56, 55, 40, 53, 48, 90],
+        ];
+    });
+    /*
+    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012','2013','2014','2015'];
+    $scope.series = ['Series A'];
+
+    $scope.data = [
+        [65, 59, 80, 81, 56, 55, 40],
+    ];
+    */
+});
 
 app.controller('ChatSend', function($scope, $http) {
     $scope.sendMsg = function() {
@@ -83,15 +108,19 @@ app.controller('Stages', function($scope, $http){
     $scope.left = function(){
         if ($scope.actualStage > 0) {
             $scope.actualStage--;
-            refresh();
+        } else {
+            $scope.actualStage = window.stages.length-1;
         }
+        refresh();
         console.log("left")
     };
     $scope.right = function(){
         if ($scope.actualStage < window.stages.length-1) {
             $scope.actualStage++;
-            refresh();
+        } else {
+            $scope.actualStage = 0;
         }
+        refresh();
         console.log("right")
     };
 
