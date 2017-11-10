@@ -113,7 +113,9 @@ app.get('/deleteSesion', function(req, res) {
     res.redirect('/api/deleteSesion?SessionId='+req.query.SessionId);
 });
 
-
+app.get('/test', function (req, res) {
+   res.render('test.html');
+});
 
 
 

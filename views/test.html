@@ -1,0 +1,18 @@
+
+<div class="modal-dialog modal-sm" style="background-color: white; border-radius: 5px; z-index: 10000000000000000;top:50px">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <ul>
+            <li ng-repeat="item in $ctrl.items">
+                <a href="#" ng-click="">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b></b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="">Cancel</button>
+    </div>
+</div>

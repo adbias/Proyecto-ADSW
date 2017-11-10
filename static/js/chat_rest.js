@@ -1,7 +1,7 @@
-var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'angularModalService']);
+var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bootstrap']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
-app.controller("BarChart", function ($scope, $http) {
+/*app.controller("BarChart", function ($scope, $http) {
     $http.get('/api/getNamSol').then(function (response) {
         $scope.series = ['Soluciones elegidas'];
 
@@ -24,8 +24,8 @@ app.controller("BarChart", function ($scope, $http) {
     $scope.data = [
         [65, 59, 80, 81, 56, 55, 40],
     ];
-    */
-});
+
+});*/
 
 app.controller('ChatSend', function($scope, $http) {
     $scope.sendMsg = function() {
@@ -92,31 +92,23 @@ app.controller('Timer', function($scope, $timeout) {
 
 });
 
-app.controller('test', function($scope, close){
-    $scope.close = close;
-    $scope.algo = algo;
+app.controller('test', function($scope, $uibModalInstance){
+    $uibModalInstance.close(close);
+    $scope.algo = 'algo';
 });
 
-app.controller('Stages', function($scope, $http, $timeout, ModalService){
+app.controller('Stages', function($scope, $http, $timeout, $uibModal){
     $scope.showAModal = function() {
-
-        // Just provide a template url, a controller and call 'showModal'.
-        ModalService.showModal({
-            template:
-            "<div style='z-index:1000;background-color: rgba(0,0,0,0.2);width: 100%;height: 100%;'>" +
-                "<div style='background-color: white;width: 100px;height: 100px;'>"+
-                    "{{algo}}" +
-                "</div>"+
-            "</div>",
-            controller: 'test'
-        }).then(function(modal) {
-            // The modal object has the element built, if this is a bootstrap modal
-            // you can call 'modal' to show it, if it's a custom modal just show or hide
-            // it as you need to.
-            modal.close.then(function(result) {
-                console.log("woo");
-            });
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            animation: true,
+            templateUrl: "http://localhost:3000/test",
+            windowTemplateUrl: "http://localhost:3000/test",
+            controller: 'test',
         });
+
+        modalInstance.result.then()
 
     };
     $scope.actualStage = 0;
@@ -155,7 +147,7 @@ app.controller('Stages', function($scope, $http, $timeout, ModalService){
     $http.get('/api/soluciones').then(function(response) {
         $scope.form = response.data;
 
-        console.log($scope.form);
+        //console.log($scope.form);
 
         var hide = function(){
             $scope.url = "";
