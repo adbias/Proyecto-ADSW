@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ng']);
+var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'angularModalService']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
 app.controller("BarChart", function ($scope, $http) {
@@ -92,7 +92,33 @@ app.controller('Timer', function($scope, $timeout) {
 
 });
 
-app.controller('Stages', function($scope, $http){
+app.controller('test', function($scope, close){
+    $scope.close = close;
+    $scope.algo = algo;
+});
+
+app.controller('Stages', function($scope, $http, $timeout, ModalService){
+    $scope.showAModal = function() {
+
+        // Just provide a template url, a controller and call 'showModal'.
+        ModalService.showModal({
+            template:
+            "<div style='z-index:1000;background-color: rgba(0,0,0,0.2);width: 100%;height: 100%;'>" +
+                "<div style='background-color: white;width: 100px;height: 100px;'>"+
+                    "{{algo}}" +
+                "</div>"+
+            "</div>",
+            controller: 'test'
+        }).then(function(modal) {
+            // The modal object has the element built, if this is a bootstrap modal
+            // you can call 'modal' to show it, if it's a custom modal just show or hide
+            // it as you need to.
+            modal.close.then(function(result) {
+                console.log("woo");
+            });
+        });
+
+    };
     $scope.actualStage = 0;
     $scope.priorities = [];
     refresh = function(){
@@ -111,7 +137,8 @@ app.controller('Stages', function($scope, $http){
         } else {
             $scope.actualStage = window.stages.length-1;
         }
-        refresh();
+        $scope.mostrar = 'mostrar1';
+        $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
         console.log("left")
     };
     $scope.right = function(){
@@ -120,7 +147,8 @@ app.controller('Stages', function($scope, $http){
         } else {
             $scope.actualStage = 0;
         }
-        refresh();
+        $scope.mostrar = 'mostrar1';
+        $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
         console.log("right")
     };
 
@@ -148,5 +176,9 @@ app.controller('Stages', function($scope, $http){
     $scope.addPriority = function (i,j) {
         $scope.priorities[i]=([i,j]);
         console.log($scope.priorities)
-        }
+        };
+    $scope.fooVoto = function(i) {
+        $scope.voto[i] = 1;
+        console.log("wowoowowowowo")
+    }
 });

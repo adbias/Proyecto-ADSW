@@ -55,9 +55,9 @@ img {
     column-gap: 20;
 }
 
-.group-list-item{
+/*.group-list-item{
     margin: 10px 0;
-}
+}*/
 
 .left-arrow {
     display: inline-block;
@@ -80,6 +80,7 @@ img {
     float:right;
 }
 .image {
+    transition: all ease 0.2s;
     border-radius: 50px;
     background: url(/img/dog.png);
     background-size: 95%;
@@ -90,6 +91,7 @@ img {
     position: relative;
 }
 .name {
+    transition: all ease 0.2s;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -104,11 +106,13 @@ img {
     font-style: italic;
 }
 
-.move {
-    animation: woo 2s ease 0s;
-    animation-fill-mode: forwards;
+.mostrar1 {
+    opacity: 0;
 }
-@keyframes woo {
-    from {color:rgba(255,255,255,1);}
-    to {color:rgba(255,255,255,0);}
+.mostrar2 {
+    opacity: 1;
+}
+
+.prioBtn {
+
 }
