@@ -72,10 +72,13 @@ app.controller('Timer', function($scope, $timeout) {
     retrievetimer();
     $scope.addTime = function() {
         $scope.timer += 300;
+        flag = false;
         if (flag) {retrieve()}
     };
     $scope.resetTime = function() {
         $scope.timer = 300;
+        flag = false;
+        paused = true;
         if (flag) {retrieve()}
     };
 
