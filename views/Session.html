@@ -6,6 +6,7 @@
 <script src="js/angular-chart.min.js"></script>
 <script src="js/angular-animate.js"></script>
 <script src="js/ui-bootstrap-2.5.0.min.js"></script>
+<script src="js/scrollglue.js"></script>
 <script>
     var usernamelogged = "<%= session.username %>";
     var url = "<%= url %>";
@@ -20,7 +21,7 @@
 <script src="js/chat_rest.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <% include ../partials/header %>
-<body>
+<body style="overflow: hidden">
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
@@ -28,8 +29,8 @@
     <div class="hero__gradient"></div>
     <div class="hero__pattern"></div>
     <div class="hero__content">
-        <div class="hero__content-wrapper">
-            <div class="container col-xs-9 pull-left" data-ng-controller="Stages">
+        <div class="hero__content-wrapper" data-ng-controller="Stages">
+            <div class="col-xs-9 pull-left">
                 <div style="display:inline-flex;padding-bottom: 10px;width:100%">
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
                     <div style="width:100%;position: relative">
@@ -54,7 +55,7 @@
                 <div style="padding-top:10px">
                     <div style="text-align: center">
                         <div data-ng-repeat="k in form" style="display:inline-flex;">
-                            <div class="card" style="" data-ng-click="fooVoto(k.id-1)">
+                            <div class="card" data-ng-click="fooVoto(k.id-1)">
                                 <p class="clabel">{{ k.name }}</p>
                                 <div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>
                                 <div style="height:100%;width:calc(15 * 3);margin: 0 auto; display: inline-flex;">
@@ -68,7 +69,12 @@
                 </div>
                 <!--<button data-ng-click="showAModal()" class="btn btn-primary">hola</button>-->
             </div>
-            <div class="container col-xs-3 pull-right" style="max-height:50vh;padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
+            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px">
+                <p>{{mechDes}}</p><br>
+                <p style="font-style: italic">{{resDes}}</p>
+            </div>
+            <div class="container col-xs-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
+                <div style="max-height:50vh;">
                 <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
                     <% if(hostId == session.userId) { %>
                     <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer%60 }} segundos</p>
@@ -99,12 +105,15 @@
                         <i class="fa fa-paper-plane"></i>
                     </button>
                 </div>
-                <div data-ng-controller='ChatRecv' style="overflow-y:scroll;max-height:30vh">
+                <div class="messageBox" scroll-glue style="visibility: hidden">
+                    <div data-ng-controller='ChatRecv' style="visibility: visible">
                     <div style="width:100%">
                         <div style="width:100%" data-ng-repeat="i in lista">
                             <p class="msg">{{ i.username }}: {{ i.msg }}</p>
                         </div>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

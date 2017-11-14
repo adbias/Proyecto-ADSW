@@ -46,6 +46,7 @@ div.scroll {
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 
 img {
@@ -152,4 +153,13 @@ img {
     width:100%;
     margin-bottom: 10px;
     align-items: center;
+}
+
+.messageBox {
+    overflow-y:scroll;
+    max-height:30vh;
+}
+
+.messageBox::-webkit-scrollbar {
+    display: none;
 }
