@@ -76,6 +76,10 @@ img {
     float: left;
     color: white;
 }
+
+.left-arrow:hover{
+    cursor: pointer;
+}
 .right-arrow {
     display: inline-block;
     top: 50%;
@@ -84,7 +88,10 @@ img {
     height: 100%;
     width: 20px;
     color: white;
-    float:right;
+    float: right;
+}
+.right-arrow:hover{
+    cursor: pointer;
 }
 .image {
     transition: all ease 0.2s;

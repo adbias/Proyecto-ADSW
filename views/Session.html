@@ -29,7 +29,7 @@
     <div class="hero__pattern"></div>
     <div class="hero__content">
         <div class="hero__content-wrapper">
-            <div class="container col-md-9 pull-left" data-ng-controller="Stages">
+            <div class="container col-xs-9 pull-left" data-ng-controller="Stages">
                 <div style="display:inline-flex;padding-bottom: 10px;width:100%">
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
                     <div style="width:100%;position: relative">
@@ -41,8 +41,8 @@
                         <div class="left-arrow" data-ng-click="left()"><i class="fa fa-arrow-left"></i></div>
                         <div style="width: calc(100% - 40px); height:100%; margin: 0 auto; display: block; float:none">
                             <div class="image" data-ng-class="mostrar"></div>
-                            <div class="name" data-ng-class="mostrar">Nombre: {{ actualName }}</div>
-                            <div class="name desc" data-ng-class="mostrar">Descripcion: {{ actualDesc }}</div>
+                            <div class="name" style="font-size:1.5em" data-ng-class="mostrar">{{ actualName }}</div>
+                            <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
                                 <div style="display:flex;align-items: center;height:100%;justify-content: center"><button style="width:100px;height:50px;transition: all ease 0.2s;"
                                     data-ng-class="mostrar" class="btn" data-ng-click="sendVoto()">
                                     Votar
@@ -68,7 +68,7 @@
                 </div>
                 <!--<button data-ng-click="showAModal()" class="btn btn-primary">hola</button>-->
             </div>
-            <div class="container col-md-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
+            <div class="container col-xs-3 pull-right" style="max-height:50vh;padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
                 <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
                     <% if(hostId == session.userId) { %>
                     <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer%60 }} segundos</p>
@@ -99,7 +99,7 @@
                         <i class="fa fa-paper-plane"></i>
                     </button>
                 </div>
-                <div data-ng-controller='ChatRecv'>
+                <div data-ng-controller='ChatRecv' style="overflow-y:scroll;max-height:30vh">
                     <div style="width:100%">
                         <div style="width:100%" data-ng-repeat="i in lista">
                             <p class="msg">{{ i.username }}: {{ i.msg }}</p>
