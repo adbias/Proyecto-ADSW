@@ -144,18 +144,15 @@ app.controller('Stages', function($scope, $http, $timeout, $uibModal){
         console.log("right")
     };
 
+    var hide = function(){
+        $scope.url = "";
+    };
+    $scope.show = function(){
+        $scope.url = url;
+        $timeout(hide, 10000);
+    };
     $http.get('/api/soluciones').then(function(response) {
         $scope.form = response.data;
-
-        //console.log($scope.form);
-
-        var hide = function(){
-            $scope.url = "";
-        };
-        $scope.show = function(){
-            $scope.url = url;
-            $timeout(hide, 10000);
-        };
         $scope.voto = {};
     });
     $scope.sendVoto = function(){

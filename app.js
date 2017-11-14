@@ -97,7 +97,7 @@ var a = [{
         result:"Reduce las posibilidades de ataque de aquellos que tienen acceso a datos no sensibles"},
     {
         id:11,
-        name:"Cambiar configuración predeterminada",
+        name:"Cambiar config. predeterminada",
         mechanism:"Las configuraciones predeterminadas que están en un sistema",
         result:"Cambiar esta configuración impide que los atacantes accedan al sistema a través de configuraciones que están disponibles públicamente"},
     {

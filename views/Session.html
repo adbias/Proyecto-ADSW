@@ -30,46 +30,37 @@
     <div class="hero__content">
         <div class="hero__content-wrapper">
             <div class="container col-md-9 pull-left" data-ng-controller="Stages">
-                <div style="...">
-                    <% if(hostId == session.userId) { %>
-                    <div style="margin-left: 10px; display: inline-flex">
-                        <button class="btn btn-primary" data-ng-click="show()">Compartir...</button>
-                        <p style="margin-left: 10px" class="clabel">{{ url }}</p>
+                <div style="display:inline-flex;padding-bottom: 10px;width:100%">
+                    <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
+                    <div style="width:100%;position: relative">
+                        <button class="btn" data-ng-click="show()" style=";position:relative;float: right">Compartir</button>
                     </div>
-                    <% } %>
                 </div>
-                <div style="display: inline-flex">
-                    <h1 class="clabel"><a href="/sessions">Sesion:</a> <%= name %></h1>
-
-                </div>
-                <div class="move" style="display:block">
+                <div style="background-color: rgba(0,0,0,0.2);border-radius: 20px;padding: 10px 0 15px 5px">
                     <div style="width:100%;height:100px; display:inline-flex">
                         <div class="left-arrow" data-ng-click="left()"><i class="fa fa-arrow-left"></i></div>
                         <div style="width: calc(100% - 40px); height:100%; margin: 0 auto; display: block; float:none">
                             <div class="image" data-ng-class="mostrar"></div>
                             <div class="name" data-ng-class="mostrar">Nombre: {{ actualName }}</div>
                             <div class="name desc" data-ng-class="mostrar">Descripcion: {{ actualDesc }}</div>
-                            <a style="display:inline-flex;transition: all ease 0.2s;" data-ng-class="mostrar">
-                                <button class="hero__button  ghost-button  ghost-button--hero" data-ng-click="sendVoto()">
-                                    <p style="color:black">Votar</p>
-                                </button>
-                            </a>
+                                <div style="display:flex;align-items: center;height:100%;justify-content: center"><button style="width:100px;height:50px;transition: all ease 0.2s;"
+                                    data-ng-class="mostrar" class="btn" data-ng-click="sendVoto()">
+                                    Votar
+                                </button></div>
                         </div>
                         <div class="right-arrow" data-ng-click="right()"><i class="fa fa-arrow-right"></i></div>
                     </div>
                 </div>
                 <div style="padding-top:10px">
-                    <div class="">
-                        <div data-ng-repeat="k in form" style="display:inline-flex">
-                            <div class="card" style="position:relative;padding:5px;background-color:rgba(255,255,255,0.15)" data-ng-click="fooVoto(k.id-1)">
-                            <p class="clabel">{{ k.name }}</p>
+                    <div style="text-align: center">
+                        <div data-ng-repeat="k in form" style="display:inline-flex;">
+                            <div class="card" style="" data-ng-click="fooVoto(k.id-1)">
+                                <p class="clabel">{{ k.name }}</p>
                                 <div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>
-                                <div style="height:100%;width:calc(15 * 5);margin: 0 auto; display: inline-flex;">
-                                    <a style="width:15px;height:15px;background-color:limegreen;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,1)"></a>
-                                    <a style="width:15px;height:15px;background-color:#6fa82f;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,2)"></a>
-                                    <a style="width:15px;height:15px;background-color:yellow;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,3)"></a>
-                                    <a style="width:15px;height:15px;background-color:darkorange;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,4)"></a>
-                                    <a style="width:15px;height:15px;background-color:red;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,5)"></a>
+                                <div style="height:100%;width:calc(15 * 3);margin: 0 auto; display: inline-flex;">
+                                    <button class="btn btn-success" id="btnPriority" data-ng-click="addPriority(k.id-1,1)"></button>
+                                    <button class="btn btn-warning" id="btnPriority" data-ng-click="addPriority(k.id-1,2)"></button>
+                                    <button class="btn btn-danger" id="btnPriority" data-ng-click="addPriority(k.id-1,3)"></button>
                                 </div>
                             </div>
                         </div>

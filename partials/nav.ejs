@@ -4,11 +4,11 @@
             <div class="header__title-main"> Lead Together </div>
         </a>
 
-        <div class="header__social-icons">
+        <div class="header__social-icons" style="margin-top: 11px">
             <% if (typeof session.login === 'undefined') { %>
-            <a href="/login"><i class="fa fa-sign-in"></i> Login</a>
+            <a style="font-size:22px;font-weight: 500;" href="/login"><i class="fa fa-sign-in"></i> Login</a>
             <% } else { %>
-            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+            <a style="font-size:22px;font-weight: 500;" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
             <% } %>
         </div>
     </div>

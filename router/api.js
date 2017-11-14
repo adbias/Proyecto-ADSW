@@ -97,7 +97,7 @@ router.post('/crearEscenario', function(req, res){
 router.post('/login', function(req, res) {
     models.Usuario.findOne({
         where: {
-            email: req.body.email
+            username: req.body.user
         }
     }).then(function (results) {
         if (results !== null && bcrypt.compareSync(req.body.password, results.password)) {
