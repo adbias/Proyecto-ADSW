@@ -140,6 +140,31 @@ img {
     padding-right: 20px;
     border-radius: 20px
 }
+
+.sessionCont {
+    width: 40vw;
+    height: 30vh;
+    margin: 10px auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px
+}
+
+.stageCont {
+    width: 40vw;
+    height: 30vh;
+    margin: 10px auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px
+}
+
 .customForm {
     display: inline-flex;
     width:100%;
