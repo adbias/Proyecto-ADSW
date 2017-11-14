@@ -59,10 +59,10 @@
                     </div>
                 </div>
                 <div style="padding-top:10px">
-                    <div class="group-list">
-                        <div data-ng-repeat="k in form" class="group-list-item">
-                            <div class="card" style="position:relative;padding:5px;background-color:rgba(255,255,255,0.2)" data-ng-click="fooVoto(k.id-1)">
-                        <span><label class="clabel"><!--<input type="checkbox" data-ng-model="voto[k.id-1]"> -->{{ k.name }}</label></span>
+                    <div class="">
+                        <div data-ng-repeat="k in form" style="display:inline-flex">
+                            <div class="card" style="position:relative;padding:5px;background-color:rgba(255,255,255,0.15)" data-ng-click="fooVoto(k.id-1)">
+                            <p class="clabel">{{ k.name }}</p>
                                 <div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>
                                 <div style="height:100%;width:calc(15 * 5);margin: 0 auto; display: inline-flex;">
                                     <a style="width:15px;height:15px;background-color:limegreen;border:1px solid white" href="" data-ng-click="addPriority(k.id-1,1)"></a>
@@ -75,16 +75,22 @@
                         </div>
                     </div>
                 </div>
-                <button data-ng-click="showAModal()" class="btn btn-primary">hola</button>
+                <!--<button data-ng-click="showAModal()" class="btn btn-primary">hola</button>-->
             </div>
-            <div class="container col-md-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2)">
-                <div class="form-inline form-group" data-ng-controller='Timer' >
+            <div class="container col-md-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
+                <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
                     <% if(hostId == session.userId) { %>
-                    <label class="clabel">{{ minutes() }} minutos {{ timer%60 }} segundos</label>
-                    <button class="btn btn-success" data-ng-click='addTime()'>+5</button>
-                    <button class="btn btn-primary" data-ng-click='starting()'>Empezar</button>
-                    <button class="btn btn-primary" data-ng-click='sit()'>Parar</button>
-                    <button class="btn btn-warning" data-ng-click='resetTime()'>Reset</button>
+                    <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer%60 }} segundos</p>
+                    <button class="btn btn-success" id="btnTimer" data-ng-click='addTime()'>+5</button>
+                    <button class="btn btn-primary" id="btnTimer" data-ng-click='starting()'>
+                        <i class="fa fa-play"></i>
+                    </button>
+                    <button class="btn btn-danger" id="btnTimer" data-ng-click='sit()'>
+                        <i class="fa fa-stop"></i>
+                    </button>
+                    <button class="btn btn-warning" id="btnTimer" data-ng-click='resetTime()'>
+                        <i class="fa fa-refresh"></i>
+                    </button>
                     <% } else { %>
                     <script>
                         var socket = io.connect('http://localhost:3000');
@@ -96,18 +102,16 @@
                     <label class="clabel" id="timerId"></label>
                     <% } %>
                 </div>
-                <form class="form-inline" data-ng-controller='ChatSend'>
-                    <div class="form-group">
-                        <label for="message" class="clabel">Mensaje</label>
-                        <input id="message" type="text" data-ng-model="msg" />
-                    </div>
-                    <button data-ng-click="sendMsg()" class="btn btn-primary">Enviar</button>
-                </form>
+                <div style="display: inline-flex" data-ng-controller='ChatSend'>
+                    <input class="btn" style="background-color: rgba(10,10,10,0.2);width: 100%;color:white; text-align:left" id="message" type="text" data-ng-model="msg" />
+                    <button data-ng-click="sendMsg()" class="btn btn-primary" id="btnTimer">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
                 <div data-ng-controller='ChatRecv'>
-                    <div class="table table-borderless">
-                        <div data-ng-repeat="i in lista">
-                            <span>{{ i.username }}:</span>
-                            <span>{{ i.msg }}</span>
+                    <div style="width:100%">
+                        <div style="width:100%" data-ng-repeat="i in lista">
+                            <p class="msg">{{ i.username }}: {{ i.msg }}</p>
                         </div>
                     </div>
                 </div>

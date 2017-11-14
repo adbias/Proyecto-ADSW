@@ -6,12 +6,12 @@ a {
     color: whitesmoke;
 }
 
-span {
-    -ms-word-break: break-all;
+.msg {
     word-break: break-all;
+    -ms-word-break: break-all;
 
     /* Non standard for webkit */
-    word-break: break-word;
+    /*word-break: break-word;*/
 
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -30,9 +30,13 @@ div.scroll {
 }
 
 .card {
+    text-align: center;
     box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
     transition: 0.3s;
-    width: 70%;
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    height: 80px;
     border-radius: 5px;
 }
 
@@ -45,15 +49,14 @@ img {
 }
 
 
-
-.group-list {
+/*.group-list {
     -moz-column-gap: 20;
     -moz-column-count: 3;
     -webkit-column-count: 3;
     -webkit-column-gap: 22;
     column-count: 3;
     column-gap: 20;
-}
+}*/
 
 /*.group-list-item{
     margin: 10px 0;
@@ -113,6 +116,6 @@ img {
     opacity: 1;
 }
 
-.prioBtn {
-
+#btnTimer {
+    font-size: 0.8em;
 }
