@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bootstrap']);
+var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bootstrap', 'luegg.directives']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
 /*app.controller("BarChart", function ($scope, $http) {
@@ -115,10 +115,13 @@ app.controller('Timer', function($scope, $timeout) {
     retrievetimer();
     $scope.addTime = function() {
         $scope.timer += 300;
+        flag = false;
         if (flag) {retrieve()}
     };
     $scope.resetTime = function() {
         $scope.timer = 300;
+        flag = false;
+        paused = true;
         if (flag) {retrieve()}
     };
 
@@ -210,7 +213,8 @@ app.controller('Stages', function($scope, $http, $timeout, $uibModal){
         console.log($scope.priorities)
         };
     $scope.fooVoto = function(i) {
-        $scope.voto[i] = 1;
-        console.log("wowoowowowowo")
+        console.log($scope.form[i].mechanism);
+        $scope.mechDes = $scope.form[i].mechanism;
+        $scope.resDes = $scope.form[i].result;
     }
 });

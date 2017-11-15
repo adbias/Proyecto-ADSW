@@ -12,17 +12,18 @@
         <div class="hero__content-wrapper">
             <div class="container">
                 <h1><p class="text-center clabel"><%=title%></p></h1>
+                <div class="stageCont">
                 <form class="form-horizontal" action="/api/crearEscenario?idSesion=<%=idSesion%>&created=1" method="POST" enctype="application/x-www-form-urlencoded">
                     <legend></legend>
                     <div class="form-group">
                         <label class="col-lg-2 control-label clabel"><p>Nombre</p></label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-9">
                             <input type="text" class="form-control" id="title" name="title" placeholder="Título">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label clabel"><p>Objetivo</p></label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-9">
                             <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
                         </div>
                     </div>
@@ -36,6 +37,7 @@
                         </div>
                     </div>
                 </form>
+                </div>
 
                 <table class="table">
                     <thead>

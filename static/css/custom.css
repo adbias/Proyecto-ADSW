@@ -46,6 +46,7 @@ div.scroll {
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 
 img {
@@ -76,6 +77,10 @@ img {
     float: left;
     color: white;
 }
+
+.left-arrow:hover{
+    cursor: pointer;
+}
 .right-arrow {
     display: inline-block;
     top: 50%;
@@ -84,7 +89,10 @@ img {
     height: 100%;
     width: 20px;
     color: white;
-    float:right;
+    float: right;
+}
+.right-arrow:hover{
+    cursor: pointer;
 }
 .image {
     transition: all ease 0.2s;
@@ -140,9 +148,43 @@ img {
     padding-right: 20px;
     border-radius: 20px
 }
+
+.sessionCont {
+    width: 40vw;
+    height: 30vh;
+    margin: 10px auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px
+}
+
+.stageCont {
+    width: 40vw;
+    height: 30vh;
+    margin: 10px auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px
+}
+
 .customForm {
     display: inline-flex;
     width:100%;
     margin-bottom: 10px;
     align-items: center;
+}
+
+.messageBox {
+    overflow-y:scroll;
+    max-height:30vh;
+}
+
+.messageBox::-webkit-scrollbar {
+    display: none;
 }
