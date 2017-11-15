@@ -92,8 +92,10 @@
                     <script>
                         var socket = io.connect('http://localhost:3000');
                         socket.on('timer', function (dat) {
-                            document.getElementById("timerId").innerHTML =
-                            '<p>' + dat.min + ' minutos '+ dat.seg+ ' segundos '+'<\p>' ;
+                            if (dat.room === sessionId){
+                                document.getElementById("timerId").innerHTML =
+                                    '<p>' + dat.min + ' minutos '+ dat.seg+ ' segundos '+'<\p>' ;
+                            }
                         });
                     </script>
                     <label class="clabel" id="timerId"></label>
