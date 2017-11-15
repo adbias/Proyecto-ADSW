@@ -67,7 +67,7 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
             // Ordenar por fecha
             response.data.sort(function(o1,o2){
                 return new Date(o1.createdAt).valueOf() < new Date(o2.createdAt).valueOf() ? -1 :
-                    new Data(o1.createdAt).valueOf() > new Data(o2.createdAt).valueOf() ? 1 : 0;
+                    new Date(o1.createdAt).valueOf() > new Date(o2.createdAt).valueOf() ? 1 : 0;
             });
 
             for(var indice in response.data){
