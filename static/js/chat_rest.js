@@ -90,15 +90,31 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
 
 });
 
-app.controller('Timer', function($scope, $timeout, $http) {
-
+app.controller('Timer', function($scope, $timeout, $http, $uibModal) {
+    $scope.showAModal = function(modal) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            windowTemplateUrl: "http://localhost:3000/template",
+            templateUrl: "http://localhost:3000/"+modal,
+            controller: 'resetTime',
+            scope:$scope
+        });
+        modalInstance.result.then(function(result){
+            console.log(result);
+            $scope.timer = result.hrs*3600 + result.min*60;
+            $scope.refreshDB($scope.timer);
+            flag = false;
+            if (flag) {retrieve()}
+        });
+    };
     // Timer guardado en la base de datos
     $http.get('/api/getTime?id=' + urlid.get("SessionId"))
         .then(function (resp) {
             $scope.timer = resp.data.timer;
     });
 
-    // Actualizo timer de la BD
+    // Función para actualizar timer de la BD
     $scope.refreshDB = function (t) {
         if (t !== null){
             $http.post('api/refresh', {
@@ -117,19 +133,17 @@ app.controller('Timer', function($scope, $timeout, $http) {
         flag = false;
         if ($scope.timer > 0 && !pause) {
             $scope.timer -= 1;
+            $scope.refreshDB($scope.timer);
         } else if ($scope.timer <= 0 ) {
             flag = true;
             return;
         }
-        if ($scope.timer !== 300) {
-            socket.emit('timeNow', {
-                hour: Math.floor($scope.timer / 3600),
-                m: Math.floor($scope.timer / 60),
-                seg: Math.floor($scope.timer % 60),
-                room:urlid.get("SessionId")
-            });
-        }
-        $scope.refreshDB($scope.timer);
+        socket.emit('timeNow', {
+            hour: Math.floor($scope.timer / 3600),
+            m: Math.floor($scope.timer / 60),
+            seg: Math.floor($scope.timer % 60),
+            room:urlid.get("SessionId")
+        });
         // Pasa el segundo
         $timeout(retrievetimer, 1000);
 
@@ -142,8 +156,8 @@ app.controller('Timer', function($scope, $timeout, $http) {
         flag = false;
         if (flag) {retrieve()}
     };
-    $scope.resetTime = function() {
-        $scope.timer = 300;
+    $scope.resetTime = function(t) {
+        $scope.timer = t;
         $scope.refreshDB($scope.timer);
         flag = false;
         paused = true;
@@ -160,28 +174,27 @@ app.controller('Timer', function($scope, $timeout, $http) {
     $scope.sit = function(){
       if (!pause) pause = true;
     };
-
 });
 
-app.controller('test', function($scope, $uibModalInstance){
-    $uibModalInstance.close(close);
-    $scope.algo = 'algo';
-});
-
-app.controller('Stages', function($scope, $http, $timeout, $uibModal){
-    $scope.showAModal = function() {
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            animation: true,
-            templateUrl: "http://localhost:3000/test",
-            windowTemplateUrl: "http://localhost:3000/test",
-            controller: 'test',
-        });
-
-        modalInstance.result.then()
-
+app.controller('resetTime', function($scope,$uibModalInstance){
+    console.log("adlkjadslk");
+    $scope.hors = 0;
+    $scope.mins = 0;
+    $scope.ok = function () {
+        console.log("ok");
+        $uibModalInstance.close("something");
     };
+    $scope.cancel = function (){
+        console.log("cancel");
+        $uibModalInstance.dismiss('cancel');
+    };
+    $scope.update = function (h,m) {
+        $scope.time = (parseInt(h) * 3600) + (parseInt(m) * 60);
+        $uibModalInstance.close({hrs: h, min: m})
+    };
+});
+
+app.controller('Stages', function($scope, $http, $timeout){
     $scope.actualStage = 0;
     $scope.priorities = [];
     refresh = function(){

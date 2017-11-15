@@ -1,0 +1,15 @@
+<script type="text/ng-template" id="http://localhost:3000/resetTime">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Colocar nuevo tiempo</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <form novalidate class="simple-form">
+                <label>Horas: <input type="text" ng-model="hors" /></label><br />
+                <label>Minutos: <input type="text" ng-model="mins" /></label><br />
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" data-ng-click="cancel()"> Cancelar </button>
+            <button class="btn btn-warning" type="submit" data-ng-click="update(hors,mins)">Guardar</button>
+        </div>
+</script>
