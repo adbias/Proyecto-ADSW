@@ -117,6 +117,10 @@ app.get('/test', function (req, res) {
    res.render('test.html');
 });
 
+app.get('/resetTime', function (req, res) {
+    res.render('Timer.html');
+});
+
 
 
 module.exports = app;

@@ -98,7 +98,7 @@ app.controller('Timer', function($scope, $timeout, $http) {
             $scope.timer = resp.data.timer;
     });
 
-    // Actualizo timer de la BD
+    // Función para actualizar timer de la BD
     $scope.refreshDB = function (t) {
         if (t !== null){
             $http.post('api/refresh', {
@@ -117,19 +117,17 @@ app.controller('Timer', function($scope, $timeout, $http) {
         flag = false;
         if ($scope.timer > 0 && !pause) {
             $scope.timer -= 1;
+            $scope.refreshDB($scope.timer);
         } else if ($scope.timer <= 0 ) {
             flag = true;
             return;
         }
-        if ($scope.timer !== 300) {
-            socket.emit('timeNow', {
-                hour: Math.floor($scope.timer / 3600),
-                m: Math.floor($scope.timer / 60),
-                seg: Math.floor($scope.timer % 60),
-                room:urlid.get("SessionId")
-            });
-        }
-        $scope.refreshDB($scope.timer);
+        socket.emit('timeNow', {
+            hour: Math.floor($scope.timer / 3600),
+            m: Math.floor($scope.timer / 60),
+            seg: Math.floor($scope.timer % 60),
+            room:urlid.get("SessionId")
+        });
         // Pasa el segundo
         $timeout(retrievetimer, 1000);
 
@@ -142,8 +140,8 @@ app.controller('Timer', function($scope, $timeout, $http) {
         flag = false;
         if (flag) {retrieve()}
     };
-    $scope.resetTime = function() {
-        $scope.timer = 300;
+    $scope.resetTime = function(t) {
+        $scope.timer = t;
         $scope.refreshDB($scope.timer);
         flag = false;
         paused = true;
@@ -160,26 +158,38 @@ app.controller('Timer', function($scope, $timeout, $http) {
     $scope.sit = function(){
       if (!pause) pause = true;
     };
+});
+
+app.controller('resetTime', function($scope, $uibModalInstance){
+    //$scope.algo = 'algo';
+    $scope.update = function (h,m) {
+        $scope.time = (parseInt(h)*3600)+(parseInt(m)*60);
+        console.log('time: ', $scope.time);
+    };
+
+    $scope.close = function () {
+        $uibModalInstance.close(close);
+    }
 
 });
 
 app.controller('test', function($scope, $uibModalInstance){
-    $uibModalInstance.close(close);
+    //$uibModalInstance.close(close);
     $scope.algo = 'algo';
 });
 
 app.controller('Stages', function($scope, $http, $timeout, $uibModal){
-    $scope.showAModal = function() {
+    $scope.showAModal = function(modal) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             animation: true,
-            templateUrl: "http://localhost:3000/test",
-            windowTemplateUrl: "http://localhost:3000/test",
-            controller: 'test',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/"+modal,
+            controller: modal,
         });
 
-        modalInstance.result.then()
+        //modalInstance.result.then();
 
     };
     $scope.actualStage = 0;
