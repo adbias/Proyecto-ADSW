@@ -90,8 +90,24 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
 
 });
 
-app.controller('Timer', function($scope, $timeout, $http) {
-
+app.controller('Timer', function($scope, $timeout, $http, $uibModal) {
+    $scope.showAModal = function(modal) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            windowTemplateUrl: "http://localhost:3000/template",
+            templateUrl: "http://localhost:3000/"+modal,
+            controller: 'resetTime',
+            scope:$scope
+        });
+        modalInstance.result.then(function(result){
+            console.log(result);
+            $scope.timer = result.hrs*3600 + result.min*60;
+            $scope.refreshDB($scope.timer);
+            flag = false;
+            if (flag) {retrieve()}
+        });
+    };
     // Timer guardado en la base de datos
     $http.get('/api/getTime?id=' + urlid.get("SessionId"))
         .then(function (resp) {
@@ -160,38 +176,25 @@ app.controller('Timer', function($scope, $timeout, $http) {
     };
 });
 
-app.controller('resetTime', function($scope, $uibModalInstance){
-    //$scope.algo = 'algo';
+app.controller('resetTime', function($scope,$uibModalInstance){
+    console.log("adlkjadslk");
+    $scope.hors = 0;
+    $scope.mins = 0;
+    $scope.ok = function () {
+        console.log("ok");
+        $uibModalInstance.close("something");
+    };
+    $scope.cancel = function (){
+        console.log("cancel");
+        $uibModalInstance.dismiss('cancel');
+    };
     $scope.update = function (h,m) {
-        $scope.time = (parseInt(h)*3600)+(parseInt(m)*60);
-        console.log('time: ', $scope.time);
+        $scope.time = (parseInt(h) * 3600) + (parseInt(m) * 60);
+        $uibModalInstance.close({hrs: h, min: m})
     };
-
-    $scope.close = function () {
-        $uibModalInstance.close(close);
-    }
-
 });
 
-app.controller('test', function($scope, $uibModalInstance){
-    //$uibModalInstance.close(close);
-    $scope.algo = 'algo';
-});
-
-app.controller('Stages', function($scope, $http, $timeout, $uibModal){
-    $scope.showAModal = function(modal) {
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            animation: true,
-            templateUrl: "http://localhost:3000/"+modal,
-            windowTemplateUrl: "http://localhost:3000/"+modal,
-            controller: modal,
-        });
-
-        //modalInstance.result.then();
-
-    };
+app.controller('Stages', function($scope, $http, $timeout){
     $scope.actualStage = 0;
     $scope.priorities = [];
     refresh = function(){
