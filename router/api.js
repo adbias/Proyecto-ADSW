@@ -13,6 +13,13 @@ var options = {
     integer: true
 };
 
+router.post('/refresh', function (req,next) {
+    models.Sesion.update(
+        {timer:req.body.tim},
+        {where: { id: req.body.idSesion}}
+    );
+});
+
 router.post('/usuarios', function(req, res){
     var add = true;
     // Search for user and email registered
@@ -70,7 +77,8 @@ router.post('/createSesion', function(req, res){
         titulo: req.body.title,
         objetivo: req.body.objetive,
         link: " Zelda ",
-        UsuarioId: req.session.userId
+        UsuarioId: req.session.userId,
+        timer: req.body.time
     }).then(function () {
         models.Sesion.findOne({
             where: {
@@ -250,4 +258,14 @@ router.get('/getNamSol',function (req,res) {
        }
        res.send(data);
    })
+});
+
+router.get('/getTime',function (req,res) {
+   models.Sesion.findOne({
+       where: {
+           id: req.query.id
+       }
+   }).then(function (ret) {
+       res.send(ret);
+    })
 });

@@ -34,7 +34,7 @@ app.controller('ChatSend', function($scope, $http) {
     // Función para enviar activada por boton en la vista
     $scope.sendMsg = function() {
         // Comunicación por socket, envío el nuevo mensaje
-        socket.emit('Chat', {username:usernamelogged, msg: $scope.msg});
+        socket.emit('Chat', {username:usernamelogged, msg: $scope.msg,room:urlid.get("SessionId")});
 
         // Se guarda en la BD
         $http.post('/api/chat?id=' + urlid.get("SessionId"), {
@@ -81,7 +81,7 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
     // Función que se llamará una y otra vez para ir actualizando el chat en tiempo real
     var retrieve = function() {
         socket.on('ChatIn', function (response) {
-            if (response.msg !== 'undefined' && response.msg !== null){
+            if (response.msg !== 'undefined' && response.msg !== null && response.room ===urlid.get("SessionId")){
                 $scope.lista.push({username:response.username, msg:response.msg});
             }
         });
@@ -90,8 +90,26 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
 
 });
 
-app.controller('Timer', function($scope, $timeout) {
-    $scope.timer = 300;
+app.controller('Timer', function($scope, $timeout, $http) {
+
+    // Timer guardado en la base de datos
+    $http.get('/api/getTime?id=' + urlid.get("SessionId"))
+        .then(function (resp) {
+            $scope.timer = resp.data.timer;
+    });
+
+    // Actualizo timer de la BD
+    $scope.refreshDB = function (t) {
+        if (t !== null){
+            $http.post('api/refresh', {
+                idSesion: urlid.get("SessionId"),
+                tim: t
+            });
+        }
+    };
+
+
+
     var flag = false;
     var pause = true;
     var socket = io.connect('http://localhost:3000');
@@ -107,19 +125,26 @@ app.controller('Timer', function($scope, $timeout) {
             socket.emit('timeNow', {
                 hour: Math.floor($scope.timer / 3600),
                 m: Math.floor($scope.timer / 60),
-                seg: Math.floor($scope.timer % 60)
+                seg: Math.floor($scope.timer % 60),
+                room:urlid.get("SessionId")
             });
         }
+        $scope.refreshDB($scope.timer);
+        // Pasa el segundo
         $timeout(retrievetimer, 1000);
+
     };
     retrievetimer();
     $scope.addTime = function() {
         $scope.timer += 300;
+        // Actualizo timer de la BD
+        $scope.refreshDB($scope.timer);
         flag = false;
         if (flag) {retrieve()}
     };
     $scope.resetTime = function() {
         $scope.timer = 300;
+        $scope.refreshDB($scope.timer);
         flag = false;
         paused = true;
         if (flag) {retrieve()}

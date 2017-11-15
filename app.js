@@ -37,17 +37,17 @@ models.sequelize.sync().then(function () {
         socket.on('timeNow', function (data) {
             console.log(data);
             if (data.seg == 'undefined'){
-                io.sockets.emit('timer',{hor:0,min:0,seg:0});
+                io.sockets.emit('timer',{hor:0,min:0,seg:0,room:data.room});
             } else {
-                io.sockets.emit('timer',{hor:data.hour, min:data.m, seg:data.seg});
+                io.sockets.emit('timer',{hor:data.hour, min:data.m, seg:data.seg,room:data.room});
             }
         });
         socket.on('Chat', function (data) {
             console.log('mensaje: ',data.msg,data.username);
             if (data.msg !== ''){
-                io.sockets.emit('ChatIn',{msg:data.msg, username:data.username});
+                io.sockets.emit('ChatIn',{msg:data.msg, username:data.username,room: data.room});
             } else {
-                io.sockets.emit('ChatIn',{msg:'undefined', username:'undefined'});
+                io.sockets.emit('ChatIn',{msg:'undefined', username:'undefined',room:data.room});
             }
         });
     });

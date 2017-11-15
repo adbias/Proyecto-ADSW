@@ -7,6 +7,10 @@ module.exports = function(sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true
         },
+        timer:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         titulo: {
             type: DataTypes.STRING,
             allowNull: false
