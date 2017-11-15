@@ -67,7 +67,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<button data-ng-click="showAModal()" class="btn btn-primary">hola</button>-->
             </div>
             <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px">
                 <p>{{mechDes}}</p><br>
@@ -110,11 +109,6 @@
                 <div class="messageBox" scroll-glue style="visibility: hidden">
                     <div data-ng-controller='ChatRecv' style="visibility: visible">
                     <div style="width:100%">
-                        <!--
-                        <div style="width:100%">
-                            <p class="msg">{{ usernameChat + ':' }} {{ msgChat }}</p>
-                        </div>
-                        -->
                         <div style="width:100%" data-ng-repeat="i in lista">
                             <p class="msg">{{ i.username }}: {{ i.msg }}</p>
                         </div>

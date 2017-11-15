@@ -6,7 +6,8 @@
   "scripts": {
     "run-migrations": "./node_modules/.bin/sequelize db:migrate",
     "start-server": "node app.js",
-    "start": "npm run run-migrations && npm run start-server"
+    "start": "npm run start-server & npm run run-migrations",
+    "stop": "pkill node"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
