@@ -39,7 +39,15 @@ models.sequelize.sync().then(function () {
             if (data.seg == 'undefined'){
                 io.sockets.emit('timer',{hor:0,min:0,seg:0});
             } else {
-                io.sockets.emit('timer',{hor:data.hour,min:data.m,seg:data.seg});
+                io.sockets.emit('timer',{hor:data.hour, min:data.m, seg:data.seg});
+            }
+        });
+        socket.on('Chat', function (data) {
+            console.log('mensaje: ',data.msg,data.username);
+            if (data.msg !== ''){
+                io.sockets.emit('ChatIn',{msg:data.msg, username:data.username});
+            } else {
+                io.sockets.emit('ChatIn',{msg:'undefined', username:'undefined'});
             }
         });
     });

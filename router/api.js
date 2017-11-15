@@ -204,6 +204,17 @@ router.get('/chat', function (req, res) {
     }));
 });
 
+router.get('/searchChat', function (req,res) {
+    models.Chat.findAll({
+        where:{
+            sessionid:req.query.id
+        }
+        }
+    ).then(function (data) {
+        res.send(data);
+    });
+});
+
 var soluciones = "";
 models.Solution.findAll().then(function(info){soluciones = info});
 

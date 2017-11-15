@@ -28,6 +28,25 @@ var urlid = new URLSearchParams(document.location.search.substring(1));
 });*/
 
 app.controller('ChatSend', function($scope, $http) {
+    // Conexion por socket
+    var socket = io.connect('http://localhost:3000');
+
+    // Función para enviar activada por boton en la vista
+    $scope.sendMsg = function() {
+        // Comunicación por socket, envío el nuevo mensaje
+        socket.emit('Chat', {username:usernamelogged, msg: $scope.msg});
+
+        // Se guarda en la BD
+        $http.post('/api/chat?id=' + urlid.get("SessionId"), {
+            username: usernamelogged,
+            msg: $scope.msg
+        });
+
+        // Clean input box (msg)
+        $scope.msg = null;
+    }
+
+    /*
     $scope.sendMsg = function() {
         $http.post('/api/chat?id=' + urlid.get("SessionId"), {
             username: usernamelogged,
@@ -35,18 +54,42 @@ app.controller('ChatSend', function($scope, $http) {
         });
         $scope.msg = null;
     }
+    */
 });
 app.controller('ChatRecv', function ($scope, $http, $timeout) {
+    // Arreglo donde se guarda el chat
     $scope.lista = [];
-    var retrieve = function() {
-        $http.get('/api/chat?id=' + urlid.get("SessionId"))
-            .then(function(response) {
-                $scope.lista = response.data;
-                $timeout(retrieve, 500);
+
+    // Se cargan los guardados en la base de datos, la primera vez que llama al controlador
+    $http.get('/api/searchChat?id=' + urlid.get("SessionId"))
+        .then(function(response) {
+
+            // Ordenar por fecha
+            response.data.sort(function(o1,o2){
+                return new Date(o1.createdAt).valueOf() < new Date(o2.createdAt).valueOf() ? -1 :
+                    new Data(o1.createdAt).valueOf() > new Data(o2.createdAt).valueOf() ? 1 : 0;
             });
+
+            for(var indice in response.data){
+                $scope.lista.push(response.data[indice]);
+            }
+        });
+
+    // Conexion por socket
+    var socket = io.connect('http://localhost:3000');
+
+    // Función que se llamará una y otra vez para ir actualizando el chat en tiempo real
+    var retrieve = function() {
+        socket.on('ChatIn', function (response) {
+            if (response.msg !== 'undefined' && response.msg !== null){
+                $scope.lista.push({username:response.username, msg:response.msg});
+            }
+        });
     };
     retrieve();
+
 });
+
 app.controller('Timer', function($scope, $timeout) {
     $scope.timer = 300;
     var flag = false;
@@ -60,7 +103,7 @@ app.controller('Timer', function($scope, $timeout) {
             flag = true;
             return;
         }
-        if ($scope.timer != 300) {
+        if ($scope.timer !== 300) {
             socket.emit('timeNow', {
                 hour: Math.floor($scope.timer / 3600),
                 m: Math.floor($scope.timer / 60),

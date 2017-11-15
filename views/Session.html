@@ -101,9 +101,15 @@
                 </div>
                 <div data-ng-controller='ChatRecv'>
                     <div style="width:100%">
+                        <!--
+                        <div style="width:100%">
+                            <p class="msg">{{ usernameChat + ':' }} {{ msgChat }}</p>
+                        </div>
+                        -->
                         <div style="width:100%" data-ng-repeat="i in lista">
                             <p class="msg">{{ i.username }}: {{ i.msg }}</p>
                         </div>
+
                     </div>
                 </div>
             </div>
