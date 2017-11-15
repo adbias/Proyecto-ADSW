@@ -27,7 +27,6 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
-                    Sesion.hasMany(models.Guestmsg);
                     Sesion.hasMany(models.Stage)
                 }
             }

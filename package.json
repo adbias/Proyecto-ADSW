@@ -4,7 +4,9 @@
   "description": "Plataforma de ayuda para la toma de decisiones",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "run-migrations": "./node_modules/.bin/sequelize db:migrate",
+    "start-server": "node app.js",
+    "start": "npm run run-migrations && npm run start-server"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -19,6 +21,7 @@
     "random-number": "0.0.9",
     "regex-email": "^1.0.2",
     "sequelize": "^3.24.0",
+    "sequelize-cli": "^3.0.0",
     "sleep": "^5.1.1",
     "socket.io": "^2.0.4"
   },

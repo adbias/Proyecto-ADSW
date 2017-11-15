@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 Usuario.hasMany(models.Sesion);
                 Usuario.hasMany(models.Participants);
-                Usuario.hasMany(models.Msg);
+                Usuario.hasMany(models.Chat);
                 Usuario.hasMany(models.Voto)
             }
         }

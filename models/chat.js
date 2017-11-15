@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Chat = sequelize.define("Chat", {
+    return sequelize.define("Chat", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -10,10 +10,11 @@ module.exports = function(sequelize, DataTypes) {
         username: {
             type: DataTypes.STRING,
             allowNull: false
-
         },
-        msg: DataTypes.STRING,
+        msg: {
+            type:DataTypes.STRING,
+            allowNull: false
+        },
         sessionid: DataTypes.INTEGER
     });
-    return Chat;
 };

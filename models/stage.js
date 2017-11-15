@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
                         allowNull: false
                     }
                 });
-                Stage.hasMany(models.Msg);
+                Stage.hasMany(models.Chat);
                 Stage.hasMany(models.Voto);
             }
         }
