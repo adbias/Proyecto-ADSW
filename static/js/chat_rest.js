@@ -90,17 +90,16 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
 
 });
 
-app.controller('Timer', function($scope, $timeout, $http, $uibModal) {
+app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCache) {
     $scope.showAModal = function(modal) {
-        var modalInstance = $uibModal.open({
+        $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            windowTemplateUrl: "http://localhost:3000/template",
             templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
             controller: 'resetTime',
-            scope:$scope
-        });
-        modalInstance.result.then(function(result){
+            scope: $scope
+        }).result.then(function(result){
             console.log(result);
             $scope.timer = result.hrs*3600 + result.min*60;
             $scope.refreshDB($scope.timer);
