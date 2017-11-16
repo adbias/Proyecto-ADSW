@@ -68,26 +68,28 @@ img {
 }*/
 
 .left-arrow {
+    font-size: 2em;
     display: inline-block;
-    top: 50%;
-    margin-top: -0.5em;
+    align-items: center;
     position: relative;
-    height: 100%;
-    width: 20px;
+    height: 100px;
+    line-height: 100px;
+    width: 30px;
     float: left;
     color: white;
+
 }
 
 .left-arrow:hover{
     cursor: pointer;
 }
 .right-arrow {
+    font-size: 2em;
     display: inline-block;
-    top: 50%;
-    margin-top: -0.5em;
     position: relative;
-    height: 100%;
-    width: 20px;
+    height: 100px;
+    line-height: 100px;
+    width: 30px;
     color: white;
     float: right;
 }
