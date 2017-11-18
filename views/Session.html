@@ -34,8 +34,13 @@
             <div class="col-xs-9 pull-left">
                 <div style="display:inline-flex;padding-bottom: 10px;width:100%">
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
+
                     <div style="width:100%;position: relative">
-                        <button class="btn" data-ng-click="show()" style=";position:relative;float: right">Compartir</button>
+                        <button class="btn btn-info" data-ng-click="show()" style=";position:relative;float: right">Compartir</button>
+
+                        <a class="btn btn-success" href="/analisis" style=";position:relative;float: right">
+                            <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
+                        </a>
                     </div>
                 </div>
                 <div style="background-color: rgba(0,0,0,0.2);border-radius: 20px;padding: 10px 0 15px 5px">
@@ -46,7 +51,7 @@
                             <div class="name" style="font-size:1.5em" data-ng-class="mostrar">{{ actualName }}</div>
                             <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
                                 <div style="display:flex;align-items: center;height:100%;justify-content: center"><button style="width:100px;height:50px;transition: all ease 0.2s;"
-                                    data-ng-class="mostrar" class="btn" data-ng-click="sendVoto()">
+                                    data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()">
                                     Votar
                                 </button></div>
                         </div>

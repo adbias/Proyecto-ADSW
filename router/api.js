@@ -78,7 +78,7 @@ router.post('/createSesion', function(req, res){
         objetivo: req.body.objetive,
         link: " Zelda ",
         UsuarioId: req.session.userId,
-        timer: req.body.time
+        timer: 1800
     }).then(function () {
         models.Sesion.findOne({
             where: {

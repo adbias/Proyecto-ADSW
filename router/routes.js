@@ -125,7 +125,11 @@ app.get('/template', function(req,res) {
     res.render("template.html")
 });
 
-
+app.get('/analisis',function (req,res) {
+    res.render('graphic.html', {
+        session: req.session
+    });
+});
 
 module.exports = app;
 
