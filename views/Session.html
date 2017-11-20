@@ -36,8 +36,9 @@
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
 
                     <div style="width:100%;position: relative">
-                        <button class="btn btn-info" data-ng-click="show()" style=";position:relative;float: right">Compartir</button>
-
+                        <div data-ng-controller="showShare">
+                            <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right">Compartir</button>
+                        </div>
                         <a class="btn btn-success" href="/analisis" style=";position:relative;float: right">
                             <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
                         </a>

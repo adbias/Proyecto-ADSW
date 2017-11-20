@@ -121,6 +121,10 @@ app.get('/resetTime', function (req, res) {
     res.render('Timer.html');
 });
 
+app.get('/share', function (req, res) {
+    res.render('Share.html');
+});
+
 app.get('/template', function(req,res) {
     res.render("template.html")
 });

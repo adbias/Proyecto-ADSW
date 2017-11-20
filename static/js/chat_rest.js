@@ -90,6 +90,27 @@ app.controller('ChatRecv', function ($scope, $http, $timeout) {
 
 });
 
+app.controller('showShare', function($scope, $timeout, $http, $uibModal, $templateCache) {
+    $scope.showShare = function(modal) {
+        $scope.url = url;
+        $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
+            controller: 'Share',
+            scope: $scope
+        }).result.then(function(result){
+            console.log(result);
+        });
+    };
+});
+
+app.controller('Share', function($scope,$uibModalInstance){
+    console.log("adlkjadslk");
+});
+
+
 app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCache) {
     $scope.showAModal = function(modal) {
         $uibModal.open({
