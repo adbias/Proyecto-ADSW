@@ -107,7 +107,16 @@ app.controller('showShare', function($scope, $timeout, $http, $uibModal, $templa
 });
 
 app.controller('Share', function($scope,$uibModalInstance){
-    console.log("adlkjadslk");
+    console.log("Usando controlador Share");
+    $scope.copyText = function (){
+        var copiedText = document.getElementById("myInput");
+        copiedText.select();
+        document.execCommand("Copy");
+    };
+    $scope.getLink = function() {
+        var link = $scope.url;
+        return link;
+    }
 });
 
 

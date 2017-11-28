@@ -135,5 +135,10 @@ app.get('/analisis',function (req,res) {
     });
 });
 
+app.get('/enterSession', function(req,res) {
+    res.render("template.html")
+});
+
+
 module.exports = app;
 
