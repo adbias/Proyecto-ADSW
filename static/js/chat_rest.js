@@ -277,8 +277,12 @@ app.controller('Stages', function($scope, $http, $timeout){
     };
     $scope.addPriority = function (i,j) {
         $scope.priorities[i]=([i,j]);
-        console.log($scope.priorities)
+        console.log($scope.priorities);
         };
+    $scope.deletePriority = function (i,j) {
+        $scope.priorities[i]=(["",""]);
+        console.log($scope.priorities);
+    };
     $scope.fooVoto = function(i) {
         console.log($scope.form[i].mechanism);
         $scope.mechDes = $scope.form[i].mechanism;
