@@ -18,7 +18,7 @@
         ["<%= resultado[i].titulo %>","<%= resultado[i].descripcion %>","<%= resultado[i].id %>"],
         <%}%>];
 </script>
-<script src="js/chat_rest.js"></script>
+<script src="js/angular_scripts.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <% include ../partials/header %>
 <body style="overflow: hidden">
@@ -31,6 +31,7 @@
     <div class="hero__content">
         <div class="hero__content-wrapper" data-ng-controller="Stages">
             <div ng-include="'http://localhost:3000/resetTime'"></div>
+            <div ng-include="'http://localhost:3000/share'"></div>
             <div class="col-xs-9 pull-left">
                 <div style="display:inline-flex;padding-bottom: 10px;width:100%">
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
@@ -62,11 +63,11 @@
                 <div style="padding-top:10px">
                     <div style="text-align: center">
                         <div data-ng-repeat="k in form" style="display:inline-flex;">
-                            <div class="card" data-ng-mouseover="fooVoto(k.id-1)">
+                            <div class="card" data-ng-mouseover="fooVoto(k.id-1)" data-ng-mouseleave="eraseVoto()">
                                 <p class="clabel">{{ k.name }}</p>
-                                <div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>
+                                <!--<div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>-->
                                 <div style="height:100%;width:calc(15 * 3);margin: 0 auto; display: inline-flex;">
-                                    <button class="btn" id="btnPriority" style="background-color:transparent; color:white"  data-ng-click="deletePriority(k.id-1,1)">
+                                    <button class="btn" id="btnPriority" style="background-color:transparent; color:white" data-ng-click="deletePriority(k.id-1)">
                                         <i class="fa fa-times" aria-hidden="true" ></i>
                                     </button>
                                     <button class="btn btn-success" id="btnPriority" data-ng-click="addPriority(k.id-1,1)"></button>
@@ -79,6 +80,8 @@
                 </div>
             </div>
             <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px">
+                <p>{{nameDes}}</p>
+                <p data-ng-style="prioColor">{{prioDes}}</p><br>
                 <p>{{mechDes}}</p><br>
                 <p style="font-style: italic">{{resDes}}</p>
             </div>

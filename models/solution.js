@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true
         }
-    }, {
+    }, {timestamps:false,
         classMethods: {
             associate: function(models) {
                 Solution.hasMany(models.Voto);

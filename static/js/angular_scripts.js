@@ -101,21 +101,21 @@ app.controller('showShare', function($scope, $timeout, $http, $uibModal, $templa
             controller: 'Share',
             scope: $scope
         }).result.then(function(result){
-            console.log(result);
+
+            //console.log(result);
         });
     };
 });
 
 app.controller('Share', function($scope,$uibModalInstance){
-    console.log("Usando controlador Share");
+    //console.log("Usando controlador Share");
     $scope.copyText = function (){
         var copiedText = document.getElementById("myInput");
         copiedText.select();
         document.execCommand("Copy");
     };
     $scope.getLink = function() {
-        var link = $scope.url;
-        return link;
+        return $scope.url;
     }
 });
 
@@ -210,11 +210,11 @@ app.controller('resetTime', function($scope,$uibModalInstance){
     $scope.hors = 0;
     $scope.mins = 0;
     $scope.ok = function () {
-        console.log("ok");
+        //console.log("ok");
         $uibModalInstance.close("something");
     };
     $scope.cancel = function (){
-        console.log("cancel");
+        //console.log("cancel");
         $uibModalInstance.dismiss('cancel');
     };
     $scope.update = function (h,m) {
@@ -244,7 +244,7 @@ app.controller('Stages', function($scope, $http, $timeout){
         }
         $scope.mostrar = 'mostrar1';
         $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
-        console.log("left")
+        //console.log("left")
     };
     $scope.right = function(){
         if ($scope.actualStage < window.stages.length-1) {
@@ -254,7 +254,7 @@ app.controller('Stages', function($scope, $http, $timeout){
         }
         $scope.mostrar = 'mostrar1';
         $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
-        console.log("right")
+        //console.log("right")
     };
 
     var hide = function(){
@@ -277,15 +277,40 @@ app.controller('Stages', function($scope, $http, $timeout){
     };
     $scope.addPriority = function (i,j) {
         $scope.priorities[i]=([i,j]);
-        console.log($scope.priorities);
+        $scope.fooVoto(i);
+        //console.log($scope.priorities);
         };
-    $scope.deletePriority = function (i,j) {
+    $scope.deletePriority = function (i) {
         $scope.priorities[i]=(["",""]);
-        console.log($scope.priorities);
+        $scope.fooVoto(i);
+        //console.log($scope.priorities);
     };
     $scope.fooVoto = function(i) {
-        console.log($scope.form[i].mechanism);
+        //console.log($scope.form[i].mechanism);
         $scope.mechDes = $scope.form[i].mechanism;
         $scope.resDes = $scope.form[i].result;
-    }
+        $scope.nameDes = $scope.form[i].name;
+        if ($scope.priorities[i][1] === "") {
+            $scope.prioDes = "(No prioridad)";
+            $scope.prioColor = {"color":"white"};
+        }
+        else if ($scope.priorities[i][1] === 1) {
+            $scope.prioDes = "(Baja prioridad)";
+            $scope.prioColor = {"color":"limegreen"};
+        }
+        else if ($scope.priorities[i][1] === 2) {
+            $scope.prioDes = "(Media prioridad)";
+            $scope.prioColor = {"color":"yellow"};
+        }
+        else if ($scope.priorities[i][1] === 3) {
+            $scope.prioDes = "(Alta prioridad)";
+            $scope.prioColor = {"color":"red"};
+        }
+    };
+    $scope.eraseVoto = function () {
+        $scope.mechDes = "";
+        $scope.resDes = "";
+        $scope.nameDes = "";
+        $scope.prioDes = "";
+    };
 });
