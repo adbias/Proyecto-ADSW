@@ -178,32 +178,15 @@ router.get('/inGuest',function (req,res) {
 });
 
 router.post('/addVotes', function (req, res) {
-    models.Voto.destroy({
-        where:{
+    //console.log(req.body.priorities);
+    for (var i=0;i<req.body.priorities.length; i++) {
+        models.Voto.create({
+            priority: parseInt(req.body.priorities[i][1]),
             UsuarioId: req.session.userId,
-            StageId: parseInt(req.body.stageId)
-        }
-        }
-    )
-    .then( function(){
-        for (var i in req.body.IdSolutions){
-        if (req.body.IdSolutions[i]) {
-            priority = 1;
-            console.log(req.body.priorities);
-            for (k=0;k<req.body.priorities.length;k++){
-                if (req.body.priorities[k][0]===parseInt(i)) {
-                    priority = req.body.priorities[k][1];
-                    //console.log("wii");
-                }
-            }
-            models.Voto.create({
-                priority: priority,
-                UsuarioId: req.session.userId,
-                StageId: parseInt(req.body.stageId),
-                SolutionId: parseInt(i)+1
-            })
-        }
-    }})
+            StageId: parseInt(req.body.stageId),
+            SolutionId: parseInt(i)+1
+        })
+    }
 });
 
 router.get('/chat', function (req, res) {
@@ -268,4 +251,47 @@ router.get('/getTime',function (req,res) {
    }).then(function (ret) {
        res.send(ret);
     })
+});
+
+router.get('/stage', function (req, res) {
+    models.Voto.findOne({
+        where: {
+            UsuarioId: req.query.user,
+            StageId: req.query.stage
+        }}
+    ).then(function (value) {
+        if(value === null){
+            res.send(false)
+        } else {
+            res.send(true)
+        }
+    })
+});
+
+router.get('/graficos', function (req, res) {
+    models.Voto.findAll({
+        raw: true,
+        where: {
+            SolutionId:req.query.id,
+            StageId:req.query.stage
+        }
+    }).then(function (value) {
+        a = 0;
+        b = 0;
+        c = 0;
+        d = 0;
+        for(var i = 0; i<value.length;i++){
+            //console.log(i);
+            if (value[i].priority === 0)
+                a += 1;
+            else if (value[i].priority === 1)
+                b += 1;
+            else if (value[i].priority === 2)
+                c += 1;
+            else if (value[i].priority === 3)
+                d += 1;
+        }
+        res.send([a,b,c,d]);
+    });
+
 });

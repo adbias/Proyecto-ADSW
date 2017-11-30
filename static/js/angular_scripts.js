@@ -1,7 +1,7 @@
 var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bootstrap', 'luegg.directives']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
-app.controller("BarChart", function ($scope, $http) {
+/*app.controller("BarChart", function ($scope, $http) {
     /*
     $http.get('/api/getNamSol').then(function (response) {
         $scope.series = ['Soluciones elegidas'];
@@ -18,14 +18,14 @@ app.controller("BarChart", function ($scope, $http) {
             [65, 59, 80, 81, 56, 55, 50,65, 59, 80, 81, 56, 55, 40, 53, 48, 90],
         ];
     });
-    */
+
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012','2013','2014','2015'];
     $scope.series = ['Series A'];
 
     $scope.data = [
         [65, 59, 80, 81, 56, 55, 40],
     ];
-});
+});*/
 
 app.controller('ChatSend', function($scope, $http) {
     // Conexion por socket
@@ -224,16 +224,34 @@ app.controller('resetTime', function($scope,$uibModalInstance){
 });
 
 app.controller('Stages', function($scope, $http, $timeout){
+    $scope.stage = false;
+    $scope.stage2 = true;
     $scope.actualStage = 0;
     $scope.priorities = [];
     refresh = function(){
+        $http.get('/api/stage?user='+useridlogged+'&stage='+window.stages[$scope.actualStage][2]).then(
+            function (value) {
+                if(value.data){
+                    $scope.stage = !$scope.stage;
+                    $scope.stage2 = !$scope.stage2;
+                } else {
+                    $scope.stage = false;
+                    $scope.stage2 = true;
+                }
+            }
+        );
         $scope.actualName = window.stages[$scope.actualStage][0];
         $scope.actualDesc = window.stages[$scope.actualStage][1];
-        $scope.voto = {};
         $scope.priorities =[];
         for (i=0;i<17;i++){
-            $scope.priorities.push(["",""])
+            $scope.priorities.push([i+1,0])
         }
+            $scope.mechDes = "";
+            $scope.resDes = "";
+            $scope.nameDes = "";
+            $scope.prioDes = "";
+            $scope.data = [];
+            $scope.labels = [];
     };
     refresh();
     $scope.left = function(){
@@ -242,9 +260,10 @@ app.controller('Stages', function($scope, $http, $timeout){
         } else {
             $scope.actualStage = window.stages.length-1;
         }
-        $scope.mostrar = 'mostrar1';
-        $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
+        //$scope.mostrar = 'mostrar1';
+        //$timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
         //console.log("left")
+        refresh();
     };
     $scope.right = function(){
         if ($scope.actualStage < window.stages.length-1) {
@@ -252,9 +271,10 @@ app.controller('Stages', function($scope, $http, $timeout){
         } else {
             $scope.actualStage = 0;
         }
-        $scope.mostrar = 'mostrar1';
-        $timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
+        //$scope.mostrar = 'mostrar1';
+        //$timeout(function(){$scope.mostrar = 'mostrar2';refresh();}, 200);
         //console.log("right")
+        refresh();
     };
 
     var hide = function(){
@@ -264,16 +284,17 @@ app.controller('Stages', function($scope, $http, $timeout){
         $scope.url = url;
         $timeout(hide, 10000);
     };
-    $http.get('/api/soluciones').then(function(response) {
+    $http.get('/api/soluciones')
+        .then(function(response) {
         $scope.form = response.data;
-        $scope.voto = {};
     });
     $scope.sendVoto = function(){
         $http.post('/api/addVotes', {
-            IdSolutions:$scope.voto,
             stageId: window.stages[$scope.actualStage][2],
             priorities:$scope.priorities
     });
+        $scope.stage = !$scope.stage;
+        $scope.stage2 = !$scope.stage2;
     };
     $scope.addPriority = function (i,j) {
         $scope.priorities[i]=([i,j]);
@@ -281,36 +302,53 @@ app.controller('Stages', function($scope, $http, $timeout){
         //console.log($scope.priorities);
         };
     $scope.deletePriority = function (i) {
-        $scope.priorities[i]=(["",""]);
+        $scope.priorities[i]=([i,0]);
         $scope.fooVoto(i);
         //console.log($scope.priorities);
     };
     $scope.fooVoto = function(i) {
         //console.log($scope.form[i].mechanism);
-        $scope.mechDes = $scope.form[i].mechanism;
-        $scope.resDes = $scope.form[i].result;
-        $scope.nameDes = $scope.form[i].name;
-        if ($scope.priorities[i][1] === "") {
-            $scope.prioDes = "(No prioridad)";
-            $scope.prioColor = {"color":"white"};
-        }
-        else if ($scope.priorities[i][1] === 1) {
-            $scope.prioDes = "(Baja prioridad)";
-            $scope.prioColor = {"color":"limegreen"};
-        }
-        else if ($scope.priorities[i][1] === 2) {
-            $scope.prioDes = "(Media prioridad)";
-            $scope.prioColor = {"color":"yellow"};
-        }
-        else if ($scope.priorities[i][1] === 3) {
-            $scope.prioDes = "(Alta prioridad)";
-            $scope.prioColor = {"color":"red"};
+        if (!$scope.stage) {
+            $scope.mechDes = $scope.form[i].mechanism;
+            $scope.resDes = $scope.form[i].result;
+            $scope.nameDes = $scope.form[i].name;
+            if ($scope.priorities[i][1] === 0) {
+                $scope.prioDes = "(No prioridad)";
+                $scope.prioColor = {"color": "white"};
+            }
+            else if ($scope.priorities[i][1] === 1) {
+                $scope.prioDes = "(Baja prioridad)";
+                $scope.prioColor = {"color": "limegreen"};
+            }
+            else if ($scope.priorities[i][1] === 2) {
+                $scope.prioDes = "(Media prioridad)";
+                $scope.prioColor = {"color": "yellow"};
+            }
+            else if ($scope.priorities[i][1] === 3) {
+                $scope.prioDes = "(Alta prioridad)";
+                $scope.prioColor = {"color": "red"};
+            }
+        } else {
+            $http.get('/api/graficos?id='+(i+1)+'&stage='+window.stages[$scope.actualStage][2]).then(function (value) {
+                $scope.nameDes = $scope.form[i].name;
+                $scope.data = value.data;
+                //console.log($scope.data);
+                $scope.labels = ['No prioridad', 'Baja prioridad', 'Media prioridad', 'Alta prioridad'];
+                $scope.colors = ['#aaaaaa',
+                    '#2bde13',
+                    '#fff419',
+                    '#ff1d00'];
+                $scope.override = { borderColor: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'] };
+            })
         }
     };
     $scope.eraseVoto = function () {
-        $scope.mechDes = "";
-        $scope.resDes = "";
-        $scope.nameDes = "";
-        $scope.prioDes = "";
+        if (!$scope.stage) {
+            $scope.mechDes = "";
+            $scope.resDes = "";
+            $scope.nameDes = "";
+            $scope.prioDes = "";
+        }
     };
+
 });

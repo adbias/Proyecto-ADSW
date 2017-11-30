@@ -10,6 +10,7 @@
 <script src="js/scrollglue.js"></script>
 <script>
     var usernamelogged = "<%= session.username %>";
+    var useridlogged = "<%= session.userId %>";
     var url = "<%= url %>";
     var reslen = parseInt("<%= resultado.length %>");
     var sessionId = "<%= sessionId %>";
@@ -53,7 +54,7 @@
                             <div class="name" style="font-size:1.5em" data-ng-class="mostrar">{{ actualName }}</div>
                             <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
                                 <div style="display:flex;align-items: center;height:100%;justify-content: center"><button style="width:100px;height:50px;transition: all ease 0.2s;"
-                                    data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()">
+                                    data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()" ng-hide="stage">
                                     Votar
                                 </button></div>
                         </div>
@@ -65,7 +66,7 @@
                         <div data-ng-repeat="k in form" style="display:inline-flex;">
                             <div class="card" data-ng-mouseover="fooVoto(k.id-1)" data-ng-mouseleave="eraseVoto()">
                                 <p class="clabel">{{ k.name }}</p>
-                                <div style="height:20px;width:80px;margin: auto auto 5px auto ;display: inline-flex;">
+                                <div style="height:20px;width:80px;margin: auto auto 5px auto ;display: inline-flex;" ng-hide="stage">
                                     <button class="btn" id="btnPriority" style="background-color:transparent; color:white" data-ng-click="deletePriority(k.id-1)">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                     </button>
@@ -78,11 +79,19 @@
                     </div>
                 </div>
             </div>
-            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px">
+            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage">
                 <p>{{nameDes}}</p>
                 <p data-ng-style="prioColor">{{prioDes}}</p><br>
                 <p>{{mechDes}}</p><br>
                 <p style="font-style: italic">{{resDes}}</p>
+            </div>
+            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage2">
+                <p>{{nameDes}}</p><br>
+                <div>
+                <canvas id="doughnut" class="chart chart-doughnut" chart-dataset-override="override"
+                        chart-data="data" chart-labels="labels" chart-colors="colors">
+                </canvas>
+                </div>
             </div>
             <div class="container col-xs-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
                 <div style="max-height:50vh;">
