@@ -18,9 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Stage.belongsTo(models.Sesion, {
-                    foreignKey: {
-                        allowNull: false
-                    }
+                    foreignKey: 'SesionId'
                 });
                 Stage.hasMany(models.Chat);
                 Stage.hasMany(models.Voto);

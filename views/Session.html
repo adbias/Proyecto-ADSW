@@ -40,7 +40,7 @@
                         <div data-ng-controller="showShare">
                             <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right">Compartir</button>
                         </div>
-                        <a class="btn btn-success" href="/analisis" style=";position:relative;float: right">
+                        <a class="btn btn-success" data-ng-click="" style="position:relative;float: right">
                             <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
                         </a>
                     </div>
@@ -65,10 +65,9 @@
                         <div data-ng-repeat="k in form" style="display:inline-flex;">
                             <div class="card" data-ng-mouseover="fooVoto(k.id-1)" data-ng-mouseleave="eraseVoto()">
                                 <p class="clabel">{{ k.name }}</p>
-                                <!--<div style="float: right;color:white">{{priorities[k.id-1][1]}}</div>-->
-                                <div style="height:100%;width:calc(15 * 3);margin: 0 auto; display: inline-flex;">
+                                <div style="height:20px;width:80px;margin: auto auto 5px auto ;display: inline-flex;">
                                     <button class="btn" id="btnPriority" style="background-color:transparent; color:white" data-ng-click="deletePriority(k.id-1)">
-                                        <i class="fa fa-times" aria-hidden="true" ></i>
+                                        <i class="fa fa-times" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-success" id="btnPriority" data-ng-click="addPriority(k.id-1,1)"></button>
                                     <button class="btn btn-warning" id="btnPriority" data-ng-click="addPriority(k.id-1,2)"></button>
@@ -88,7 +87,7 @@
             <div class="container col-xs-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
                 <div style="max-height:50vh;">
                 <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
-                    <% if(hostId == session.userId) { %>
+                    <% if(userId === session.userId) { %>
                     <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer%60 }} segundos</p>
                     <button class="btn btn-success" id="btnTimer" data-ng-click='addTime()'>+5</button>
                     <button class="btn btn-primary" id="btnTimer" data-ng-click='starting()'>
@@ -125,22 +124,13 @@
                         <div style="width:100%" data-ng-repeat="i in lista">
                             <p class="msg">{{ i.username }}: {{ i.msg }}</p>
                         </div>
-
                     </div>
                     </div>
                 </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-    <!--
-    <div class="graph" ng-controller="BarChart" >
-        <canvas id="bar" class="chart-horizontal-bar"
-                chart-data="data" chart-labels="labels">
-        </canvas>
-    </div> -->
 </section>
 </body>
 </html>

@@ -13,7 +13,9 @@ app.get('/beta', function(req, res){
 
 app.get('/login', function(req, res){
     if (typeof req.session.login === 'undefined') {
-        res.render('Login.html', {session: req.session});
+        res.render('Login.html', {
+            session: req.session
+        });
     } else {
         res.redirect('/');
     }
@@ -46,17 +48,18 @@ app.get('/soluciones',function(req,res){
 
 app.get('/session',function(req,res){
     models.Stage.findAll({
-        where: {SesionId: req.query.SessionId}
+        raw:true,
+        where: {SesionId: req.query.SessionId},
+        include: [models.Sesion]
     }).then(function (resultado) {
-        //console.log(resultado);
         res.render('Session.html', {
             title: 'Sesion',
             resultado: resultado,
             session: req.session,
             sessionId:req.query.SessionId,
             name: req.query.nameSession,
+            userId:resultado[0]['Sesion.UsuarioId'],
             url:'http://'+ip.address().toString()+':3000/session?SessionId='+req.query.SessionId+'&nameSession='+ req.query.nameSession,
-            hostId:req.query.hostId
         });
     });
 });

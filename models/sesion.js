@@ -31,7 +31,9 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
-                    Sesion.hasMany(models.Stage)
+                    Sesion.hasMany(models.Stage, {
+                        foreignKey: 'SesionId'
+                    })
                 }
             }
         });

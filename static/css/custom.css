@@ -30,6 +30,8 @@ div.scroll {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     position:relative;
     padding:5px;
     background-color:rgba(0,0,0,0.2);
