@@ -311,3 +311,14 @@ router.get('/getNameUser',function (req,res) {
        res.send(ret);
    })
 });
+
+router.get('/countVotes',function (req,res) {
+    models.Voto.findAll({
+        where: {
+            StageId: req.query.idEsc
+        }
+    }).then(function (ret) {
+        res.send(ret);
+        //res.send(ret.length);
+    });
+});
