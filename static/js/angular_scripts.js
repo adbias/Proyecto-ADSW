@@ -1,8 +1,8 @@
 var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bootstrap', 'luegg.directives']);
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
-/*app.controller("BarChart", function ($scope, $http) {
-    /*
+app.controller("BarChart", function ($scope, $http) {
+    console.log("idEsc: ", $scope.actualIdStage);
     $http.get('/api/getNamSol').then(function (response) {
         $scope.series = ['Soluciones elegidas'];
 
@@ -12,20 +12,28 @@ var urlid = new URLSearchParams(document.location.search.substring(1));
             arr.push($scope.form[i].name);
         }
         $scope.labels = arr;
+        $scope.data = arr;
 
-
+        for(var i=0;i<$scope.labels.length;i++){
+            $http.get('/api/countVotes?idEsc='+response.data[i].id).then(function (ret) {
+                $scope.data[i] = ret.length;
+            });
+        }
+        /*
         $scope.data = [
             [65, 59, 80, 81, 56, 55, 50,65, 59, 80, 81, 56, 55, 40, 53, 48, 90],
         ];
+        */
     });
-
+    /*
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012','2013','2014','2015'];
     $scope.series = ['Series A'];
 
     $scope.data = [
         [65, 59, 80, 81, 56, 55, 40],
     ];
-});*/
+    */
+});
 
 app.controller('ChatSend', function($scope, $http) {
     // Conexion por socket
@@ -117,6 +125,57 @@ app.controller('Share', function($scope,$uibModalInstance){
     $scope.getLink = function() {
         return $scope.url;
     }
+    $scope.cancel = function (){
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+app.controller('viewAll',function ($scope,$uibModalInstance,$http) {
+    $scope.lista = [];
+    $http.get('api/Usuarios?idSesion='+urlid.get("SessionId")).then(function (ret) {
+        console.log("ret.data: ",ret.data);
+        for(var i=0;i<ret.data.length;i++){
+            $http.get('api/getNameUser?idUser='+ret.data[i].id).then(function (ans) {
+                console.log("ans.data.username: ",ans.data.username);
+               $scope.lista.push(ans.data.username);
+            });
+        };
+    });
+    $scope.cancel = function (){
+        //console.log("cancel");
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+
+
+app.controller('Users',function ($scope, $timeout, $http, $uibModal) {
+    $scope.showAModal = function(modal) {
+        $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
+            controller: 'viewAll',
+            scope: $scope
+        });
+    };
+    $scope.showGraphic = function(modal) {
+        $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
+            controller: 'Graphic',
+            scope: $scope
+        });
+    };
+});
+
+app.controller('Graphic',function ($scope,$uibModalInstance,$http) {
+    $scope.cancel = function (){
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
 
@@ -130,7 +189,7 @@ app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCa
             controller: 'resetTime',
             scope: $scope
         }).result.then(function(result){
-            console.log(result);
+            //console.log(result);
             $scope.timer = result.hrs*3600 + result.min*60;
             $scope.refreshDB($scope.timer);
             flag = false;
@@ -214,7 +273,6 @@ app.controller('resetTime', function($scope,$uibModalInstance){
         $uibModalInstance.close("something");
     };
     $scope.cancel = function (){
-        //console.log("cancel");
         $uibModalInstance.dismiss('cancel');
     };
     $scope.update = function (h,m) {
@@ -228,6 +286,8 @@ app.controller('Stages', function($scope, $http, $timeout){
     $scope.stage2 = true;
     $scope.actualStage = 0;
     $scope.priorities = [];
+    $scope.actualIdStage = window.stages[$scope.actualStage][2];
+    console.log("windows: ",window.stages);
     refresh = function(){
         $http.get('/api/stage?user='+useridlogged+'&stage='+window.stages[$scope.actualStage][2]).then(
             function (value) {
@@ -242,6 +302,8 @@ app.controller('Stages', function($scope, $http, $timeout){
         );
         $scope.actualName = window.stages[$scope.actualStage][0];
         $scope.actualDesc = window.stages[$scope.actualStage][1];
+        $scope.actualIdStage = window.stages[$scope.actualStage][2];
+        $scope.voto = {};
         $scope.priorities =[];
         for (i=0;i<17;i++){
             $scope.priorities.push([i+1,0])

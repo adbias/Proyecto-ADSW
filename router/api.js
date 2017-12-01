@@ -86,7 +86,12 @@ router.post('/createSesion', function(req, res){
                 objetivo: req.body.objetive
             }
         }).then(function (results) {
-            res.redirect("/crearEscenario?idSesion="+results.id.toString()+"&created=0");
+            models.Participants.create({
+                UsuarioId: req.session.userId,
+                SesionId: results.id
+            }).then(function () {
+                res.redirect("/crearEscenario?idSesion="+results.id.toString()+"&created=0");
+            });
         });
     });
 });
@@ -172,6 +177,23 @@ router.get('/inGuest',function (req,res) {
                 req.session.username = results.username;
                 req.session.userId = results.id;
                 res.redirect('/');
+            }
+        });
+    });
+});
+
+router.get('/guestSesion',function (req,res) {
+    var num = rn(options);
+    models.Usuario.create({
+        username: 'invitado'+num.toString(),
+        password: bcrypt.hashSync('123456'),
+        email: 'invitado@invitado.com'
+    }).then(function () {
+        models.Usuario.findOne({
+            where: { username: 'invitado'+num.toString()}
+        }).then(function (results) {
+            if (results !== null && bcrypt.compareSync('123456', results.password)) {
+                res.redirect('/session?user='+results.username+'&id='+results.id);
             }
         });
     });
@@ -294,4 +316,34 @@ router.get('/graficos', function (req, res) {
         res.send([a,b,c,d]);
     });
 
+});
+router.get('/Usuarios',function (req,res){
+  models.Participants.findAll({
+      where:{
+          SesionId: req.query.idSesion
+      }
+  }).then(function (response) {
+      res.send(response);
+  });
+});
+
+router.get('/getNameUser',function (req,res) {
+   models.Usuario.findOne({
+       where:{
+           id: req.query.idUser
+       }
+   }).then(function (ret) {
+       res.send(ret);
+   })
+});
+
+router.get('/countVotes',function (req,res) {
+    models.Voto.findAll({
+        where: {
+            StageId: req.query.idEsc
+        }
+    }).then(function (ret) {
+        res.send(ret);
+        //res.send(ret.length);
+    });
 });
