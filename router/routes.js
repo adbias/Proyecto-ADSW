@@ -211,6 +211,10 @@ app.get('/enterSession', function(req,res) {
     res.render("template.html")
 });
 
+app.get('/graphic',function (req,res) {
+   res.render('graphic.html')
+});
+
 
 app.get('/invitaciones',function (req,res) {
     var sesiones = [];

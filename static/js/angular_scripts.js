@@ -2,7 +2,6 @@ var app = angular.module('myApp', ['ngSanitize', 'chart.js', 'ngAnimate', 'ui.bo
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
 app.controller("BarChart", function ($scope, $http) {
-    /*
     $http.get('/api/getNamSol').then(function (response) {
         $scope.series = ['Soluciones elegidas'];
 
@@ -18,13 +17,14 @@ app.controller("BarChart", function ($scope, $http) {
             [65, 59, 80, 81, 56, 55, 50,65, 59, 80, 81, 56, 55, 40, 53, 48, 90],
         ];
     });
-    */
+    /*
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012','2013','2014','2015'];
     $scope.series = ['Series A'];
 
     $scope.data = [
         [65, 59, 80, 81, 56, 55, 40],
     ];
+    */
 });
 
 app.controller('ChatSend', function($scope, $http) {
@@ -117,6 +117,9 @@ app.controller('Share', function($scope,$uibModalInstance){
     $scope.getLink = function() {
         return $scope.url;
     }
+    $scope.cancel = function (){
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
 app.controller('viewAll',function ($scope,$uibModalInstance,$http) {
@@ -136,6 +139,8 @@ app.controller('viewAll',function ($scope,$uibModalInstance,$http) {
     };
 });
 
+
+
 app.controller('Users',function ($scope, $timeout, $http, $uibModal) {
     $scope.showAModal = function(modal) {
         $uibModal.open({
@@ -147,8 +152,24 @@ app.controller('Users',function ($scope, $timeout, $http, $uibModal) {
             scope: $scope
         });
     };
-
+    $scope.showGraphic = function(modal) {
+        $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
+            controller: 'Graphic',
+            scope: $scope
+        });
+    };
 });
+
+app.controller('Graphic',function ($scope,$uibModalInstance,$http) {
+    $scope.cancel = function (){
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
 
 app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCache) {
     $scope.showAModal = function(modal) {
