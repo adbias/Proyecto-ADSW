@@ -56,9 +56,10 @@ app.get('/session',function(req,res){
     if (typeof req.session.userId !== 'undefined'){
         console.log('si existe....');
         models.Stage.findAll({
-            raw:true,
             where: {SesionId: req.query.SessionId},
-            include: [models.Sesion]
+            include: [models.Sesion],
+            raw:true
+
         }).then(function (resultado) {
             // Consulto para ver si ya está en la tabla participantes
             models.Participants.findAll({

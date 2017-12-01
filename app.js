@@ -9,12 +9,14 @@ var Solution = require('./models/solution.js');
 var models = require("./models/index.js");
 var session = require('express-session');
 var sleep = require('sleep');
+var cors = require('cors');
 app.use(session({
     secret: 'a4f8071f-c873-4447-8ee2',
     cookie: {maxAge: 2628000000},
     resave: false,
     saveUninitialized: true
 }));
+app.use(cors());
 
 app.use(express.static(__dirname + '/static'));
 app.set('views', path.join(__dirname, 'views'));
