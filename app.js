@@ -35,7 +35,7 @@ models.sequelize.sync().then(function () {
     var io = require('socket.io')(server);
     io.on('connection', function (socket) {
         socket.on('timeNow', function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.seg == 'undefined'){
                 io.sockets.emit('timer',{hor:0,min:0,seg:0,room:data.room});
             } else {
@@ -43,7 +43,7 @@ models.sequelize.sync().then(function () {
             }
         });
         socket.on('Chat', function (data) {
-            console.log('mensaje: ',data.msg,data.username);
+            //console.log('mensaje: ',data.msg,data.username);
             if (data.msg !== ''){
                 io.sockets.emit('ChatIn',{msg:data.msg, username:data.username,room: data.room});
             } else {

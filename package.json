@@ -17,6 +17,7 @@
     "express": "^4.16.2",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.15.6",
+    "http": "0.0.0",
     "ip": "^1.1.5",
     "mysql": "~2.11.1",
     "random-number": "0.0.9",

@@ -8,7 +8,10 @@
 <script src="js/angular-animate.js"></script>
 <script src="js/ui-bootstrap-2.5.0.min.js"></script>
 <script src="js/scrollglue.js"></script>
+<script src="js/angular_scripts.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
+
     var usernamelogged = "<%= session.username %>";
     var url = "<%= url %>";
     var reslen = parseInt("<%= resultado.length %>");
@@ -16,10 +19,9 @@
     var stages = [
         <%for (var i = 0; i < resultado.length; i++) {%>
         ["<%= resultado[i].titulo %>","<%= resultado[i].descripcion %>","<%= resultado[i].id %>"],
-        <%}%>];
+        <%} %>];
+
 </script>
-<script src="js/angular_scripts.js"></script>
-<script src="/socket.io/socket.io.js"></script>
 <% include ../partials/header %>
 <body style="overflow: hidden">
 <div id="start" class="start"></div>
@@ -32,6 +34,7 @@
         <div class="hero__content-wrapper" data-ng-controller="Stages">
             <div ng-include="'http://localhost:3000/resetTime'"></div>
             <div ng-include="'http://localhost:3000/share'"></div>
+            <div ng-include="'http://localhost:3000/Users'"></div>
             <div class="col-xs-9 pull-left">
                 <div style="display:inline-flex;padding-bottom: 10px;width:100%">
                     <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
@@ -43,6 +46,11 @@
                         <a class="btn btn-success" href="/analisis" style=";position:relative;float: right">
                             <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
                         </a>
+                        <div data-ng-controller="Users">
+                            <button class="btn btn-warning" style=";position:relative;float: right" data-ng-click='showAModal("Users")'>
+                                <i class="fa fa-users"></i> Participantes
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div style="background-color: rgba(0,0,0,0.2);border-radius: 20px;padding: 10px 0 15px 5px">

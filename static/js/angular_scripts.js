@@ -119,6 +119,36 @@ app.controller('Share', function($scope,$uibModalInstance){
     }
 });
 
+app.controller('viewAll',function ($scope,$uibModalInstance,$http) {
+    $scope.lista = [];
+    $http.get('api/Usuarios?idSesion='+urlid.get("SessionId")).then(function (ret) {
+        console.log("ret.data: ",ret.data);
+        for(var i=0;i<ret.data.length;i++){
+            $http.get('api/getNameUser?idUser='+ret.data[i].id).then(function (ans) {
+                console.log("ans.data.username: ",ans.data.username);
+               $scope.lista.push(ans.data.username);
+            });
+        };
+    });
+    $scope.cancel = function (){
+        //console.log("cancel");
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+app.controller('Users',function ($scope, $timeout, $http, $uibModal) {
+    $scope.showAModal = function(modal) {
+        $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: "http://localhost:3000/"+modal,
+            windowTemplateUrl: "http://localhost:3000/template",
+            controller: 'viewAll',
+            scope: $scope
+        });
+    };
+
+});
 
 app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCache) {
     $scope.showAModal = function(modal) {
@@ -130,7 +160,7 @@ app.controller('Timer', function($scope, $timeout, $http, $uibModal, $templateCa
             controller: 'resetTime',
             scope: $scope
         }).result.then(function(result){
-            console.log(result);
+            //console.log(result);
             $scope.timer = result.hrs*3600 + result.min*60;
             $scope.refreshDB($scope.timer);
             flag = false;
