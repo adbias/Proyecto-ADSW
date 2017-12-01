@@ -340,7 +340,8 @@ router.get('/getNameUser',function (req,res) {
 router.get('/countVotes',function (req,res) {
     models.Voto.findAll({
         where: {
-            StageId: req.query.idEsc
+            StageId: req.query.idEsc,
+            SolutionId: req.query.idSol
         }
     }).then(function (ret) {
         res.send(ret);

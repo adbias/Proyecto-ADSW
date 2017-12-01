@@ -235,28 +235,6 @@ app.get('/invitaciones',function (req,res) {
             session: req.session,
             title: 'Sesiones'
         });
-        //console.log("buenas: ",resultado);
-        /*
-        for(var i=0;i<resultado.length;i++){
-            console.log("vamos por el for :)");
-            models.Sesion.findOne({
-                where: {
-                    id: resultado[i].SesionId
-                }
-            }).then(function (data) {
-                sesiones.push(data);
-                console.log("arreglo 1: ",sesiones);
-                if (i >= (resultado.length-1)){
-                    console.log("arreglo final: ",sesiones);
-                    res.render('invitaciones.html', {
-                        resultado: sesiones,
-                        session: req.session,
-                        title: 'Sesiones'
-                    });
-                }
-            });
-        };
-        */
 
 
 
