@@ -8,41 +8,27 @@ app.config(function ($sceDelegateProvider) {
 var urlid = new URLSearchParams(document.location.search.substring(1));
 
 app.controller("BarChart", function ($scope, $http) {
-    $scope.buscar = [2,3]; // un Arreglo con las propiedades que busca
+    $scope.labels2 = [];
+    $scope.data2 = [];
+    $scope.options = [
+        {id:1, value:"Prioridad Baja"},
+        {id:2, value:"Prioridad Media"},
+        {id:3, value:"Prioridad Alta"}
+    ];
+    $scope.series = ['Soluciones elegidas'];
+    $scope.buscar = [function(){return $scope.selectedHist.id}]; // un Arreglo con las propiedades que busca
     //console.log("indice: ",$scope.buscar.indexOf(4)); -1 si no existe
     console.log("idEsc: ", $scope.actualIdStage);
-    $http.get('/api/getNamSol').then(function (response) {
-        $scope.series = ['Soluciones elegidas'];
-
-        var arr=[];
-        var idSol=[];
+    $http.get('/api/getVotos?esc='+$scope.actualIdStage).then(function (response) {
         $scope.form = response.data;
-        for(i in $scope.form){
-            arr.push($scope.form[i].name);
-            idSol.push($scope.form[i].id);
-        }
-        $scope.labels2 = arr;
-        $scope.data2 = []; //new Array($scope.labels2.length).fill(0);
-        console.log("data de 0: ", $scope.data2);
-
-        for(var i=0;i<$scope.labels2.length;i++){
-            console.log("hola");
-            $http.get('/api/countVotes?idEsc='+$scope.actualIdStage+"&idSol="+response.data[i].id).then(function (ret) {
-                var cantidad=0;
-                for(var j=0;j<ret.data.length;j++){
-                    // Significa que si está en las prioridades buscadas
-                    if ($scope.buscar.indexOf(ret.data[j].priority) !== -1){
-                        cantidad = cantidad + 1;
-                    }
-                }
-                $scope.data2.push(cantidad);
-
-
-            });
-            //console.log("data numero: ", $scope.data2);
-
-        }
     });
+    $scope.changing = function(k){
+        $scope.labels2 = [];
+        $scope.data2 = [];
+        for (x in $scope.form){
+        $scope.data2.push($scope.form[x][k]);
+        $scope.labels2.push(x);
+    }};
 });
 
 app.controller('ChatSend', function($scope, $http) {

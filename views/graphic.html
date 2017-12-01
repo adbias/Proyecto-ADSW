@@ -1,17 +1,26 @@
 <script src="js/scrollglue.js"></script>
 <script src="js/angular_scripts.js"></script>
 <script type="text/ng-template" id="http://localhost:3000/graphic">
+<div data-ng-controller="BarChart">
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title" style="color:white;">Histograma del Escenario {{actualName}}</h3>
     </div>
     <div class="modal-body" id="modal-body">
-        <div class="graph" ng-controller="BarChart" >
+        <div class="graph"  >
             <canvas id="bar" class="chart-horizontal-bar"
                     chart-data="data2" chart-labels="labels2">
             </canvas>
         </div>
     </div>
     <div class="modal-footer">
+        <select ng-model="selectedHist">
+            <option></option>
+            <option data-ng-click="changing(0)">No prioridad</option>
+            <option data-ng-click="changing(1)">Baja Prioridad</option>
+            <option data-ng-click="changing(2)">Media Prioridad</option>
+            <option data-ng-click="changing(3)">Alta Prioridad</option>
+        </select>
         <button class="btn btn-danger" type="button" data-ng-click="cancel()"> Cerrar </button>
     </div>
+</div>
 </script>

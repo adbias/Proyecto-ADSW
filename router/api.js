@@ -255,13 +255,26 @@ router.get('/deleteSesion', function(req, res){
 
 });
 
-router.get('/getNamSol',function (req,res) {
-   models.Solution.findAll().then(function (data) {
-       var arr=[];
-       for(i in data){
-           arr.push(data[i].name);
+router.get('/getVotos',function (req,res) {
+   models.Voto.findAll({
+       where:{StageId:req.query.esc},
+       raw: true,
+       include:[models.Solution]
+   }).then(function (data) {
+       result = {};
+       for (i=0;i<data.length;i++){
+           if (data[i]['Solution.name'] in result){
+               console.log("wii");
+               result[data[i]['Solution.name']][data[i].priority] += 1
+           } else {
+               console.log("wii2");
+               result[data[i]['Solution.name']] = [0,0,0,0];
+               result[data[i]['Solution.name']][data[i].priority] += 1;
+           }
        }
-       res.send(data);
+       console.log(result);
+       //console.log(data);
+       res.send(result);
    })
 });
 
