@@ -224,9 +224,19 @@ app.get('/graphic',function (req,res) {
 app.get('/invitaciones',function (req,res) {
     var sesiones = [];
     models.Participants.findAll({
-        where: {UsuarioId: req.session.userId}
+        raw:true,
+        where: {
+            UsuarioId: req.session.userId
+        },
+        include: [models.Sesion]
     }).then(function (resultado) {
+        res.render('invitaciones.html', {
+            resultado: resultado,
+            session: req.session,
+            title: 'Sesiones'
+        });
         //console.log("buenas: ",resultado);
+        /*
         for(var i=0;i<resultado.length;i++){
             console.log("vamos por el for :)");
             models.Sesion.findOne({
@@ -246,6 +256,7 @@ app.get('/invitaciones',function (req,res) {
                 }
             });
         };
+        */
 
 
 
