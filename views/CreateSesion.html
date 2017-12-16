@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <% include ../partials/header %>
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper">
-<div class="container">
-    <h1><p class="text-center clabel"><%=title%></p></h1>
-    <div class="sessionCont">
-    <form class="form-horizontal" action="/api/createSesion" method="POST" enctype="application/x-www-form-urlencoded">
-        <div class="form-group">
-            <label class="col-lg-2 control-label clabel"><p>Titulo</p></label>
-            <div class="col-lg-9">
+  <div class="hero__gradient"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__content">
+    <div class="hero__content-wrapper">
+      <div class="container">
+        <h1 class="text-center clabel">
+          <%= title %>
+        </h1>
+        <div class="sessionCont">
+          <form class="form-horizontal" action="/api/createSesion" method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+              <label class="col-lg-2 control-label clabel">Título</label>
+              <div class="col-lg-9">
                 <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+              </div>
             </div>
-        </div>
-        <div class="form-group">
-        <label class="col-lg-2 control-label clabel"><p>Objetivos</p></label>
-        <div class="col-lg-9">
-            <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
-        </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <a href="/sessions" class="btn btn-info" role="button">Cancel</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+              <label class="col-lg-2 control-label clabel">Objetivos</label>
+              <div class="col-lg-9">
+                <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
+              </div>
             </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <a href="/sessions" class="btn btn-info" role="button">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+            </div>
+          </form>
         </div>
-    </form>
+      </div>
     </div>
-
-</div>
-        </div>
-    </div>
+  </div>
 </section>
 </body>
 </html>

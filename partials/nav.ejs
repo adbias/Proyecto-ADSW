@@ -3,12 +3,16 @@
         <a href="/" class="header__title-wrapper  js-smooth-scroll">
             <div class="header__title-main"> Lead Together </div>
         </a>
-
         <div class="header__social-icons" style="margin-top: 11px">
-            <% if (typeof session.login === 'undefined') { %>
-            <a style="font-size:22px;font-weight: 500;" href="/login"><i class="fa fa-sign-in"></i> Login</a>
+            <% if (language === 0) { %>
+            <a href="language?id=1&url=<%= url %>" style="font-size: 22px"><i class="fa fa-language"></i> Inglés</a>
             <% } else { %>
-            <a style="font-size:22px;font-weight: 500;" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+            <a href="language?id=0&url=<%= url %>" style="font-size: 22px"><i class="fa fa-language"></i> Spanish</a>
+            <% } %>
+            <% if (typeof session.login === 'undefined') { %>
+            <a style="font-size:22px;font-weight: 500;" href="/login"><i class="fa fa-sign-in"></i> Entrar</a>
+            <% } else { %>
+            <a style="font-size:22px;font-weight: 500;" href="/logout"><i class="fa fa-sign-out"></i> Salir</a>
             <% } %>
         </div>
     </div>

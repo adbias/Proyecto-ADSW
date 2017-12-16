@@ -6,40 +6,41 @@
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper">
-<div class="container">
-    <h1> <p class="clabel"> Sesiones </p></h1>
-    <div style="display: inline-block; width: inherit">
-        <% for (var i = 0; i < resultado.length; i++){ %>
-        <div style="border-bottom: 1px white solid; position: relative; width:inherit; padding:10px; display: inline-flex">
+  <div class="hero__gradient">&nbsp;</div>
+  <div class="hero__pattern">&nbsp;</div>
+  <div class="hero__content">
+    <div class="hero__content-wrapper">
+      <div class="container">
+        <h1 class="clabel"> Sesiones </h1>
+          <div style="display: inline-block; width: inherit">
+           <% for (var i = 0; i < resultado.length; i++) { %>
+            <div style="border-bottom: 1px white solid; position: relative; width:inherit; padding:10px; display: inline-flex">
             <div>
-            <div class="clabel" style="font-size: 1.2em; font-weight: bold">
+              <div class="clabel" style="font-size: 1.2em; font-weight: bold">
                 Nombre: <%= resultado[i].titulo%>
-            </div>
-            <div class="clabel" style="font-size:1.2em; font-style: italic">
+              </div>
+              <div class="clabel" style="font-size:1.2em; font-style: italic">
                 Descripción: <%= resultado[i].objetivo %>
-            </div>
+              </div>
             </div>
             <div style="display: inline-flex; position:relative; margin: auto 0 auto auto">
-                <a class="btn btn-primary" href="/session?SessionId=<%= resultado[i].id%>&nameSession=<%= resultado[i].titulo%>">
-                <i class="fa fa-sign-in"  aria-hidden="true"></i> Entrar</a>
-                <a class="btn btn-danger" href="/deleteSesion?SessionId=<%= resultado[i].id%>">
-                <i class="fa fa-trash"  aria-hidden="true"></i> Borrar</a>
+              <a class="btn btn-primary" href="/session?SessionId=<%= resultado[i].id %>&nameSession=<%= resultado[i].titulo %>">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Entrar
+              </a>
+              <a class="btn btn-danger" href="/deleteSesion?SessionId=<%= resultado[i].id %>">
+                <i class="fa fa-trash" aria-hidden="true"></i> Borrar
+              </a>
             </div>
-        </div>
-        <% }%>
+            </div>
+            <% } %>
+          </div>
+      </div>
+      <div class="hero__call-to-action">
+        <a href="/createSesion" class="hero__button ghost-button ghost-button--hero">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva Sesión</p></a>
+      </div>
     </div>
-</div>
-    <div class="hero__call-to-action">
-        <a href="/createSesion" class="hero__button  ghost-button  ghost-button--hero">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva Sesión</p></a>
-    </div>
-
-        </div>
-    </div>
+  </div>
 </section>
 </body>
 </html>

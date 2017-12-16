@@ -1,46 +1,61 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html>
 <% include ../partials/header %>
 <body>
-	<div id="start" class="start"></div>
-	<div class="maxwidth1050"></div>
-	<% include ../partials/nav %>
-	<section id="hero" class="hero">
-		<div class="hero__gradient"></div>
-		<div class="hero__pattern"></div>
-		<div class="hero__content">
-			<div class="hero__content-wrapper">
-				<div class="hero__title-wrapper">
-					<div class="hero__title-large">
-						Bienvenido
-					</div>
-					<div class="hero__title-small">
-						<% if (typeof session.login != 'undefined') { %>
-						<%= session.username %>
-						<% } %>
-					</div>
-					<div class="hero__title-small">Este es Lead Together.</div>
-				</div>
-				<div class="hero__photo-wrapper">
-					<div class="hero__photo">
-					</div>
-				</div>
-				<div class="hero__description">
-					Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.
-				</div>
-
-				<div class="hero__call-to-action">
-					<% if (typeof session.login == 'undefined') { %>
-					<a href="/entradaInvitado" type="submit" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Entrar como invitado</i></a>
-					<a href="/crearUsuario?Err=0" class="hero__button ghost-button ghost-button--hero"><i class="fa fa-user-plus"></i> Registrarse</i></a>
-					<% } else { %>
-					<a href="/sessions" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Mis sesiones </i></a>
-					<a href="/invitaciones" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Sesiones externas </i></a>
-					<a href="/" class="hero__button  ghost-button  ghost-button--hero"><i class="fa fa-arrow-circle-right"></i> Unirme a una sesion </i></a>
-					<% } %>
-				</div>
-
-			</div>
-		</div>
-	</section>
+  <div id="start" class="start"></div>
+  <div class="maxwidth1050"></div>
+  <% include ../partials/nav %>
+  <section id="hero" class="hero">
+    <div class="hero__gradient"></div>
+    <div class="hero__pattern"></div>
+    <div class="hero__content">
+      <div class="hero__content-wrapper">
+        <div class="hero__title-wrapper">
+          <div class="hero__title-large">
+            <p>Bienvenido</p>
+          </div>
+          <div class="hero__title-small">
+            <% if (typeof session.login !== 'undefined') { %>
+              <%= session.username %>
+            <% } %>
+          </div>
+          <div class="hero__title-small">
+            <p>Este es Lead Together</p>
+          </div>
+        </div>
+        <div class="hero__photo-wrapper">
+          <div class="hero__photo"></div>
+        </div>
+        <div class="hero__description">
+          <p>Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.</p>
+        </div>
+        <div class="hero__call-to-action">
+          <% if (typeof session.login === 'undefined') { %>
+          <a href="/entradaInvitado" type="submit" class="hero__button ghost-button ghost-button--hero">
+            <i class="fa fa-arrow-circle-right"></i>
+            <p>Entrar como invitado</p>
+          </a>
+          <a href="/crearUsuario?Err=0" class="hero__button ghost-button ghost-button--hero">
+            <i class="fa fa-user-plus"></i>
+            <p>Registrarse</p>
+          </a>
+          <% } else { %>
+          <a href="/sessions" class="hero__button ghost-button ghost-button--hero">
+            <i class="fa fa-arrow-circle-right"></i>
+            <p>Mis sesiones</p>
+          </a>
+          <a href="/invitaciones" class="hero__button ghost-button ghost-button--hero">
+            <i class="fa fa-arrow-circle-right"></i>
+            <p>Sesiones externas</p>
+          </a>
+          <a href="/" class="hero__button ghost-button ghost-button--hero">
+            <i class="fa fa-arrow-circle-right"></i>
+            <p>Unirme a una sesion</p>
+          </a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

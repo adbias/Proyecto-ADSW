@@ -1,39 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <% include ../partials/header %>
 <body>
-<div id="start" class="start"></div>
-<div class="maxwidth1050"></div>
-<% include ../partials/nav %>
-<section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
+  <div id="start" class="start"></div>
+  <div class="maxwidth1050"></div>
+  <% include ../partials/nav %>
+  <section id="hero" class="hero">
+    <div class="hero__gradient"></div>
+    <div class="hero__pattern"></div>
     <div class="hero__content">
-        <div class="hero__content-wrapper">
-            <div class="container">
-                <h1> <p class="clabel"> Sesiones </p></h1>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th> <p class="clabel"> Título </p> </th>
-                        <th> <p class="clabel"> Objetivo </p></th>
-                        <th> <p class="clabel"> Entrar </p></th>
-                    </tr>
-                    </thead>
-                    <% for (var i = 0; i < resultado.length; i++){ %>
-                    <tbody>
-                    <tr>
-                        <td> <a href="/session?SessionId=<%= resultado[i].id%>&nameSession=<%= resultado[i].titulo%>" class="clabel">
-                            <%= resultado[i]['Sesion.titulo']%> </a> </td>
-                        <td> <p class="clabel"> <%= resultado[i]['Sesion.objetivo'] %> </p> </td>
-                        <td> <a class="clabel" href="/session?SessionId=<%= resultado[i].id%>&nameSession=<%= resultado[i].titulo%>">
-                            <i class="	fa fa-sign-in fa-2x"  aria-hidden="true"></i></a> </td>
-                    </tr>
-                    <% }%>
-                    </tbody>
-                </table>
-            </div>
+      <div class="hero__content-wrapper">
+        <div class="container">
+          <h1 class="clabel">Sesiones</h1>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                <p class="clabel">Título</p>
+              </th>
+              <th>
+                <p class="clabel">Objetivo</p>
+              </th>
+              <th><p class="clabel">Entrar</p></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (var i = 0; i < resultado.length; i++){ %>
+              <tr>
+                <td>
+                  <a href="/session?SessionId=<%= resultado[i].id%>&nameSession=<%= resultado[i].titulo%>" class="clabel">
+                    <%= resultado[i]['Sesion.titulo'] %>
+                  </a>
+                </td>
+                <td>
+                  <p class="clabel">
+                    <%= resultado[i]['Sesion.objetivo'] %>
+                  </p>
+                </td>
+                <td>
+                  <a class="clabel" href="/session?SessionId=<%= resultado[i].id%>&nameSession=<%= resultado[i].titulo%>">
+                    <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            <% } %>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </section>
 </body>
 </html>

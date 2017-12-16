@@ -1,22 +1,22 @@
 <script src="js/scrollglue.js"></script>
 <script type="text/ng-template" id="http://localhost:3000/Users">
-    <div class="modal-header">
-        <h3 class="modal-title" id="modal-title" style="color:white;">Participantes</h3>
-    </div>
-    <div class="modal-body" id="modal-body">
-        <div class="messageBox" scroll-glue style="visibility: hidden" >
-            <div style="visibility: visible">
-                <div style="width:100%">
-                    <div style="width:100%" data-ng-repeat="i in lista">
-                        <H3>
-                        <label class="msg" style="color:black;">{{i}}</label>
-                        </H3>
-                    </div>
-                </div>
-            </div>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title" style="color:white;">Participantes</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <div class="messageBox" scroll-glue style="visibility: hidden">
+      <div style="visibility: visible">
+        <div style="width:100%">
+          <div style="width:100%" data-ng-repeat="i in lista">
+            <h3>
+              <label class="msg" style="color:black;">{{i}}</label>
+            </h3>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-danger" type="button" data-ng-click="cancel()"> Cerrar </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" type="button" data-ng-click="cancel()"> Cerrar </button>
+  </div>
 </script>

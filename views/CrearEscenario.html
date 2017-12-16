@@ -1,64 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<% include ../partials/header %>
-<body>
-<div id="start" class="start"></div>
-<div class="maxwidth1050"></div>
-<% include ../partials/nav %>
-<section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper">
-            <div class="container">
-                <h1><p class="text-center clabel"><%=title%></p></h1>
-                <div class="stageCont">
-                <form class="form-horizontal" action="/api/crearEscenario?idSesion=<%=idSesion%>&created=1" method="POST" enctype="application/x-www-form-urlencoded">
-                    <legend></legend>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label clabel"><p>Nombre</p></label>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Título">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label clabel"><p>Objetivo</p></label>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Agregar</button>
-                            <a href="/sessions" class="btn btn-info" role="button">Listo!</a>
-                            <% if (created==1){%>
-                            <!--<button class="btn btn-success">Agregado</button>-->
-                            <%}%>
-                        </div>
-                    </div>
-                </form>
-                </div>
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th class="clabel">Título Escenario</th>
-                        <th class="clabel">Descripción</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% for (var i = 0; i < resultado.length; i++) { %>
-                    <tr>
-                        <td class="clabel"><%= resultado[i].titulo %></td>
-                        <td class="clabel"><%= resultado[i].descripcion %></td>
-                    </tr>
-                    <% } %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<%- include ../partials/base %>
+<h1 class="text-center clabel">
+  <%= title %>
+</h1>
+<div class="stageCont">
+  <form class="form-horizontal" action="/api/crearEscenario?idSesion=<%=idSesion%>&created=1" method="POST" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+      <label class="col-lg-2 control-label clabel"><%= text[0][language] %></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+      </div>
     </div>
-</section>
-</body>
-</html>
+    <div class="form-group">
+      <label class="col-lg-2 control-label clabel"><%= text[1][language] %></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary"><%= text[2][language] %></button>
+        <a href="/sessions" class="btn btn-info" role="button"><%= text[3][language] %></a>
+      </div>
+    </div>
+  </form>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="clabel"><%= text[4][language] %></th>
+      <th class="clabel"><%= text[5][language] %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for (var i = 0; i < resultado.length; i++) { %>
+  <tr>
+    <td class="clabel">
+      <%= resultado[i].titulo %>
+    </td>
+    <td class="clabel">
+      <%= resultado[i].descripcion %>
+    </td>
+  </tr>
+  <% } %>
+  </tbody>
+</table>
+<%- include ../partials/footer %>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <script src="js/angular.min.js"></script>
 <script src="js/angular-sanitize.js"></script>
 <script src="js/Chart.min.js"></script>
@@ -27,126 +26,126 @@
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero" data-ng-app="myApp">
-    <div class="hero__gradient"></div>
-    <div class="hero__pattern"></div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper" data-ng-controller="Stages">
-            <div ng-include="'http://localhost:3000/resetTime'"></div>
-            <div ng-include="'http://localhost:3000/share'"></div>
-            <div ng-include="'http://localhost:3000/Users'"></div>
-            <div ng-include="'http://localhost:3000/graphic'"></div>
-            <div class="col-xs-9 pull-left">
-                <div style="display:inline-flex;padding-bottom: 10px;width:100%">
-                    <h1 class="clabel" style="position: absolute"><a href="/sessions"></a> <%= name %></h1>
-
-                    <div style="width:100%;position: relative">
-                        <div data-ng-controller="showShare">
-                            <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right">Compartir</button>
-                        </div>
-                        <div data-ng-controller="Users">
-                        <a class="btn btn-success" style=";position:relative;float: right" data-ng-click='showGraphic("graphic")'>
-                            <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
-                        </a>
-                            <button class="btn btn-warning" style=";position:relative;float: right" data-ng-click='showAModal("Users")'>
-                                <i class="fa fa-users"></i> Participantes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div style="background-color: rgba(0,0,0,0.2);border-radius: 20px;padding: 10px 0 15px 5px">
-                    <div style="width:100%;height:100px; display:inline-flex">
-                        <div class="left-arrow" data-ng-click="left()"><i class="fa fa-arrow-left"></i></div>
-                        <div style="width: calc(100% - 60px); height:100%; margin: 0 auto; display: block; float:none">
-                            <div class="image" data-ng-class="mostrar"></div>
-                            <div class="name" style="font-size:1.5em" data-ng-class="mostrar">{{ actualName }}</div>
-                            <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
-                                <div style="display:flex;align-items: center;height:100%;justify-content: center"><button style="width:100px;height:50px;transition: all ease 0.2s;"
-                                    data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()" ng-hide="stage">
-                                    Votar
-                                </button></div>
-                        </div>
-                            <div class="right-arrow" data-ng-click="right()"><i class="fa fa-arrow-right"></i></div>
-                    </div>
-                </div>
-                <div style="padding-top:10px">
-                    <div style="text-align: center">
-                        <div data-ng-repeat="k in form" style="display:inline-flex;">
-                            <div class="card" data-ng-mouseover="fooVoto(k.id-1)" data-ng-mouseleave="eraseVoto()">
-                                <p class="clabel">{{ k.name }}</p>
-                                <div style="height:20px;width:80px;margin: auto auto 5px auto ;display: inline-flex;" ng-hide="stage">
-                                    <button class="btn" id="btnPriority" style="background-color:transparent; color:white" data-ng-click="deletePriority(k.id-1)">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>
-                                    <button class="btn btn-success" id="btnPriority" data-ng-click="addPriority(k.id-1,1)"></button>
-                                    <button class="btn btn-warning" id="btnPriority" data-ng-click="addPriority(k.id-1,2)"></button>
-                                    <button class="btn btn-danger" id="btnPriority" data-ng-click="addPriority(k.id-1,3)"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="hero__gradient"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__content">
+    <div class="hero__content-wrapper" data-ng-controller="Stages">
+      <div ng-include="'http://localhost:3000/resetTime'"></div>
+      <div ng-include="'http://localhost:3000/share'"></div>
+      <div ng-include="'http://localhost:3000/Users'"></div>
+      <div ng-include="'http://localhost:3000/graphic'"></div>
+      <div class="col-xs-9 pull-left">
+        <div style="display:inline-flex;padding-bottom: 10px;width:100%">
+          <h1 class="clabel" style="position: absolute">
+            <a href="/sessions"></a> <%= name %></h1>
+          <div style="width:100%;position: relative">
+            <div data-ng-controller="showShare">
+              <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right">Compartir</button>
             </div>
-            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage">
-                <p>{{nameDes}}</p>
-                <p data-ng-style="prioColor">{{prioDes}}</p><br>
-                <p>{{mechDes}}</p><br>
-                <p style="font-style: italic">{{resDes}}</p>
+            <div data-ng-controller="Users">
+              <a class="btn btn-success" style=";position:relative;float: right" data-ng-click='showGraphic("graphic")'>
+                <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
+              </a>
+              <button class="btn btn-warning" style=";position:relative;float: right" data-ng-click='showAModal("Users")'>
+                <i class="fa fa-users"></i> Participantes
+              </button>
             </div>
-            <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage2">
-                <p>{{nameDes}}</p><br>
-                <div>
-                <canvas id="doughnut" class="chart chart-doughnut" chart-dataset-override="override"
-                        chart-data="data" chart-labels="labels" chart-colors="colors">
-                </canvas>
-                </div>
-            </div>
-            <div class="container col-xs-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
-                <div style="max-height:50vh;">
-                <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
-                    <% if(userId === session.userId) { %>
-                    <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer%60 }} segundos</p>
-                    <button class="btn btn-success" id="btnTimer" data-ng-click='addTime()'>+5</button>
-                    <button class="btn btn-primary" id="btnTimer" data-ng-click='starting()'>
-                        <i class="fa fa-play"></i>
-                    </button>
-                    <button class="btn btn-danger" id="btnTimer" data-ng-click='sit()'>
-                        <i class="fa fa-stop"></i>
-                    </button>
-                    <button class="btn btn-warning" id="btnTimer" data-ng-click='showAModal("resetTime")'>
-                        <i class="fa fa-refresh"></i>
-                    </button>
-                    <% } else { %>
-                    <script>
-                        var socket = io.connect('http://localhost:3000');
-                        socket.on('timer', function (dat) {
-                            if (dat.room === sessionId){
-                                document.getElementById("timerId").innerHTML =
-                                    '<p>' + dat.min + ' minutos '+ dat.seg+ ' segundos '+'<\p>' ;
-                            }
-                        });
-                    </script>
-                    <label class="clabel" id="timerId"></label>
-                    <% } %>
-                </div>
-                <div style="display: inline-flex" data-ng-controller='ChatSend'>
-                    <input class="btn" style="background-color: rgba(10,10,10,0.2);width: 100%;color:white; text-align:left" id="message" type="text" data-ng-model="msg" />
-                    <button data-ng-click="sendMsg()" class="btn btn-primary" id="btnTimer">
-                        <i class="fa fa-paper-plane"></i>
-                    </button>
-                </div>
-                <div class="messageBox" scroll-glue style="visibility: hidden">
-                    <div data-ng-controller='ChatRecv' style="visibility: visible">
-                    <div style="width:100%">
-                        <div style="width:100%" data-ng-repeat="i in lista">
-                            <p class="msg">{{ i.username }}: {{ i.msg }}</p>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div style="background-color: rgba(0,0,0,0.2);border-radius: 20px;padding: 10px 0 15px 5px">
+          <div style="width:100%;height:100px; display:inline-flex">
+            <div class="left-arrow" data-ng-click="left()"><i class="fa fa-arrow-left"></i></div>
+            <div style="width: calc(100% - 60px); height:100%; margin: 0 auto; display: block; float:none">
+              <div class="image" data-ng-class="mostrar"></div>
+              <div class="name" style="font-size:1.5em" data-ng-class="mostrar">{{ actualName }}</div>
+              <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
+              <div style="display:flex;align-items: center;height:100%;justify-content: center">
+                <button style="width:100px;height:50px;transition: all ease 0.2s;" data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()" ng-hide="stage">
+                  Votar
+                </button>
+              </div>
+            </div>
+            <div class="right-arrow" data-ng-click="right()"><i class="fa fa-arrow-right"></i></div>
+          </div>
+        </div>
+        <div style="padding-top:10px">
+          <div style="text-align: center">
+            <div data-ng-repeat="k in form" style="display:inline-flex;">
+              <div class="card" data-ng-mouseover="fooVoto(k.id-1)" data-ng-mouseleave="eraseVoto()">
+                <p class="clabel">{{ k.name }}</p>
+                <div style="height:20px;width:80px;margin: auto auto 5px auto ;display: inline-flex;" ng-hide="stage">
+                  <button class="btn" id="btnPriority" style="background-color:transparent; color:white" data-ng-click="deletePriority(k.id-1)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-success" id="btnPriority" data-ng-click="addPriority(k.id-1,1)"></button>
+                  <button class="btn btn-warning" id="btnPriority" data-ng-click="addPriority(k.id-1,2)"></button>
+                  <button class="btn btn-danger" id="btnPriority" data-ng-click="addPriority(k.id-1,3)"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage">
+        <p>{{nameDes}}</p>
+        <p data-ng-style="prioColor">{{prioDes}}</p><br>
+        <p>{{mechDes}}</p><br>
+        <p style="font-style: italic">{{resDes}}</p>
+      </div>
+      <div class="container pull-right col-xs-3" style="background-color: rgba(0,0,0,0.2); border-radius: 20px; height:35vh; margin-bottom: 10px; color: white; padding-top:30px" ng-hide="stage2">
+        <p>{{nameDes}}</p><br>
+        <div>
+          <canvas id="doughnut" class="chart chart-doughnut" chart-dataset-override="override"
+                  chart-data="data" chart-labels="labels" chart-colors="colors"></canvas>
+        </div>
+      </div>
+      <div class="container col-xs-3 pull-right" style="padding-top:20px;background-color:rgba(0,0,0,0.2);border-radius: 10px;padding-bottom: 20px">
+        <div style="max-height:50vh;">
+          <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
+            <% if(userId === session.userId) { %>
+            <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer % 60 }} segundos</p>
+            <button class="btn btn-success" id="btnTimer" data-ng-click='addTime()'>+5</button>
+            <button class="btn btn-primary" id="btnTimer" data-ng-click='starting()'>
+              <i class="fa fa-play"></i>
+            </button>
+            <button class="btn btn-danger" id="btnTimer" data-ng-click='sit()'>
+              <i class="fa fa-stop"></i>
+            </button>
+            <button class="btn btn-warning" id="btnTimer" data-ng-click='showAModal("resetTime")'>
+              <i class="fa fa-refresh"></i>
+            </button>
+            <% } else { %>
+            <script>
+                var socket = io.connect('http://localhost:3000');
+                socket.on('timer', function (dat) {
+                    if (dat.room === sessionId){
+                        document.getElementById("timerId").innerHTML =
+                            '<p>' + dat.min + ' minutos '+ dat.seg+ ' segundos '+'<\p>' ;
+                    }
+                });
+            </script>
+            <label class="clabel" id="timerId"></label>
+            <% } %>
+          </div>
+          <div style="display: inline-flex" data-ng-controller='ChatSend'>
+            <input class="btn" style="background-color: rgba(10,10,10,0.2);width: 100%;color:white; text-align:left" id="message" type="text" data-ng-model="msg" />
+            <button data-ng-click="sendMsg()" class="btn btn-primary" id="btnTimer">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="messageBox" scroll-glue style="visibility: hidden">
+            <div data-ng-controller='ChatRecv' style="visibility: visible">
+              <div style="width:100%">
+                <div style="width:100%" data-ng-repeat="i in lista">
+                  <p class="msg">{{ i.username }}: {{ i.msg }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 </body>
 </html>

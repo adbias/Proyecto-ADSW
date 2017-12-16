@@ -1,64 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <% include ../partials/header %>
-
 <body>
 <div id="start" class="start"></div>
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero">
-    <div class="hero__gradient">&nbsp;</div>
-    <div class="hero__pattern">&nbsp;</div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper">
-        <form class="form-horizontal" action="/api/usuarios" method="POST" enctype="application/x-www-form-urlencoded">
-                  <legend></legend>
-                    <div class="form-group">
-                      <label class="col-lg-4 control-label clabel"><p>Username</p></label>
-                      <div class="col-lg-3">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nombre Usuario">
-                      </div>
-                    </div>
-                  <div class="form-group">
-                    <label class="col-lg-4 control-label clabel"><p>Password  (Mín 6 caracteres)</p></label>
-                    <div class="col-lg-3">
-                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                  </div>
-                    <div class="form-group">
-                      <label class="col-lg-4 control-label clabel"><p>Email</p></label>
-                      <div class="col-lg-3">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                  <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-5">
-                        <a href="/" class="btn btn-info" role="button">Cancel</a>
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                  </div>
-                    <div class="col-lg-10 col-lg-offset-5">
-                        <% if(error==1){ %>
-                        <button type="button" class="btn btn-danger">Usuario ocupado</button>
-                        <%}%>
-
-                        <% if(error==2){ %>
-                        <button type="button" class="btn btn-danger">Contraseña inválida</button>
-                        <%}%>
-
-                        <% if(error==3){ %>
-                        <button type="button" class="btn btn-danger">Correo ya en uso</button>
-                        <%}%>
-
-                        <% if(error==4){ %>
-                        <button type="button" class="btn btn-danger">Correo ya en uso</button>
-                        <%}%>
-                    </div>
-
-              </form>
-
-</div>
+  <div class="hero__gradient"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__content">
+    <div class="hero__content-wrapper">
+      <form class="form-horizontal" action="/api/usuarios" method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="form-group">
+          <label class="col-lg-4 control-label clabel">Nombre de usuario</label>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Nombre">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-4 control-label clabel">Contraseña  (Mín 6 caracteres)</label>
+          <div class="col-lg-3">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-4 control-label clabel">E-mail</label>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-5">
+            <a href="/" class="btn btn-info" role="button">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+        <div class="col-lg-10 col-lg-offset-5">
+          <% if (error == 1) { %>
+            <button type="button" class="btn btn-danger">Usuario ocupado</button>
+          <% } else if (error == 2) { %>
+            <button type="button" class="btn btn-danger">Contraseña inválida</button>
+          <% } else if (error == 3) { %>
+            <button type="button" class="btn btn-danger">Correo ya en uso</button>
+          <% } else if (error == 4) { %>
+            <button type="button" class="btn btn-danger">Correo ya en uso</button>
+          <% } %>
+        </div>
+      </form>
     </div>
+  </div>
 </section>
 </body>
 </html>

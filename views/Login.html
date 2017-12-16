@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <% include ../partials/header %>
 
 <body>
@@ -7,42 +7,40 @@
 <div class="maxwidth1050"></div>
 <% include ../partials/nav %>
 <section id="hero" class="hero">
-    <div class="hero__gradient"></div>
-    <div class="hero__pattern"></div>
-    <div class="hero__content">
-        <div class="hero__content-wrapper">
-            <div class="loginCont">
-            <form action="/api/login" method="POST" enctype="application/x-www-form-urlencoded" >
-                <div class="customForm">
-                    <label class="clabel" style="position: absolute">Usuario</label>
-                    <div style="width:100%;position: relative">
-                        <input type="text" id="user" name="user" placeholder="Username" class="form-control" style="width:70%;float: right">
-                    </div>
-                </div>
-                <div class="customForm">
-                    <label class="clabel" style="position: absolute">Contraseña</label>
-                    <div style="width:100%">
-                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" style="width:70%;float: right">
-                    </div>
-                </div>
-                <div style="">
-                    <a href="/" class="btn btn-danger" role="button" style="margin-left:30%">Cancelar</a>
-                    <button type="submit" class="btn btn-primary" style="float: right">Entrar</button>
-                </div>
-        <% if (typeof resultado !== 'undefined') {
-                if (resultado === 'error') {%>
+  <div class="hero__gradient"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__content">
+    <div class="hero__content-wrapper">
+      <div class="loginCont">
+        <form action="/api/login" method="POST" enctype="application/x-www-form-urlencoded" >
+          <div class="customForm">
+            <label class="clabel" style="position: absolute">Usuario</label>
+            <div style="width:100%;position: relative">
+              <input type="text" id="user" name="user" placeholder="Username" class="form-control" style="width:70%;float: right">
+            </div>
+          </div>
+          <div class="customForm">
+            <label class="clabel" style="position: absolute">Contraseña</label>
+            <div style="width:100%">
+              <input type="password" id="password" name="password" placeholder="Password" class="form-control" style="width:70%;float: right">
+            </div>
+          </div>
+          <div style="">
+            <a href="/" class="btn btn-danger" role="button" style="margin-left:30%">Cancelar</a>
+            <button type="submit" class="btn btn-primary" style="float: right">Entrar</button>
+          </div>
+          <% if (typeof resultado !== 'undefined') {
+            if (resultado === 'error') {%>
             <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="button" class="btn btn-danger">Error al iniciar sesión</button>
-                </div>
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="button" class="btn btn-danger">Error al iniciar sesión</button>
             </div>
-        <% }}%>
-
-            </form>
-            </div>
-
-</div>
+          </div>
+          <% }} %>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 </body>
 </html>

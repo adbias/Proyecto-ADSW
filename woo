@@ -1,0 +1,232 @@
+- index.html
+Bienvenido
+Welcome
+
+Este es Lead Together
+This is Lead Together
+
+Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.
+This app help teams for taking decisions, making it easier and quicker.
+
+Entrar como invitado
+Sign in as a guest
+
+Registrarse
+Sign up
+
+Mis sesiones
+My sessions
+
+Sesiones externas
+External sessions
+
+Unirme a una sesion
+Join
+
+
+- Nav
+Entrar
+Login
+
+Salir
+Logout
+
+- invitaciones.html
+Sesiones
+Sessions
+
+Título
+Title
+
+Objetivo
+Goal
+
+Entrar
+Join
+
+- CrearEscenario.html
+Nombre
+Name
+
+Objetivo
+Goal
+
+Agregar
+Add
+
+Listo!
+Ready
+
+Título Escenario
+Stage name
+
+Descripción
+Details
+
+- CrearSolucion.html
+Nombre solución
+Solution name
+
+Descripción
+Details
+
+Resultado Esperado
+Consequence
+
+Cancelar
+Cancel
+
+Enviar
+Submit
+
+- CrearUsuario.html
+Nombre de usuario
+Username
+
+Contraseña  (Mín 6 caracteres)
+Password (Min 6 characters)
+
+E-mail
+Email
+
+Cancelar
+Cancel
+
+Enviar
+Submit
+
+Usuario ocupado
+This user is already registered. Please try again with another username.
+
+Contraseña inválida
+Invalid password. Please try again with another password with more than 6 characters.
+
+Correo ya en uso
+This email is already registered. Please try again with another email.
+
+- CreateSesion.html
+Título
+Title
+
+Objetivos
+Goals
+
+Cancelar
+Cancel
+
+Enviar
+Submit
+
+- graphic.html
+Histograma del Escenario
+Stage histogram
+
+No prioridad
+No priority
+
+Baja prioridad
+Low priority
+
+Media prioridad
+Mid priority
+
+Alta prioridad
+High priority
+
+Cerrar
+Close
+
+-Login.html
+Usuario
+Username
+
+Contraseña
+Password
+
+Cancelar
+Cancel
+
+Entrar
+Submit
+
+Error al iniciar sesión
+Error while trying to login. Please try again.
+
+- Session.html
+Compartir
+Share
+
+Análisis
+Results
+
+Participantes
+Players
+
+Votar
+Send solutions
+
+minutos
+mins
+
+segundos
+secs
+
+- Sessions.html
+Sesiones
+Sessions
+
+Nombre:
+Name:
+
+Descripción:
+Details:
+
+Entrar
+Join
+
+Borrar
+Delete
+
+Nueva Sesión
+New session
+
+- Share.html
+Compartir
+Share
+
+Copiar Link
+Copy
+
+Cerrar
+Close
+
+-Soluciones.html
+Nombre
+Name
+
+Descripción
+Details
+
+Resultado Esperado
+Consequence
+
+Nueva solución
+Add solutions
+
+- Timer.html
+Colocar nuevo tiempo
+Set time
+
+Horas
+Hours
+
+Minutos
+Minutes
+
+Cancelar
+Cancel
+
+Guardar
+Save
+
+'Users.html': [['Participantes', 'Players'], ['Cerrar', 'Close']]}
