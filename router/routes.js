@@ -18,7 +18,8 @@ var text = {
     ['Registrarse', 'Sign up'],
     ['Mis sesiones', 'My sessions'],
     ['Sesiones externas', 'External sessions'],
-    ['Unirme a una sesion', 'Join']],
+    ['Unirme a una sesion', 'Join'],
+    ['Descargar juego', 'Download']],
 
     'nav': [['Entrar', 'Login'], ['Salir', 'Logout']],
 
