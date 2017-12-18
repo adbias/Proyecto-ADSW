@@ -1,18 +1,18 @@
 <header class="header">
     <div class="header__wrapper">
-        <a href="/" class="header__title-wrapper  js-smooth-scroll">
+        <a href="/" class="header__title-wrapper js-smooth-scroll">
             <div class="header__title-main"> Lead Together </div>
         </a>
         <div class="header__social-icons" style="margin-top: 11px">
-            <% if (language === 0) { %>
-            <a href="language?id=1&url=<%= url %>" style="font-size: 22px"><i class="fa fa-language"></i> Inglés</a>
-            <% } else { %>
-            <a href="language?id=0&url=<%= url %>" style="font-size: 22px"><i class="fa fa-language"></i> Spanish</a>
-            <% } %>
+            <% if (pack.language === '0') { %>
+                <a href="language?id=1&url=<%= pack.url %>" style="font-size: 22px"><i class="fa fa-language"></i> Inglés</a>
+            <% } else if (pack.language === '1') { %>
+                <a href="language?id=0&url=<%= pack.url %>" style="font-size: 22px"><i class="fa fa-language"></i> Spanish</a>
+            <%}%>
             <% if (typeof session.login === 'undefined') { %>
-            <a style="font-size:22px;font-weight: 500;" href="/login"><i class="fa fa-sign-in"></i> Entrar</a>
+            <a style="font-size:22px;font-weight: 500;" href="/login"><i class="fa fa-sign-in"></i> <%= pack.nav[0][pack.language]%></a>
             <% } else { %>
-            <a style="font-size:22px;font-weight: 500;" href="/logout"><i class="fa fa-sign-out"></i> Salir</a>
+            <a style="font-size:22px;font-weight: 500;" href="/logout"><i class="fa fa-sign-out"></i> <%= pack.nav[1][pack.language]%></a>
             <% } %>
         </div>
     </div>

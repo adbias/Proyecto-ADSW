@@ -14,26 +14,26 @@
       <div class="loginCont">
         <form action="/api/login" method="POST" enctype="application/x-www-form-urlencoded" >
           <div class="customForm">
-            <label class="clabel" style="position: absolute">Usuario</label>
+            <label class="clabel" style="position: absolute"><%=pack.text[0][pack.language]%></label>
             <div style="width:100%;position: relative">
               <input type="text" id="user" name="user" placeholder="Username" class="form-control" style="width:70%;float: right">
             </div>
           </div>
           <div class="customForm">
-            <label class="clabel" style="position: absolute">Contraseña</label>
+            <label class="clabel" style="position: absolute"><%=pack.text[1][pack.language]%></label>
             <div style="width:100%">
               <input type="password" id="password" name="password" placeholder="Password" class="form-control" style="width:70%;float: right">
             </div>
           </div>
           <div style="">
-            <a href="/" class="btn btn-danger" role="button" style="margin-left:30%">Cancelar</a>
-            <button type="submit" class="btn btn-primary" style="float: right">Entrar</button>
+            <a href="/" class="btn btn-danger" role="button" style="margin-left:30%"><%=pack.text[2][pack.language]%></a>
+            <button type="submit" class="btn btn-primary" style="float: right"><%=pack.text[3][pack.language]%></button>
           </div>
           <% if (typeof resultado !== 'undefined') {
             if (resultado === 'error') {%>
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button type="button" class="btn btn-danger">Error al iniciar sesión</button>
+                <button type="button" class="btn btn-danger"><%=pack.text[4][pack.language]%></button>
             </div>
           </div>
           <% }} %>

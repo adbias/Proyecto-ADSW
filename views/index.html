@@ -12,7 +12,7 @@
       <div class="hero__content-wrapper">
         <div class="hero__title-wrapper">
           <div class="hero__title-large">
-            <p>Bienvenido</p>
+            <p><%= pack.text[0][pack.language] %></p>
           </div>
           <div class="hero__title-small">
             <% if (typeof session.login !== 'undefined') { %>
@@ -20,37 +20,37 @@
             <% } %>
           </div>
           <div class="hero__title-small">
-            <p>Este es Lead Together</p>
+            <p><%= pack.text[1][pack.language] %></p>
           </div>
         </div>
         <div class="hero__photo-wrapper">
           <div class="hero__photo"></div>
         </div>
         <div class="hero__description">
-          <p>Esta aplicación está hecha para ayudar a la toma de decisiones de forma más rápida y colaborativa entre un grupo de usuarios.</p>
+          <p><%= pack.text[2][pack.language] %></p>
         </div>
         <div class="hero__call-to-action">
           <% if (typeof session.login === 'undefined') { %>
           <a href="/entradaInvitado" type="submit" class="hero__button ghost-button ghost-button--hero">
             <i class="fa fa-arrow-circle-right"></i>
-            <p>Entrar como invitado</p>
+            <p><%= pack.text[3][pack.language] %></p>
           </a>
           <a href="/crearUsuario?Err=0" class="hero__button ghost-button ghost-button--hero">
             <i class="fa fa-user-plus"></i>
-            <p>Registrarse</p>
+            <p><%= pack.text[4][pack.language] %></p>
           </a>
           <% } else { %>
           <a href="/sessions" class="hero__button ghost-button ghost-button--hero">
             <i class="fa fa-arrow-circle-right"></i>
-            <p>Mis sesiones</p>
+            <p><%= pack.text[5][pack.language] %></p>
           </a>
           <a href="/invitaciones" class="hero__button ghost-button ghost-button--hero">
             <i class="fa fa-arrow-circle-right"></i>
-            <p>Sesiones externas</p>
+            <p><%= pack.text[6][pack.language]%></p>
           </a>
           <a href="/" class="hero__button ghost-button ghost-button--hero">
             <i class="fa fa-arrow-circle-right"></i>
-            <p>Unirme a una sesion</p>
+            <p><%= pack.text[7][pack.language]%></p>
           </a>
           <% } %>
         </div>

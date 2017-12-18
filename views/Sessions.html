@@ -11,24 +11,24 @@
   <div class="hero__content">
     <div class="hero__content-wrapper">
       <div class="container">
-        <h1 class="clabel"> Sesiones </h1>
+        <h1 class="clabel"><%=pack.text[0][pack.language]%></h1>
           <div style="display: inline-block; width: inherit">
            <% for (var i = 0; i < resultado.length; i++) { %>
             <div style="border-bottom: 1px white solid; position: relative; width:inherit; padding:10px; display: inline-flex">
             <div>
               <div class="clabel" style="font-size: 1.2em; font-weight: bold">
-                Nombre: <%= resultado[i].titulo%>
+                <%=pack.text[1][pack.language]%> <%= resultado[i].titulo%>
               </div>
               <div class="clabel" style="font-size:1.2em; font-style: italic">
-                Descripción: <%= resultado[i].objetivo %>
+                <%=pack.text[2][pack.language]%> <%= resultado[i].objetivo %>
               </div>
             </div>
             <div style="display: inline-flex; position:relative; margin: auto 0 auto auto">
               <a class="btn btn-primary" href="/session?SessionId=<%= resultado[i].id %>&nameSession=<%= resultado[i].titulo %>">
-                <i class="fa fa-sign-in" aria-hidden="true"></i> Entrar
+                <i class="fa fa-sign-in" aria-hidden="true"></i> <%=pack.text[3][pack.language]%>
               </a>
               <a class="btn btn-danger" href="/deleteSesion?SessionId=<%= resultado[i].id %>">
-                <i class="fa fa-trash" aria-hidden="true"></i> Borrar
+                <i class="fa fa-trash" aria-hidden="true"></i> <%=pack.text[4][pack.language]%>
               </a>
             </div>
             </div>
@@ -37,7 +37,7 @@
       </div>
       <div class="hero__call-to-action">
         <a href="/createSesion" class="hero__button ghost-button ghost-button--hero">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva Sesión</p></a>
+          <i class="fa fa-plus-circle" aria-hidden="true"></i><p> <%=pack.text[5][pack.language]%></p></a>
       </div>
     </div>
   </div>

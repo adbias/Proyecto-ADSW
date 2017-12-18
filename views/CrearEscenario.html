@@ -1,25 +1,25 @@
 <%- include ../partials/base %>
 <h1 class="text-center clabel">
-  <%= title %>
+  <%= title[pack.language] %>
 </h1>
 <div class="stageCont">
   <form class="form-horizontal" action="/api/crearEscenario?idSesion=<%=idSesion%>&created=1" method="POST" enctype="application/x-www-form-urlencoded">
     <div class="form-group">
-      <label class="col-lg-2 control-label clabel"><%= text[0][language] %></label>
+      <label class="col-lg-2 control-label clabel"><%= pack.text[0][pack.language] %></label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+        <input type="text" class="form-control" id="title" name="title" placeholder="">
       </div>
     </div>
     <div class="form-group">
-      <label class="col-lg-2 control-label clabel"><%= text[1][language] %></label>
+      <label class="col-lg-2 control-label clabel"><%= pack.text[1][pack.language] %></label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" id="objetive" name="objetive" placeholder="Objetivo">
+        <input type="text" class="form-control" id="objetive" name="objetive" placeholder="">
       </div>
     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-primary"><%= text[2][language] %></button>
-        <a href="/sessions" class="btn btn-info" role="button"><%= text[3][language] %></a>
+        <button type="submit" class="btn btn-primary"><%= pack.text[2][pack.language] %></button>
+        <a href="/sessions" class="btn btn-info" role="button"><%= pack.text[3][pack.language] %></a>
       </div>
     </div>
   </form>
@@ -27,8 +27,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="clabel"><%= text[4][language] %></th>
-      <th class="clabel"><%= text[5][language] %></th>
+      <th class="clabel"><%= pack.text[4][pack.language] %></th>
+      <th class="clabel"><%= pack.text[5][pack.language] %></th>
       <th></th>
     </tr>
   </thead>

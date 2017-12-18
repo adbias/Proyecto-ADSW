@@ -3,7 +3,7 @@
 <script type="text/ng-template" id="http://localhost:3000/graphic">
 <div data-ng-controller="BarChart">
   <div class="modal-header">
-    <h3 class="modal-title" id="modal-title" style="color:white">Histograma del Escenario {{actualName}}</h3>
+    <h3 class="modal-title" id="modal-title" style="color:white"><%=pack.text[0][pack.language]%> {{actualName}}</h3>
   </div>
   <div class="modal-body" id="modal-body">
     <div class="graph">
@@ -13,12 +13,12 @@
   <div class="modal-footer">
     <select ng-model="selectedHist">
       <option></option>
-      <option data-ng-click="changing(0)">No prioridad</option>
-      <option data-ng-click="changing(1)">Baja Prioridad</option>
-      <option data-ng-click="changing(2)">Media Prioridad</option>
-      <option data-ng-click="changing(3)">Alta Prioridad</option>
+      <option data-ng-click="changing(0)"><%=pack.text[1][pack.language]%></option>
+      <option data-ng-click="changing(1)"><%=pack.text[2][pack.language]%></option>
+      <option data-ng-click="changing(2)"><%=pack.text[3][pack.language]%></option>
+      <option data-ng-click="changing(3)"><%=pack.text[4][pack.language]%></option>
     </select>
-    <button class="btn btn-danger" type="button" data-ng-click="cancel()"> Cerrar </button>
+    <button class="btn btn-danger" type="button" data-ng-click="cancel()"> <%=pack.text[5][pack.language]%> </button>
   </div>
 </div>
 </script>

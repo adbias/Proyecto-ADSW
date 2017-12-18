@@ -12,38 +12,38 @@
     <div class="hero__content-wrapper">
       <form class="form-horizontal" action="/api/usuarios" method="POST" enctype="application/x-www-form-urlencoded">
         <div class="form-group">
-          <label class="col-lg-4 control-label clabel">Nombre de usuario</label>
+          <label class="col-lg-4 control-label clabel"><%=pack.text[0][pack.language]%></label>
           <div class="col-lg-3">
-            <input type="text" class="form-control" id="username" name="username" placeholder="Nombre">
+            <input type="text" class="form-control" id="username" name="username" placeholder="">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-4 control-label clabel">Contraseña  (Mín 6 caracteres)</label>
+          <label class="col-lg-4 control-label clabel"><%=pack.text[1][pack.language]%></label>
           <div class="col-lg-3">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+            <input type="password" class="form-control" id="password" name="password" placeholder="">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-4 control-label clabel">E-mail</label>
+          <label class="col-lg-4 control-label clabel"><%=pack.text[2][pack.language]%></label>
           <div class="col-lg-3">
-            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="text" class="form-control" id="email" name="email" placeholder="">
           </div>
         </div>
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-5">
-            <a href="/" class="btn btn-info" role="button">Cancelar</a>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a href="/" class="btn btn-info" role="button"><%=pack.text[3][pack.language]%></a>
+            <button type="submit" class="btn btn-primary"><%=pack.text[4][pack.language]%></button>
           </div>
         </div>
         <div class="col-lg-10 col-lg-offset-5">
           <% if (error == 1) { %>
-            <button type="button" class="btn btn-danger">Usuario ocupado</button>
+            <button type="button" class="btn btn-danger"><%=pack.text[5][pack.language]%></button>
           <% } else if (error == 2) { %>
-            <button type="button" class="btn btn-danger">Contraseña inválida</button>
+            <button type="button" class="btn btn-danger"><%=pack.text[6][pack.language]%></button>
           <% } else if (error == 3) { %>
-            <button type="button" class="btn btn-danger">Correo ya en uso</button>
+            <button type="button" class="btn btn-danger"><%=pack.text[7][pack.language]%></button>
           <% } else if (error == 4) { %>
-            <button type="button" class="btn btn-danger">Correo ya en uso</button>
+            <button type="button" class="btn btn-danger"><%=pack.text[7][pack.language]%></button>
           <% } %>
         </div>
       </form>

@@ -1,11 +1,21 @@
-<% include ('base') %>
+<!DOCTYPE html>
+<html>
+<% include ../partials/header %>
+<body>
+<div id="start" class="start"></div>
+<div class="maxwidth1050"></div>
+<% include ../partials/nav %>
+<section id="hero" class="hero">
+  <div class="hero__gradient"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__content">
 <h1 class="clabel"> <% title %> </h1>
 <table class="table">
   <thead>
   <tr>
-    <th> <p class="clabel"> Nombre </p> </th>
-    <th> <p class="clabel"> Descripción </p></th>
-    <th> <p class="clabel"> Resultado esperado </p></th>
+    <th> <p class="clabel"> <%=pack.text[0][pack.language]%> </p> </th>
+    <th> <p class="clabel"> <%=pack.text[1][pack.language]%> </p></th>
+    <th> <p class="clabel"> <%=pack.text[2][pack.language]%> </p></th>
   </tr>
   </thead>
   <tbody>
@@ -20,6 +30,9 @@
 </table>
 <div class="hero__call-to-action">
   <a href="/CrearSolucion" class="hero__button  ghost-button  ghost-button--hero">
-    <i class="fa fa-plus-circle" aria-hidden="true"></i><p> Nueva solucion</p></a>
+    <i class="fa fa-plus-circle" aria-hidden="true"></i><p> <%=pack.text[3][pack.language]%></p></a>
 </div>
-<% include ('footer') %>
+  </div>
+</section>
+</body>
+</html>

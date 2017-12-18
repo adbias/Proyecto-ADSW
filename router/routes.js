@@ -9,6 +9,7 @@ var options = {
     max: 1000,
     integer: true
 };
+
 var text = {
     'index.html': [['Bienvenido', 'Welcome'],
     ['Este es Lead Together', 'This is Lead Together'],
@@ -19,7 +20,7 @@ var text = {
     ['Sesiones externas', 'External sessions'],
     ['Unirme a una sesion', 'Join']],
 
-    'Nav': [['Entrar', 'Login'], ['Salir', 'Logout']],
+    'nav': [['Entrar', 'Login'], ['Salir', 'Logout']],
 
     'invitaciones.html': [['Sesiones', 'Sessions'],
     ['Título', 'Title'],
@@ -66,48 +67,63 @@ var text = {
     ['Entrar', 'Submit'],
     ['Error al iniciar sesión', 'Error while trying to login. Please try again.']],
 
-    'Session.html': [['Compartir', 'Share'], ['Análisis', 'Results'], ['Participantes', 'Players'], ['Votar', 'Send solutions'], ['minutos', 'mins'], ['segundos', 'secs']],
+    'Session.html': [['Compartir', 'Share'], ['Análisis', 'Results'], ['Participantes', 'Players'], ['Votar', 'Send'], ['minutos', 'mins'], ['segundos', 'secs']],
     'Sessions.html': [['Sesiones', 'Sessions'], ['Nombre:', 'Name:'], ['Descripción:', 'Details:'], ['Entrar', 'Join'], ['Borrar', 'Delete'], ['Nueva Sesión', 'New session']],
     'Share.html': [['Compartir', 'Share'], ['Copiar Link', 'Copy'], ['Cerrar', 'Close']],
     'Soluciones.html': [['Nombre', 'Name'], ['Descripción', 'Details'], ['Resultado Esperado', 'Consequence'], ['Nueva solución', 'Add solutions']],
     'Timer.html': [['Colocar nuevo tiempo', 'Set time'], ['Horas', 'Hours'], ['Minutos', 'Minutes'], ['Cancelar', 'Cancel'], ['Guardar', 'Save']],
     'Users.html': [['Participantes', 'Players'], ['Cerrar', 'Close']]};
 
+var getPack = function(req, name) {
+    var pack = Object();
+    pack.text = text[name];
+    if (typeof req.session.language === 'undefined')
+        pack.language = '0';
+    else pack.language = req.session.language;
+    pack.url = req.protocol + '://' + req.get('host') + req.originalUrl;
+    pack.nav = text['nav'];
+    return pack;
+};
+
 app.get('/', function(req, res) {
-    res.render('index.html', {session: req.session, text: text['index.html']});
+    console.log(req.session.language);
+    res.render('index.html', {
+        session: req.session,
+        pack: getPack(req,'index.html')
+    });
 });
 
 app.get('/login', function(req, res) {
     if (typeof req.session.login === 'undefined')
-        res.render('Login.html', {session: req.session, text: text['Login.html']});
+        res.render('Login.html', {session: req.session, pack: getPack(req,'Login.html')});
     else
         res.redirect('/');
 });
 
 app.get('/crearUsuario', function(req, res) {
     res.render('CrearUsuario.html', {
-        title: 'Registro de Usuario',
+        title: ['Registro de Usuario','Sign up'],
         session: req.session,
         error: req.query.Err,
-        text: text['CrearUsuario.html']
+        pack: getPack(req, 'CrearUsuario.html')
     });
 });
 
 app.get('/crearSolucion', function(req, res) {
     res.render('CrearSolucion.html', {
-        title: 'Crear Solucion',
+        title: ['Crear Solucion', 'Add solution'],
         session: req.session,
-        text: text['CrearSolucion.html']
+        pack: getPack(req,'CrearSolucion.html')
     });
 });
 
 app.get('/soluciones', function(req, res) {
     models.Solution.findAll().then(function(user) {
         res.render('Soluciones.html', {
-            title: 'Posibles soluciones',
+            title: ['Posibles soluciones','Solutions'],
             resultado: user,
             session: req.session,
-            text: text['Soluciones.html']
+            pack:getPack(req,'Soluciones.html')
         });
     });
 });
@@ -132,7 +148,7 @@ app.get('/session',function(req, res) {
                     })
                 }
                 res.render('Session.html', {
-                    title: 'Sesion',
+                    title: ['Sesion','Session'],
                     resultado: resultado,
                     session: req.session,
                     sessionId: req.query.SessionId,
@@ -140,7 +156,7 @@ app.get('/session',function(req, res) {
                     url: 'http://' + ip.address().toString() +
                     ':3000/session?SessionId=' + req.query.SessionId + '&nameSession=' + req.query.nameSession,
                     userId: resultado[0]['Sesion.UsuarioId'],
-                    text: text['Session.html']
+                    pack: getPack(req,'Session.html')
                 });
             });
 
@@ -170,7 +186,7 @@ app.get('/session',function(req, res) {
                                     include: [models.Sesion]})
                                     .then(function(resultado) {
                                         res.render('Session.html', {
-                                            title: 'Sesion',
+                                            title: ['Sesion','Session'],
                                             resultado: resultado,
                                             session: req.session,
                                             sessionId: req.query.SessionId,
@@ -178,7 +194,7 @@ app.get('/session',function(req, res) {
                                             url: 'http://' + ip.address().toString() + ':3000/session?SessionId=' +
                                             req.query.SessionId + '&nameSession=' + req.query.nameSession,
                                             userId:resultado[0]['Sesion.UsuarioId'],
-                                            text:text['Session.html']
+                                            pack:getPack(req,'Session.html')
                                         });
                                     });
                             });
@@ -192,41 +208,33 @@ app.get('/sessions', function(req, res) {
     models.Sesion.findAll({where: {UsuarioId: req.session.userId}})
         .then(function (resultado) {
             res.render('Sessions.html', {
-                title: 'Sesiones',
+                title: ['Sesiones','Sessions'],
                 resultado: resultado,
                 session: req.session,
                 hostId: req.session.userId,
-                text: text['Sessions.html']
+                pack: getPack(req,'Sessions.html')
         });
     });
 });
 
 app.get('/createSesion', function(req, res) {
     res.render('CreateSesion.html', {
-        title: 'Crear Sesion',
+        title: ['Crear Sesion','Add sessions'],
         session: req.session,
-        text: text['CreateSesion.html']
+        pack: getPack(req,'CreateSesion.html')
     });
 });
-
-var getlanguage = function(req) {
-    if (typeof req.session.language === 'undefined')
-        return 0;
-    else return req.session.language;
-};
 
 app.get('/crearEscenario', function(req, res) {
     models.Stage.findAll({where: {SesionId: req.query.idSesion}})
         .then(function(resultado) {
             res.render('CrearEscenario.html', {
-                title: 'Creando Escenarios',
+                title: ['Creando Escenarios','Add Stages'],
                 session: req.session,
                 created: req.query.created,
                 idSesion: req.query.idSesion,
                 resultado: resultado,
-                language: getlanguage(req),
-                text: text['CrearEscenario.html'],
-                url: req.protocol + '://' + req.get('host') + req.originalUrl
+                pack: getPack(req,'CrearEscenario.html')
             });
         });
 });
@@ -245,15 +253,15 @@ app.get('/deleteSesion', function(req, res) {
 });
 
 app.get('/resetTime', function(req, res) {
-    res.render('Timer.html', {text: text['Timer.html']});
+    res.render('Timer.html', {pack: getPack(req,'Timer.html')});
 });
 
 app.get('/Users', function(req, res) {
-   res.render('Users.html', {text: text['Users.html']}) ;
+   res.render('Users.html', {pack: getPack(req,'Users.html')}) ;
 });
 
 app.get('/share', function(req, res) {
-    res.render('Share.html', {text: text['Share.html']});
+    res.render('Share.html', {pack: getPack(req,'Share.html')});
 });
 
 app.get('/template', function(req, res) {
@@ -261,7 +269,7 @@ app.get('/template', function(req, res) {
 });
 
 app.get('/analisis', function(req, res) {
-    res.render('graphic.html', {session: req.session, text: text['graphic.html']});
+    res.render('graphic.html', {session: req.session, pack:getPack(req,'graphic.html')});
 });
 
 app.get('/enterSession', function(req, res) {
@@ -269,7 +277,7 @@ app.get('/enterSession', function(req, res) {
 });
 
 app.get('/graphic', function(req, res) {
-   res.render('graphic.html', {text: text['graphic.html']});
+   res.render('graphic.html', {pack: getPack(req,'graphic.html')});
 });
 
 app.get('/invitaciones', function(req, res) {
@@ -281,14 +289,13 @@ app.get('/invitaciones', function(req, res) {
         res.render('invitaciones.html', {
             resultado: resultado,
             session: req.session,
-            title: 'Sesiones',
-            text: text['invitaciones.html']
+            title: ['Sesiones','Sessions'],
+            pack: getPack(req,'invitaciones.html')
         });
     });
 });
 
 app.get('/language', function(req, res) {
-    console.log("cambio de lenguaje");
     req.session.language = req.query.id;
     res.redirect(req.query.url);
 });

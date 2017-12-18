@@ -40,14 +40,14 @@
             <a href="/sessions"></a> <%= name %></h1>
           <div style="width:100%;position: relative">
             <div data-ng-controller="showShare">
-              <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right">Compartir</button>
+              <button class="btn btn-info" data-ng-click="showShare('share')" style=";position:relative;float: right"><%=pack.text[0][pack.language]%></button>
             </div>
             <div data-ng-controller="Users">
               <a class="btn btn-success" style=";position:relative;float: right" data-ng-click='showGraphic("graphic")'>
-                <i class="fa fa-bar-chart" aria-hidden="true" ></i> Análisis
+                <i class="fa fa-bar-chart" aria-hidden="true" ></i> <%=pack.text[1][pack.language]%>
               </a>
               <button class="btn btn-warning" style=";position:relative;float: right" data-ng-click='showAModal("Users")'>
-                <i class="fa fa-users"></i> Participantes
+                <i class="fa fa-users"></i> <%=pack.text[2][pack.language]%>
               </button>
             </div>
           </div>
@@ -61,7 +61,7 @@
               <div class="name desc" data-ng-class="mostrar">{{ actualDesc }}</div>
               <div style="display:flex;align-items: center;height:100%;justify-content: center">
                 <button style="width:100px;height:50px;transition: all ease 0.2s;" data-ng-class="mostrar" class="btn btn-warning" data-ng-click="sendVoto()" ng-hide="stage">
-                  Votar
+                  <%=pack.text[3][pack.language]%>
                 </button>
               </div>
             </div>
@@ -103,7 +103,7 @@
         <div style="max-height:50vh;">
           <div data-ng-controller='Timer' style="text-align:center;padding-bottom:10px">
             <% if(userId === session.userId) { %>
-            <p class="clabel" style="font-size:1.2em">{{ minutes() }} minutos {{ timer % 60 }} segundos</p>
+            <p class="clabel" style="font-size:1.2em">{{ minutes() }} <%=pack.text[4][pack.language]%> {{ timer % 60 }} <%=pack.text[5][pack.language]%></p>
             <button class="btn btn-success" id="btnTimer" data-ng-click='addTime()'>+5</button>
             <button class="btn btn-primary" id="btnTimer" data-ng-click='starting()'>
               <i class="fa fa-play"></i>
@@ -120,7 +120,7 @@
                 socket.on('timer', function (dat) {
                     if (dat.room === sessionId){
                         document.getElementById("timerId").innerHTML =
-                            '<p>' + dat.min + ' minutos '+ dat.seg+ ' segundos '+'<\p>' ;
+                            '<p>' + dat.min + ' <%=pack.text[4][pack.language]%> '+ dat.seg+ ' <%=pack.text[5][pack.language]%> '+'<\p>' ;
                     }
                 });
             </script>
